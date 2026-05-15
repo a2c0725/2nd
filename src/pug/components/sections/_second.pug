@@ -1,0 +1,18 @@
+include ../data/_newsData
+
+section#news.section-contents-wrapper.second
+  .section-contents-inner
+    h2.section-title
+      .line
+      .title-text NEWS
+        span.title-kana ニュース
+    .section-contents
+      .section-inner
+        ul.news-list
+          each item in news
+            li.news-item
+              .news-date #{ item.date }
+              if item.url
+                a.news-text(href=item.url target="_blank" rel="noopener noreferrer") #{ item.title }
+              else
+                .news-text #{ item.title }

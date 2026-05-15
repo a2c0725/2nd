@@ -1,0 +1,31 @@
+// new valiable
+$contentsWidth: 80%;
+$contentsSpWidth: 85%;
+$borderColor: #ccc;
+$headerHeight: 68px;
+$hoverOpacity: 0.6;
+$serif: 'Noto Serif JP', serif;
+$sans: 'Inter', sans-serif;
+$helvetica: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+$spMenuPosition: 30px;
+$spMenuSize: 135px;
+
+// color
+$colors: (
+  bright: #fff,
+  lightGreen: #8edbb1,
+  darkGreen: #076251,
+  activeColor: #fe001a,
+  textColor: #333,
+  currentColor: #fe001a,
+  primaryColor: #fe001a
+);
+
+$breakpoints: (
+  'xs': 'screen and (max-width: 360px)',
+  's': 'screen and (max-width: 400px)',
+  'm': 'screen and (max-width: 768px)',
+  'ms': 'screen and (max-width: 800px)',
+  'l': 'screen and (max-width: 1000px)',
+  'xl': 'screen and (max-width: 1200px)',
+) !default;

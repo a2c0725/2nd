@@ -1,0 +1,6 @@
+%commonAreaMargin {
+  margin-top: 8rem;
+  @include mq() {
+    margin-top: 3rem;
+  }
+}

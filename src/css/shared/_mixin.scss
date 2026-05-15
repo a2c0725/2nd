@@ -1,0 +1,60 @@
+@mixin mq($_breakpoint: m) {
+  @media #{map-get($breakpoints, $_breakpoint)} {
+    @content;
+  }
+}
+
+@mixin iconfont($num) {
+  font-family: 'icomoon';
+  content: $num;
+}
+
+@mixin boxShadow($_num: 0 3px 6px, $_color: 0.2) {
+  box-shadow: $_num rgba(0,0,0,$_color);
+}
+
+@mixin flex($wrap, $justify, $align) {
+  display: flex;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin center50() {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center50-y() {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@mixin center50-x() {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin hoverAnimation($textColor, $activeColor) {
+    color: $textColor;
+    &::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 80%;
+      background: $activeColor;
+      position: absolute;
+      bottom: -5px;
+      left: 10%;
+      transform: scale(0, 1);
+      transition: .3s;
+    }
+    &:hover,
+    &.active {
+      color: $activeColor;
+    }
+    &:hover::after {
+      transform: scale(1, 1);
+    }
+}

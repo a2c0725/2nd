@@ -1,0 +1,10 @@
+doctype html
+html(lang='ja')
+  include components/config/_head
+  body
+    .container
+      include components/layouts/_header
+      block content
+    script(src='//unpkg.com/swiper@7/swiper-bundle.min.js')
+    script(src='js/bundle.js')
+    block script

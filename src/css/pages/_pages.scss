@@ -1,0 +1,459 @@
+.section-contents-wrapper {
+  @include flex(wrap, center, center);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  &.first {
+    background-image: url('/img/bg/first.jpg');
+    background-size: 200%;
+    background-position: 50% 50%;
+    @include mq() {
+      background-size: cover;
+    }
+  }
+  &.second {
+    background-image: url('/img/bg/second.jpg');
+    background-size: 200%;
+    background-position: 82% 0;
+    @include mq() {
+      background-size: cover;
+    }
+  }
+  &.third {
+    background-image: url('/img/bg/third.jpg');
+  }
+  &.fourth {
+    background-image: url('/img/bg/force.jpg');
+  }
+  &.fifth {
+    background-image: url('/img/bg/fifth.jpg');
+  }
+  &.sixth {
+    background-image: url('/img/bg/sixth.jpg');
+    background-size: 200%;
+    background-position: 82% 0;
+    @include mq() {
+      background-size: cover;
+      background-position: 20% 0;
+    }
+  }
+  &.seventh {
+    background-image: url('/img/bg/seventh.jpg');
+    background-position: 80%;
+  }
+  &.footer {
+    background: color(primaryColor);
+  }
+}
+
+.section-contents-inner {
+  width: $contentsWidth;
+  position: relative;
+  @include mq() {
+    width: $contentsSpWidth;
+  }
+}
+
+.section-inner {
+  margin-top: 50px;
+}
+
+.section-title {
+  position: relative;
+  .line {
+    width: 19%;
+    height: 3px;
+    position: absolute;
+    top: -50px;
+    left: -20%;
+    background: color(textColor);
+    transition: top 1s ease;
+    &.before {
+      top: 80px;
+    }
+    &.active {
+      top: 10px;
+    }
+  }
+  .title-kana {
+    display: block;
+    font-weight: normal;
+    font-size: 1.4rem;
+  }
+}
+
+.first {
+  color: color(bright);
+  font-size: 2.4rem;
+  .hello {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .logo-wrapper {
+    width: 218px;
+    padding: 10px 20px;
+    background: color(primaryColor);
+  }
+  .company-name,
+  .company-name,
+  .company-catch {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    gap: 20px;
+  }
+  .catch-jp,
+  .catch-fn {
+    letter-spacing: 8px;
+  }
+  .catch-jp {
+    @include mq() {
+      margin-top: 100px;
+      font-size: 1.6rem;
+    }
+  }
+  .catch-en {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #fff;
+    color: color(textColor);
+    font-weight: bold;
+    opacity: 0.8;
+    @include mq() {
+      font-size: 1.2rem;
+      white-space: nowrap;
+    }
+  }
+  .catch-img {
+    width: 66px;
+    margin-right: 20px;
+    @include mq() {
+      margin-right: 10px;
+    }
+  }
+  .catch-fn {
+    @include mq() {
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+    }
+  }
+}
+
+.second {
+  .line {
+    // top: -80px;
+  }
+  .news-list {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    row-gap: 30px;
+    font-size: 1.4rem;
+  }
+  .news-item {
+    @include flex(nowrap, flex-start, center);
+    column-gap: 30px;
+    @include mq() {
+      @include flex(wrap, flex-start, flex-start);
+    }
+  }
+  .news-date {
+    letter-spacing: 1.5px;
+  }
+}
+
+.third {
+  color: color(bright);
+  .line {
+    background: color(bright);
+    // top: -175px;
+  }
+  .section-inner {
+    @include flex(nowrap, flex-start, stretch);
+    font-size: 1.4rem;
+    @include mq() {
+      display: block;
+      margin-top: 30px;
+    }
+  }
+  .about-title {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    font-size: 2.4rem;
+    @include mq() {
+      @include flex(nowrap, flex-start, center);
+      column-gap: 12px;
+      font-size: 1.8rem;
+    }
+  }
+  .title-jp {
+    display: block;
+    margin-top: 8px;
+    @include mq() {
+      font-size: 1.4rem;
+      margin-top: 0;
+    }
+  }
+  .about-text {
+    line-height: 1.5;
+  }
+  .about-list {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    row-gap: 24px;
+    width: 100%;
+    padding-right: 46px;
+    flex: 1;
+    @include mq() {
+      padding-right: 0;
+    }
+    .about-item {
+      @include flex(wrap, flex-start, flex-start);
+      flex-direction: column;
+      row-gap: 10px;
+    }
+  }
+  .logo-about {
+    @include flex(wrap, center, center);
+    width: 40%;
+    min-width: 250px;
+    max-width: 330px;
+    @include mq() {
+      min-width: 60px;
+      max-width: 100px;
+      position: absolute;
+      right: 0;
+    }
+  }
+  .company-logo {
+    margin-top: -50px;
+  }
+  .representative-name {
+    margin-top: 50px;
+    font-weight: bold;
+    @include mq() {
+      margin-top: 20px;
+    }
+    .name {
+      margin-left: 20px;
+    }
+  }
+}
+
+.fourth {
+  color: color(bright);
+  .line {
+    background: color(bright);
+    // top: -270px;
+  }
+  .section-inner {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    row-gap: 100px;
+    font-size: 1.4rem;
+    color: color(bright);
+    @include mq() {
+      margin-top: 30px;
+      row-gap: 30px;
+    }
+  }
+  .bussiness-top-contents {
+    @include flex(nowrap, flex-start, flex-start);
+    column-gap: 30px;
+    width: 100%;
+    @include mq() {
+      @include flex(wrap, flex-start, flex-start);
+      row-gap: 20px;
+    }
+    .business-content {
+      width: calc(100% - 30px);
+      .bussiness-body {
+        line-height: 1.5;
+        @include mq() {
+          font-size: 1.2rem;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+  .business-content {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    row-gap: 16px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    @include mq() {
+      row-gap: 12px;
+    }
+  }
+  .bussiness-head {
+    @include flex(nowrap, flex-start, center);
+    column-gap: 20px;
+  }
+  .bussiness-img {
+    width: 52px;
+    @include mq() {
+      width: 40px;
+    }
+  }
+  .bussiness-title {
+    flex: 1;
+    font-size: 2.4rem;
+    font-weight: bold;
+    @include mq() {
+      font-size: 1.8rem;
+    }
+  }
+  .bussiness-bottom-contents {
+    @include flex(wrap, flex-start, center);
+    gap: 70px;
+    @include mq() {
+      gap: 10px 20px;
+    }
+    .bussiness-img {
+      @include mq() {
+        width: 40px;
+      }
+    }
+    .business-content {
+      align-items: center;
+      @include mq() {
+        min-width: 40px;
+      }
+    }
+    .bussiness-body {
+      font-size: 1.6rem;
+      font-weight: bold;
+      @include mq() {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.fifth {
+  color: color(bright);
+  .line {
+    background: color(bright);
+  }
+  .section-inner {
+    @include flex(nowrap, flex-start, stretch);
+    column-gap: 30px;
+  }
+  .company-info {
+    @include flex(nowrap, flex-start, flex-start);
+    gap: 20px;
+    flex: 1;
+  }
+  .company-info-list {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    row-gap: 24px;
+    width: 100%;
+    .company-info-item {
+      @include flex(nowrap, flex-start, flex-start)
+      column-gap: 16px;
+      @include mq() {
+        column-gap: 10px;
+      }
+    }
+    .company-info-title {
+      width: 100px;
+      @include mq() {
+        font-size: 1.4rem;
+      }
+    }
+    .company-info-text {
+      width: 100%;
+      flex: 1;
+      @include mq() {
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .contents-list {
+    @include flex(wrap, flex-start, flex-start);
+    row-gap: 5px;
+  }
+  .contents-item {
+    width: 100%;
+  }
+  .company-info-logo {
+    opacity: 0.6;
+    @include mq() {
+      display: none;
+    }
+  }
+}
+
+.sixth {
+  .access-map {
+    width: 70%;
+    max-width: 800px;
+    height: auto;
+    iframe {
+      width: 100%;
+      max-height: 800px;
+      border: 0;
+      @include mq() {
+        max-height: 400px;
+      }
+    }
+  }
+  .section-inner {
+    @include flex(nowrap, flex-start, flex-start);
+    flex-direction: row-reverse;
+    column-gap: 30px;
+    @include mq() {
+      display: block;
+    }
+  }
+  .access-address {
+    font-weight: bold;
+    @include mq() {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+.seventh {
+  color: color(bright);
+  .line {
+    background: color(bright);
+  }
+  .tel-list {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    row-gap: 8px;
+    width: 100%;
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+  .button-wrapper {
+    margin-top: 200px;
+  }
+  .button {
+    position: relative;
+    border: 1px solid color(bright);
+    padding: 25px 40px 25px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: color(bright);
+    font-size: 2rem;
+    font-weight: bold;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+      border: 5px solid transparent;
+      border-left: 8px solid color(bright);
+    }
+    &:hover {
+      color: color(primaryColor);
+      border-color: color(primaryColor);
+      &::after {
+        border-left: 8px solid color(primaryColor);
+      }
+    }
+  }
+}

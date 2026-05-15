@@ -1,0 +1,58 @@
+{
+  "name": "frontend-devkit",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "server": "browser-sync start --config ./config/bs-config.js",
+    "pug": "pug --hierarchy -o dist/ src/pug/*",
+    "pug:watch": "pug --hierarchy -o dist/ src/pug/* -w --pretty",
+    "build:css": "node-sass src/css/style.scss --output-style compressed dist/css/style.css --source-map false",
+    "watch:css": "node-sass ./src/css/style.scss --output-style expanded ./dist/css/style.css -w --source-map true",
+    "autoprefixer": "postcss --use autoprefixer --no-map dist/css/style.css -d dist/css/",
+    "autoprefixer:watch": "postcss --use autoprefixer --no-map dist/css/style.css -d dist/css/ -w",
+    "watch:js": "babel src/js/main.js -o dist/js/bundle.js -w -s",
+    "build:js": "babel --compact=true --comment=false src/js/main.js -o dist/js/bundle.js",
+    "copy": "cpx \"./src/**/*{*.jpg,*.png,*.gif,*.svg,*.eot,*.ttf,*.woff,*.json,lib/**/*.js,*.ico,*.mp3,*.mp4}\" ./dist",
+    "watch:copy": "cpx \"./src/**/{*.jpg,*.png,*.gif,*.svg,*.eot,*.ttf,*.woff,*.json,lib/**/*.js,*.ico,*.mp3,*.mp4}\" ./dist -w",
+    "clean": "rimraf ./dist",
+    "make_dir": "mkdirp dist/js",
+    "dev": "run-p server pug:watch watch:*",
+    "build": "run-s clean make_dir build:* autoprefixer pug copy"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not ie < 11",
+    "Android >= 4",
+    "iOS >= 9"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^6.5.4",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.5",
+    "cpx": "^1.5.0",
+    "css-mqpacker": "^5.0.1",
+    "lodash": "^4.17.2",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.17.1",
+    "node-sass": "^4.9.0",
+    "npm-run-all": "^4.0.2",
+    "postcss": "^6.0.22",
+    "postcss-cli": "^5.0.0",
+    "pug": "^2.0.0-rc.4",
+    "pug-cli": "https://github.com/pugjs/pug-cli.git",
+    "rimraf": "^2.6.2",
+    "watchify": "^3.8.0"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}

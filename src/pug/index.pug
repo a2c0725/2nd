@@ -1,0 +1,26 @@
+extends _layout.pug
+
+block content
+  block valiables
+    - const currentPage = 'home'
+  main
+    include components/sections/_first
+
+    include components/sections/_second
+
+    include components/sections/_third
+
+    include components/sections/_fourth
+
+    include components/sections/_fifth
+
+    include components/sections/_sixth
+
+    include components/sections/_seventh
+
+    include components/layouts/_footer
+
+    .scroll-arrow
+
+block script
+  script(src='js/lib/use-swiper.js')
