@@ -409,6 +409,8 @@
   }
   .access-address {
     font-weight: bold;
+    width: 300px;
+    flex: 1;
     @include mq() {
       margin-bottom: 30px;
     }
