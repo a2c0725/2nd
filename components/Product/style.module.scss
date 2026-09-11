@@ -1,0 +1,12 @@
+@use '@/styles/common' as *;
+
+.cards {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+
+  @include mq() {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

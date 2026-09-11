@@ -1,0 +1,117 @@
+@use '@/styles/common' as *;
+
+.business {
+  background-image: url('/img/bg/business.webp');
+
+  color: color(bright);
+
+  :global(.section-inner) {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    row-gap: 100px;
+    font-size: 1.4rem;
+    color: color(bright);
+    @include mq() {
+      margin-top: 30px;
+      row-gap: 30px;
+    }
+  }
+
+  :global(.small-device) & {
+    :global(.section-inner) {
+      row-gap: 30px;
+    }
+    .bussinessImg {
+      width: 30px;
+    }
+    .businessContent {
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-bottom: 10px;
+    }
+    .bussinessTopContents .bussinessBody {
+      font-size: 1.1rem;
+    }
+    .bussinessBottomContents {
+      .businessContent {
+        min-width: 50px;
+      }
+      .bussinessBody {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.bussinessTopContents {
+  @include flex(nowrap, flex-start, flex-start);
+  column-gap: 30px;
+  width: 100%;
+  @include mq() {
+    @include flex(wrap, flex-start, flex-start);
+    row-gap: 20px;
+  }
+  .businessContent {
+    width: calc(100% - 30px);
+    .bussinessBody {
+      line-height: 1.5;
+      @include mq() {
+        font-size: 1.2rem;
+        line-height: 1.2;
+      }
+    }
+  }
+}
+.businessContent {
+  @include flex(wrap, flex-start, flex-start);
+  flex-direction: column;
+  row-gap: 16px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  @include mq() {
+    row-gap: 12px;
+  }
+}
+.bussinessHead {
+  @include flex(nowrap, flex-start, center);
+  column-gap: 20px;
+}
+.bussinessImg {
+  width: 52px;
+  @include mq() {
+    width: 40px;
+  }
+}
+.bussinessTitle {
+  flex: 1;
+  font-size: 2.4rem;
+  font-weight: bold;
+  @include mq() {
+    font-size: 1.8rem;
+  }
+}
+.bussinessBottomContents {
+  @include flex(wrap, flex-start, center);
+  gap: 70px;
+  @include mq() {
+    gap: 10px 20px;
+  }
+  .bussinessImg {
+    @include mq() {
+      width: 40px;
+    }
+  }
+  .businessContent {
+    align-items: center;
+    @include mq() {
+      min-width: 40px;
+    }
+  }
+  .bussinessBody {
+    font-size: 1.6rem;
+    font-weight: bold;
+    @include mq() {
+      font-size: 1rem;
+    }
+  }
+}

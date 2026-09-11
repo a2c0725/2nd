@@ -1,0 +1,58 @@
+@use '@/styles/common' as *;
+
+.button {
+  position: relative;
+  display: inline-block;
+  border: 1px solid color(bright);
+  padding: 25px 40px 25px 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: color(bright);
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 1.5;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    border: 5px solid transparent;
+    border-left: 8px solid color(bright);
+  }
+
+  &:hover:not(:disabled) {
+    color: color(primaryRed);
+    border-color: color(primaryRed);
+    &::after {
+      border-left: 8px solid color(primaryRed);
+    }
+  }
+
+  &.contact {
+    font-size: 2rem;
+  }
+
+  &.product {
+    margin-top: auto;
+    padding: 12px 40px;
+    min-width: 180px;
+    @include mq() {
+      min-width: 100%;
+    }
+  }
+}
+
+.label {
+  white-space: pre;
+}
+
+.subLabel {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1.4rem;
+  white-space: nowrap;
+}

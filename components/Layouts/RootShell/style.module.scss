@@ -1,0 +1,40 @@
+@use '@/styles/common' as *;
+
+// hooks/useHomeInteractions.ts が document.querySelector('.container') で直接参照するため、
+// CSS Modules のハッシュ化を避けて :global でリテラルなクラス名のまま定義する
+:global(.container) {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+// hooks/useHomeInteractions.ts が document.querySelector('.scroll-arrow') で直接参照するため、
+// 同様に :global で定義する
+:global(.scroll-arrow) {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  border-bottom: 10px solid color(bright);
+  border-right: 10px solid color(bright);
+  transform: rotate(45deg);
+  opacity: 0.5;
+  @include mq() {
+    display: inline-block;
+  }
+}
+
+:global(.section-news),
+:global(.section-access) {
+  :global(.scroll-arrow) {
+    border-color: #000;
+  }
+}
+:global(.section-footer) {
+  :global(.scroll-arrow) {
+    display: none;
+  }
+}

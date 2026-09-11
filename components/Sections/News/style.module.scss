@@ -1,0 +1,27 @@
+@use '@/styles/common' as *;
+
+.news {
+  background-image: url('/img/bg/news.webp');
+  background-size: 200%;
+  background-position: 82% 0;
+  @include mq() {
+    background-size: cover;
+  }
+}
+
+.newsList {
+  @include flex(wrap, flex-start, flex-start);
+  flex-direction: column;
+  row-gap: 30px;
+  font-size: 1.4rem;
+}
+.newsItem {
+  @include flex(nowrap, flex-start, center);
+  column-gap: 30px;
+  @include mq() {
+    @include flex(wrap, flex-start, flex-start);
+  }
+}
+.newsDate {
+  letter-spacing: 1.5px;
+}

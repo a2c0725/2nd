@@ -1,0 +1,70 @@
+@use '@/styles/common' as *;
+
+.company {
+  background-image: url('/img/bg/company.webp');
+
+  color: color(bright);
+
+  :global(.section-inner) {
+    @include flex(nowrap, flex-start, stretch);
+    column-gap: 30px;
+  }
+
+  :global(.small-device) & {
+    .companyInfo {
+      gap: 10px;
+    }
+    .companyInfoList {
+      row-gap: 12px;
+      .companyInfoTitle,
+      .companyInfoText {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+.companyInfo {
+  @include flex(nowrap, flex-start, flex-start);
+  gap: 20px;
+  flex: 1;
+}
+.companyInfoList {
+  @include flex(wrap, flex-start, flex-start);
+  flex-direction: column;
+  row-gap: 24px;
+  width: 100%;
+  .companyInfoItem {
+    @include flex(nowrap, flex-start, flex-start);
+    column-gap: 16px;
+    @include mq() {
+      column-gap: 10px;
+    }
+  }
+}
+.companyInfoTitle {
+  width: 100px;
+  @include mq() {
+    font-size: 1.4rem;
+  }
+}
+.companyInfoText {
+  width: 100%;
+  flex: 1;
+  @include mq() {
+    font-size: 1.4rem;
+  }
+}
+.contentsList {
+  @include flex(wrap, flex-start, flex-start);
+  row-gap: 5px;
+}
+.contentsItem {
+  width: 100%;
+}
+.companyInfoLogo {
+  opacity: 0.6;
+  @include mq() {
+    display: none;
+  }
+}

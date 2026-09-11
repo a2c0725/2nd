@@ -1,0 +1,103 @@
+@use '@/styles/common' as *;
+
+.about {
+  background-image: url('/img/bg/about.webp');
+
+  color: color(bright);
+
+  :global(.section-inner) {
+    @include flex(nowrap, flex-start, stretch);
+    font-size: 1.4rem;
+    @include mq() {
+      display: block;
+      margin-top: 30px;
+    }
+  }
+
+  :global(.small-device) & {
+    :global(.section-inner) {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+    .aboutTitle {
+      font-size: 1.6rem;
+    }
+    .aboutList {
+      row-gap: 16px;
+      .aboutItem {
+        row-gap: 5px;
+      }
+    }
+    .representativeName {
+      margin-top: 20px;
+    }
+    .logoAbout {
+      min-width: 30px;
+      max-width: 50px;
+      bottom: -20px;
+    }
+  }
+}
+
+.aboutTitle {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-size: 2.4rem;
+  @include mq() {
+    @include flex(nowrap, flex-start, center);
+    column-gap: 12px;
+    font-size: 1.8rem;
+  }
+}
+.titleJp {
+  display: block;
+  margin-top: 8px;
+  @include mq() {
+    font-size: 1.4rem;
+    margin-top: 0;
+  }
+}
+.aboutText {
+  line-height: 1.5;
+}
+.aboutList {
+  @include flex(wrap, flex-start, flex-start);
+  flex-direction: column;
+  row-gap: 24px;
+  width: 100%;
+  padding-right: 46px;
+  flex: 1;
+  @include mq() {
+    padding-right: 0;
+  }
+  .aboutItem {
+    @include flex(wrap, flex-start, flex-start);
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}
+.logoAbout {
+  @include flex(wrap, center, center);
+  width: 40%;
+  min-width: 250px;
+  max-width: 330px;
+  @include mq() {
+    min-width: 60px;
+    max-width: 100px;
+    position: absolute;
+    right: 0;
+  }
+}
+.companyLogo {
+  margin-top: -50px;
+}
+.representativeName {
+  margin-top: 50px;
+  font-weight: bold;
+  @include mq() {
+    margin-top: 20px;
+  }
+  .name {
+    margin-left: 20px;
+  }
+}

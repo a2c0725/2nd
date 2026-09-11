@@ -1,0 +1,72 @@
+@use '@/styles/common' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1;
+  min-width: 200px;
+  padding: 24px;
+  background: color(cardBackground);
+  color: color(bright);
+  position: relative;
+
+  @include mq() {
+    width: 100%;
+    padding: 16px;
+  }
+
+  &.product {
+    min-height: 300px;
+    @include mq() {
+      min-height: auto;
+    }
+  }
+}
+
+.commingsoonWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: color(bright);
+}
+
+.commingsoonOverlay {
+  position: absolute;
+  inset: 0;
+  background: color(cardBackground);
+  opacity: 0.6;
+}
+
+.commingsoonText {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.description {
+  font-size: 1.4rem;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+.disabled {
+  opacity: 0.6;
+
+  .title {
+    font-weight: 700;
+  }
+}

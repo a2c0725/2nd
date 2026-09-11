@@ -1,0 +1,88 @@
+@use '@/styles/common' as *;
+
+.baseTitle {
+  margin-block-start: 0;
+  position: relative;
+}
+
+.mountLine,
+.scrollLine {
+  width: 19%;
+  height: 3px;
+  position: absolute;
+  // デフォルト（下スクロールで出現するのを待つ待機位置）: 上に隠れている
+  top: -50px;
+  left: -20%;
+  background: color(primaryText);
+  // 上スクロールで出現するのを待つ待機位置: 下に隠れている
+  &.fromBelow {
+    top: 80px;
+  }
+  // 画面内に入っている状態（最終位置）
+  &.onScreen {
+    top: 10px;
+  }
+}
+
+// mount時にのみ表示する line。top には transition をつけないため、
+// before/active の切り替えは常に瞬時（アニメーションしない）。
+// 横方向の transform だけ transition 対象にして、左からスライドインさせる。
+// 親要素(.section-contents-wrapper)の overflow: hidden でクリップされない
+// 距離にしてスライド全体が視認できるようにする。
+// opacity はデフォルトで 0 にしておき、SSRの初期描画〜hydration完了までの間、
+// 誤った位置(top: -50px)がそのまま見えてしまうのを防ぐ。
+// opacity は transition の対象に含めないため、revealed 付与時は瞬時に表示され、
+// transform（スライド）だけがアニメーションする
+.mountLine {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: transform 0.6s ease;
+  &.revealed {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// スクロールで追従させる line。実際に scroll が発生するまでは非表示にしておき、
+// 発生した瞬間に現在位置を反映してから表示に切り替える
+.scrollLine {
+  opacity: 0;
+  transition: top 1s ease;
+  &.shown {
+    opacity: 1;
+  }
+}
+
+.titleKana {
+  display: block;
+  font-weight: normal;
+  font-size: 1.4rem;
+}
+
+.titleText.hasSub {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.titleSub {
+  font-weight: normal;
+  font-size: 2.8rem;
+  @include mq() {
+    font-size: 2rem;
+  }
+}
+
+.white {
+  .mountLine,
+  .scrollLine {
+    background: color(bright);
+  }
+}
+
+.product {
+  margin-bottom: 40px;
+  @include mq() {
+    margin-bottom: 0;
+  }
+}

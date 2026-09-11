@@ -1,0 +1,67 @@
+@use '@/styles/common' as *;
+
+.top {
+  background-image: url('/img/bg/top.webp');
+  background-size: 200%;
+  background-position: 50% 50%;
+  @include mq() {
+    background-size: cover;
+  }
+
+  color: color(bright);
+  font-size: 2.4rem;
+}
+
+.hello {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.logoWrapper {
+  width: 218px;
+  padding: 10px 20px;
+  background: color(primaryRed);
+}
+
+.companyName,
+.companyCatch {
+  @include flex(wrap, flex-start, flex-start);
+  flex-direction: column;
+  gap: 20px;
+}
+
+.catchJp,
+.catchFn {
+  letter-spacing: 8px;
+}
+.catchJp {
+  @include mq() {
+    margin-top: 100px;
+    font-size: 1.6rem;
+  }
+}
+.catchEn {
+  display: inline-block;
+  padding: 5px 10px;
+  background: #fff;
+  color: color(primaryText);
+  font-weight: bold;
+  opacity: 0.8;
+  @include mq() {
+    font-size: 1.2rem;
+    white-space: nowrap;
+  }
+}
+.catchImg {
+  width: 66px;
+  margin-right: 20px;
+  @include mq() {
+    margin-right: 10px;
+  }
+}
+.catchFn {
+  @include mq() {
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+  }
+}

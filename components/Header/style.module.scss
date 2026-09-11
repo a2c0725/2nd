@@ -1,0 +1,161 @@
+@use '@/styles/common' as *;
+
+.header {
+  @include flex(nowrap, center, center);
+  width: 100%;
+  height: $headerHeight;
+  position: absolute;
+  z-index: 11;
+
+  @include onContentSection {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));
+  }
+}
+
+.headerInner {
+  @include flex(nowrap, flex-start, center);
+  width: $contentsWidth;
+}
+
+.logo {
+  width: 135px;
+  @include mq() {
+    width: $spMenuSize;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+  }
+}
+
+.logoImgR {
+  display: block;
+  @include onContentSection {
+    display: none;
+  }
+}
+.logoImgW {
+  display: none;
+  @include onContentSection {
+    display: block;
+  }
+}
+
+.menuIcon {
+  display: none; // デフォルトで非表示
+  position: fixed;
+  top: $spMenuPosition;
+  right: $spMenuPosition;
+  z-index: 1010;
+  @include mq() {
+    display: block; // スマホ版で表示
+    cursor: pointer;
+    .line {
+      display: block;
+      width: 30px;
+      height: 5px;
+      margin: 10px 0;
+      background-color: color(bright);
+      transition: all 0.5s ease;
+    }
+    &:global(.active) .line:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    &:global(.active) .line:nth-child(2) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+}
+
+.spGnav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: -100vw;
+  height: 100vh;
+  z-index: 1001;
+  transition: right 0.5s ease;
+}
+.spGnavMenu {
+  padding: 120px 24px 24px;
+  text-align: right;
+}
+.spGnavItem {
+  & + & {
+    margin-top: 30px;
+  }
+}
+.spGnavLink {
+  color: color(bright);
+}
+.gnavEn {
+  display: block;
+  font-size: 3.2rem;
+  font-weight: bold;
+}
+.gnavKana {
+  margin-top: 5px;
+  font-size: 1.6rem;
+}
+
+.gnav {
+  @include flex(nowrap, flex-start, center);
+  column-gap: 24px;
+  margin-left: auto;
+  @include mq() {
+    display: none;
+  }
+
+  :global(.section-footer) & {
+    display: none;
+  }
+}
+.gnavItem {
+  position: relative;
+}
+.gnavLink {
+  @include hoverAnimation(color(bright), color(bright));
+  color: color(bright);
+  &:hover {
+    opacity: $hoverOpacity;
+  }
+  &:global(.current) {
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 80%;
+      background: color(bright);
+      position: absolute;
+      bottom: -5px;
+      left: 10%;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.5s ease,
+    visibility 0s 0.5s;
+
+  :global(.menu-open) & {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease;
+  }
+}
+.spLogoImgW {
+  width: 135px;
+  position: absolute;
+  top: $spMenuPosition;
+  left: $spMenuPosition;
+}

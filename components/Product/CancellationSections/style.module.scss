@@ -1,0 +1,13 @@
+@use '@/styles/common' as *;
+
+.buttonGroup {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+
+  @include mq() {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

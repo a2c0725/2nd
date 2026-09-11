@@ -1,0 +1,5 @@
+export const HERO_GREETING = 'HELLO.'
+export const HERO_CATCH_JP = '二番目でも輝ける世界を。'
+export const HERO_CATCH_EN = 'A world where even the second person can shine'
+export const HERO_CATCH_PREFIX = '株式会社'
+export const HERO_CATCH_SUFFIX = 'は、不動産会社です。'

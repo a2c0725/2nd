@@ -1,0 +1,112 @@
+@use './common' as *;
+@use './normalize';
+
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: $sans;
+  @include mq() {
+    font-size: 1.2rem;
+  }
+}
+
+img {
+  width: 100%;
+}
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+dl,
+dt,
+dd,
+ul,
+li {
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+  list-style: none;
+}
+a {
+  transition: 0.3s;
+}
+a:link,
+a:visited,
+a:active,
+a:hover {
+  text-decoration: none;
+}
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+body {
+  overflow-y: hidden;
+}
+
+// 各セクション共通の外枠
+.section-contents-wrapper {
+  @include flex(wrap, center, center);
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.section-contents-inner {
+  width: $contentsWidth;
+  position: relative;
+  @include mq() {
+    width: $contentsSpWidth;
+  }
+}
+
+.section-inner {
+  margin-top: 50px;
+}
+
+.annotation {
+  text-indent: -1em;
+  padding-left: 1em;
+  line-height: 1.4;
+}
+
+// 縦幅の狭いデバイスの場合（innerHeightが680以下だとclass付与）
+.small-device {
+  .section-inner {
+    margin-top: 30px;
+  }
+}
+
+// 汎用ユーティリティクラス
+.serif {
+  font-family: $serif;
+}
+.sans {
+  font-family: $sans;
+}
+.spnone {
+  @include mq() {
+    display: none;
+  }
+}
+.pcnone {
+  display: none;
+  @include mq() {
+    display: block;
+  }
+}
