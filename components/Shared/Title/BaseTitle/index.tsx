@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import { useEffect, useLayoutEffect, useRef } from 'react'
-import { getNavItem } from '@/constants/nav'
+import { getNavItem } from '@/constants/common/nav'
 import type { SectionTitleProps } from '@/types/ui'
 import { usedClasses } from '@/utility/usedClasses'
 import styles from './style.module.scss'

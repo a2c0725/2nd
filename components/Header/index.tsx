@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import { COMPANY_LOGO_ALT } from '@/constants/company'
-import { NAV_ITEMS } from '@/constants/nav'
+import Link from 'next/link'
+import { COMPANY } from '@/constants/common/company'
+import { NAV_ITEMS } from '@/constants/common/nav'
 import styles from './style.module.scss'
 
 export default function Header() {
@@ -8,10 +9,10 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <div className={styles.logo}>
-          <a className={styles.logoLink} href="/#top">
-            <img className={styles.logoImgR} src="/img/logo/logo_red.svg" alt={COMPANY_LOGO_ALT} />
-            <img className={styles.logoImgW} src="/img/logo/logo_white.svg" alt={COMPANY_LOGO_ALT} />
-          </a>
+          <Link className={styles.logoLink} href="/#top">
+            <img className={styles.logoImgR} src="/img/logo/logo_red.svg" alt={COMPANY.logoAlt} />
+            <img className={styles.logoImgW} src="/img/logo/logo_white.svg" alt={COMPANY.logoAlt} />
+          </Link>
         </div>
         <div className={clsx('menu-icon', styles.menuIcon)}>
           <span className={styles.line} />
@@ -40,7 +41,7 @@ export default function Header() {
         </ul>
       </div>
       <div className={clsx('overlay', styles.overlay)}>
-        <img className={styles.spLogoImgW} src="/img/logo/logo_white.svg" alt={COMPANY_LOGO_ALT} />
+        <img className={styles.spLogoImgW} src="/img/logo/logo_white.svg" alt={COMPANY.logoAlt} />
       </div>
     </header>
   )

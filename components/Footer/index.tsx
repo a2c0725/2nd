@@ -1,12 +1,6 @@
 import clsx from 'clsx'
-import { NAV_ITEMS } from '@/constants/nav'
-import {
-  COMPANY_ADDRESS,
-  COMPANY_FAX,
-  COMPANY_LOGO_ALT,
-  COMPANY_NAME,
-  COMPANY_TEL,
-} from '@/constants/company'
+import { NAV_ITEMS } from '@/constants/common/nav'
+import { COMPANY } from '@/constants/common/company'
 import styles from './style.module.scss'
 
 export default function Footer() {
@@ -15,14 +9,14 @@ export default function Footer() {
       <div className="section-contents-inner">
         <div className={styles.footerLogoArea}>
           <div className={styles.footerLogo}>
-            <img className={styles.logoImg} src="/img/logo/logo_notext_w.svg" alt={COMPANY_LOGO_ALT} />
-            <img className={styles.logoImg} src="/img/logo/2nd.svg" alt={COMPANY_LOGO_ALT} />
+            <img className={styles.logoImg} src="/img/logo/logo_notext_w.svg" alt={COMPANY.logoAlt} />
+            <img className={styles.logoImg} src="/img/logo/2nd.svg" alt={COMPANY.logoAlt} />
           </div>
           <ul className={styles.companyInfo}>
-            <li className={styles.companyName}>{COMPANY_NAME}</li>
-            <li className={styles.companyAddress}>{COMPANY_ADDRESS}</li>
-            <li className={styles.companyTel}>TEL {COMPANY_TEL} </li>
-            <li className={styles.companyFax}>FAX {COMPANY_FAX}</li>
+            <li className={styles.companyName}>{COMPANY.name}</li>
+            <li className={styles.companyAddress}>{COMPANY.address}</li>
+            <li className={styles.companyTel}>TEL {COMPANY.tel} </li>
+            <li className={styles.companyFax}>FAX {COMPANY.fax}</li>
           </ul>
         </div>
         <div className={styles.gnavArea}>

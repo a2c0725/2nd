@@ -1,12 +1,5 @@
 import clsx from 'clsx'
-import { COMPANY_LOGO_ALT } from '@/constants/company'
-import {
-  HERO_CATCH_EN,
-  HERO_CATCH_JP,
-  HERO_CATCH_PREFIX,
-  HERO_CATCH_SUFFIX,
-  HERO_GREETING,
-} from '@/constants/sections/hero'
+import { HERO } from '@/constants/sections/hero'
 import styles from './style.module.scss'
 
 export default function Top() {
@@ -15,22 +8,22 @@ export default function Top() {
       <div className="section-contents-inner">
         <div className={clsx('section-contents', 'serif')}>
           <h1 className={styles.companyName}>
-            <p className={clsx(styles.hello, 'sans')}>{HERO_GREETING}</p>
+            <p className={clsx(styles.hello, 'sans')}>{HERO.greeting}</p>
             <div className={styles.logoWrapper}>
               <img
                 className={styles.companyLogo}
                 src="/img/logo/logo_white.svg"
-                alt={COMPANY_LOGO_ALT}
+                alt={HERO.logoAlt}
               />
             </div>
           </h1>
           <div className={styles.companyCatch}>
-            <p className={styles.catchJp}>{HERO_CATCH_JP}</p>
-            <p className={clsx(styles.catchEn, 'sans')}>{HERO_CATCH_EN}</p>
+            <p className={styles.catchJp}>{HERO.catchJp}</p>
+            <p className={clsx(styles.catchEn, 'sans')}>{HERO.catchEn}</p>
             <div className={styles.catchFn}>
-              {HERO_CATCH_PREFIX}
-              <img className={styles.catchImg} src="/img/logo/2nd.svg" alt={COMPANY_LOGO_ALT} />
-              {HERO_CATCH_SUFFIX}
+              {HERO.catchPrefix}
+              <img className={styles.catchImg} src="/img/logo/2nd.svg" alt={HERO.logoAlt} />
+              {HERO.catchSuffix}
             </div>
           </div>
         </div>

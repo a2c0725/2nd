@@ -3,7 +3,6 @@ import type { NavItem } from '@/types/nav'
 // Product 系ページの SectionTitle 表示内容。home の NAV_ITEMS と同じ考え方で、
 // ページ(URL)ごとに固定の navId を割り当て、label/kana/subTitle をここに集約する
 export const PRODUCT_NAV_ITEMS: NavItem[] = [
-  { id: 'product', label: 'Product', kana: '製品案内' },
   { id: 'product-resident', label: 'Product', kana: '製品案内', subTitle: 'ご入居者様専用サイト' },
   {
     id: 'product-resident-renewal',

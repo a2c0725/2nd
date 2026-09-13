@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
-import { COMPANY_OFFICES } from '@/constants/company'
+import { ACCESS_OFFICES } from '@/constants/sections/access'
 import styles from './style.module.scss'
 
 export default function Access() {
@@ -9,7 +9,7 @@ export default function Access() {
       <div className="section-contents-inner">
         <BaseTitle navId="access" />
         <div className="section-contents">
-          {COMPANY_OFFICES.map((office) => (
+          {ACCESS_OFFICES.map((office) => (
             <div className="section-inner" key={office.title}>
               <div className={styles.accessAddress}>
                 <p className={styles.officeTitle}>{office.title}</p>

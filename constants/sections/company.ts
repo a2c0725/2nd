@@ -1,0 +1,37 @@
+import { COMPANY } from '@/constants/common/company'
+
+export const COMPANY_INFO = {
+  name: COMPANY.name,
+  representativeName: COMPANY.representativeName,
+  address: COMPANY.address,
+  tel: COMPANY.tel,
+  fax: COMPANY.fax,
+  logoAlt: COMPANY.logoAlt,
+  branchOfficeAddress: '山梨県富士吉田市下吉田7-12-1　フリムール103',
+  capital: '5百万円',
+  businessHours: '9:30-18:00',
+  licenseNumber: '東京都知事(1)第111146号',
+  establishedDate: '2024年3月',
+  businessScope: [
+    '管理委託運営(管理受託)',
+    '不動産売買',
+    '不動産賃貸/仲介/管理',
+    '不動産サブリース事業',
+    'リフォーム',
+    '建築',
+    'ペットサロン/ホテル',
+    '保険代理店業',
+    'デザイン制作事業',
+  ],
+  labels: {
+    name: '社名',
+    representative: '代表',
+    address: '所在地',
+    tel: '電話番号',
+    capital: '資本金',
+    businessHours: '営業時間',
+    businessScope: '主な事業内容',
+    licenseNumber: '免許番号',
+    establishedDate: '設立年月日',
+  },
+} as const

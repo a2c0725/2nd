@@ -1,10 +1,11 @@
-import { PRODUCT_NAV_ITEMS } from '@/constants/product'
+import { PRODUCT_NAV_ITEMS } from '@/constants/product/nav'
 import type { NavItem } from '@/types/nav'
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'news', label: 'NEWS', kana: 'ニュース', sectionTitleKana: 'ニュース' },
   { id: 'about', label: 'ABOUT', kana: '2ndについて', sectionTitleKana: 'アバウト' },
   { id: 'business', label: 'BUSINESS', kana: '事業内容', sectionTitleKana: '事業内容' },
+  { id: 'product', label: 'PRODUCT', kana: '製品案内', sectionTitleKana: '製品案内' },
   { id: 'company', label: 'COMPANY', kana: '会社概要', sectionTitleKana: '会社概要' },
   { id: 'access', label: 'ACCESS', kana: 'アクセス', sectionTitleKana: 'アクセス' },
   { id: 'contact', label: 'CONTACT', kana: 'お問い合わせ', sectionTitleKana: 'お問い合わせ' },

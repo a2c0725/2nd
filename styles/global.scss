@@ -60,12 +60,17 @@ body {
   @include flex(wrap, center, center);
   height: 100vh;
   height: 100dvh;
+  padding-top: $headerHeight;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+
+  @include mq() {
+    padding-top: $headerHeightSp;
+  }
 }
 
 .section-contents-inner {

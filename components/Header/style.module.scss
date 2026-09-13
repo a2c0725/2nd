@@ -7,6 +7,10 @@
   position: absolute;
   z-index: 11;
 
+  @include mq() {
+    height: $headerHeightSp;
+  }
+
   @include onContentSection {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0));
   }
@@ -22,8 +26,8 @@
   @include mq() {
     width: $spMenuSize;
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: $spMenuPositionTop;
+    left: $spMenuPositionLeft;
   }
 }
 
@@ -43,8 +47,8 @@
 .menuIcon {
   display: none; // デフォルトで非表示
   position: fixed;
-  top: $spMenuPosition;
-  right: $spMenuPosition;
+  top: $spMenuPositionTop;
+  right: $spMenuPositionLeft;
   z-index: 1010;
   @include mq() {
     display: block; // スマホ版で表示
@@ -83,6 +87,9 @@
 .spGnavItem {
   & + & {
     margin-top: 30px;
+  }
+  :global(.small-device) & + & {
+    margin-top: 20px;
   }
 }
 .spGnavLink {
@@ -156,8 +163,8 @@
   }
 }
 .spLogoImgW {
-  width: 135px;
+  width: $spMenuSize;
   position: absolute;
-  top: $spMenuPosition;
-  left: $spMenuPosition;
+  top: $spMenuPositionTop;
+  left: $spMenuPositionLeft;
 }

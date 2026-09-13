@@ -1,51 +1,37 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
-import {
-  COMPANY_ADDRESS,
-  COMPANY_BRANCH_OFFICE_ADDRESS,
-  COMPANY_BUSINESS_HOURS,
-  COMPANY_BUSINESS_SCOPE,
-  COMPANY_CAPITAL,
-  COMPANY_ESTABLISHED_DATE,
-  COMPANY_FAX,
-  COMPANY_INFO_LABELS,
-  COMPANY_LICENSE_NUMBER,
-  COMPANY_LOGO_ALT,
-  COMPANY_NAME,
-  COMPANY_REPRESENTATIVE_NAME,
-  COMPANY_TEL,
-} from '@/constants/company'
+import { COMPANY_INFO } from '@/constants/sections/company'
 import type { CompanyInfoRow } from '@/types/company'
 import styles from './style.module.scss'
 
 const COMPANY_INFO_ROWS: CompanyInfoRow[] = [
-  { title: COMPANY_INFO_LABELS.name, text: `・${COMPANY_NAME}` },
-  { title: COMPANY_INFO_LABELS.representative, text: `・${COMPANY_REPRESENTATIVE_NAME}` },
+  { title: COMPANY_INFO.labels.name, text: `・${COMPANY_INFO.name}` },
+  { title: COMPANY_INFO.labels.representative, text: `・${COMPANY_INFO.representativeName}` },
   {
-    title: COMPANY_INFO_LABELS.address,
+    title: COMPANY_INFO.labels.address,
     text: (
       <>
-        ・本社：{COMPANY_ADDRESS}
-        <br />・営業所：{COMPANY_BRANCH_OFFICE_ADDRESS}
+        ・本社：{COMPANY_INFO.address}
+        <br />・営業所：{COMPANY_INFO.branchOfficeAddress}
       </>
     ),
   },
   {
-    title: COMPANY_INFO_LABELS.tel,
+    title: COMPANY_INFO.labels.tel,
     text: (
       <>
-        ・TEL{COMPANY_TEL}
-        <br className="pcnone" />・FAX{COMPANY_FAX}
+        ・TEL{COMPANY_INFO.tel}
+        <br className="pcnone" />・FAX{COMPANY_INFO.fax}
       </>
     ),
   },
-  { title: COMPANY_INFO_LABELS.capital, text: `・${COMPANY_CAPITAL}` },
-  { title: COMPANY_INFO_LABELS.businessHours, text: `・${COMPANY_BUSINESS_HOURS}` },
+  { title: COMPANY_INFO.labels.capital, text: `・${COMPANY_INFO.capital}` },
+  { title: COMPANY_INFO.labels.businessHours, text: `・${COMPANY_INFO.businessHours}` },
   {
-    title: COMPANY_INFO_LABELS.businessScope,
+    title: COMPANY_INFO.labels.businessScope,
     text: (
       <ul className={styles.contentsList}>
-        {COMPANY_BUSINESS_SCOPE.map((item) => (
+        {COMPANY_INFO.businessScope.map((item) => (
           <li className={styles.contentsItem} key={item}>
             ・{item}
           </li>
@@ -53,8 +39,8 @@ const COMPANY_INFO_ROWS: CompanyInfoRow[] = [
       </ul>
     ),
   },
-  { title: COMPANY_INFO_LABELS.licenseNumber, text: `・${COMPANY_LICENSE_NUMBER}` },
-  { title: COMPANY_INFO_LABELS.establishedDate, text: `・${COMPANY_ESTABLISHED_DATE}` },
+  { title: COMPANY_INFO.labels.licenseNumber, text: `・${COMPANY_INFO.licenseNumber}` },
+  { title: COMPANY_INFO.labels.establishedDate, text: `・${COMPANY_INFO.establishedDate}` },
 ]
 
 export default function Company() {
@@ -78,7 +64,7 @@ export default function Company() {
               <img
                 className={styles.companyLogo}
                 src="/img/logo/company-info-logo-r.svg"
-                alt={COMPANY_LOGO_ALT}
+                alt={COMPANY_INFO.logoAlt}
               />
             </div>
           </div>

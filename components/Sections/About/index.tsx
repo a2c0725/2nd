@@ -1,36 +1,18 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
-import {
-  ABOUT_GREETING_TEXT,
-  ABOUT_GREETING_TITLE,
-  ABOUT_GREETING_TITLE_JP,
-  ABOUT_INTRO_TEXT_LINE1,
-  ABOUT_INTRO_TEXT_LINE2,
-  ABOUT_INTRO_TITLE,
-  ABOUT_THEME_TEXT_LINE1,
-  ABOUT_THEME_TEXT_LINE2,
-  ABOUT_THEME_TEXT_LINE3,
-  ABOUT_THEME_TEXT_LINE4,
-  ABOUT_THEME_TITLE,
-  ABOUT_THEME_TITLE_JP,
-} from '@/constants/sections/about'
-import {
-  COMPANY_LOGO_ALT,
-  COMPANY_REPRESENTATIVE_NAME,
-  COMPANY_REPRESENTATIVE_TITLE,
-} from '@/constants/company'
+import { ABOUT } from '@/constants/sections/about'
 import type { AboutItem } from '@/types/about'
 import styles from './style.module.scss'
 
 const ABOUT_ITEMS: AboutItem[] = [
   {
     id: 'intro',
-    title: ABOUT_INTRO_TITLE,
+    title: ABOUT.introTitle,
     text: (
       <>
-        {ABOUT_INTRO_TEXT_LINE1}
+        {ABOUT.introTextLine1}
         <br />
-        {ABOUT_INTRO_TEXT_LINE2}
+        {ABOUT.introTextLine2}
       </>
     ),
   },
@@ -38,19 +20,19 @@ const ABOUT_ITEMS: AboutItem[] = [
     id: 'theme',
     title: (
       <>
-        {ABOUT_THEME_TITLE}
-        <span className={styles.titleJp}>{ABOUT_THEME_TITLE_JP}</span>
+        {ABOUT.themeTitle}
+        <span className={styles.titleJp}>{ABOUT.themeTitleJp}</span>
       </>
     ),
     text: (
       <>
-        {ABOUT_THEME_TEXT_LINE1}
+        {ABOUT.themeTextLine1}
         <br />
-        {ABOUT_THEME_TEXT_LINE2}
+        {ABOUT.themeTextLine2}
         <br className="spnone" />
-        {ABOUT_THEME_TEXT_LINE3}
+        {ABOUT.themeTextLine3}
         <br className="spnone" />
-        {ABOUT_THEME_TEXT_LINE4}
+        {ABOUT.themeTextLine4}
       </>
     ),
   },
@@ -58,11 +40,11 @@ const ABOUT_ITEMS: AboutItem[] = [
     id: 'greeting',
     title: (
       <>
-        {ABOUT_GREETING_TITLE}
-        <span className={styles.titleJp}>{ABOUT_GREETING_TITLE_JP}</span>
+        {ABOUT.greetingTitle}
+        <span className={styles.titleJp}>{ABOUT.greetingTitleJp}</span>
       </>
     ),
-    text: ABOUT_GREETING_TEXT,
+    text: ABOUT.greetingText,
   },
 ]
 
@@ -83,15 +65,15 @@ export default function About() {
                 ))}
               </ul>
               <div className={styles.representativeName}>
-                <span className={styles.post}>{COMPANY_REPRESENTATIVE_TITLE}</span>
-                <span className={styles.name}>{COMPANY_REPRESENTATIVE_NAME}</span>
+                <span className={styles.post}>{ABOUT.representativeTitle}</span>
+                <span className={styles.name}>{ABOUT.representativeName}</span>
               </div>
             </div>
             <div className={styles.logoAbout}>
               <img
                 className={styles.companyLogo}
                 src="/img/logo/logo_notext_w.svg"
-                alt={COMPANY_LOGO_ALT}
+                alt={ABOUT.logoAlt}
               />
             </div>
           </div>
