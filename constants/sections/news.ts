@@ -1,5 +1,6 @@
 import type { NewsItem } from '@/types/news'
 
+// 改行を入れる場合は \n を記述する
 export const NEWS_LIST: NewsItem[] = [
   {
     date: '2026.05.04',
@@ -7,7 +8,7 @@ export const NEWS_LIST: NewsItem[] = [
   },
   {
     date: '2026.04.03',
-    title: '求人募集を開始しました。詳細はinstagramをご確認ください。',
+    title: '求人募集を開始しました。\n詳細はinstagramをご確認ください。',
     url: 'https://www.instagram.com/p/DWyPnwbE56W/?igsh=cmM3N214MHBidWs1',
   },
   {

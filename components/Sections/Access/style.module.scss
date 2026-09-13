@@ -26,7 +26,10 @@
       margin-bottom: 20px;
     }
     .mapFrame {
-      height: 350px !important;
+      height: 350px;
+      @include mq() {
+        height: 130px;
+      }
     }
   }
 }
@@ -35,13 +38,17 @@
   width: 70%;
   max-width: 800px;
   height: auto;
+  @include mq() {
+    width: 100%;
+  }
 }
 .mapFrame {
   width: 100%;
+  height: 300px;
   max-height: 800px;
   border: 0;
   @include mq() {
-    max-height: 400px;
+    height: 200px;
   }
 }
 .accessAddress {

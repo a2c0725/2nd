@@ -20,7 +20,6 @@ export default function Access() {
                 <iframe
                   className={styles.mapFrame}
                   src={office.mapEmbedUrl}
-                  style={{ border: 0, width: '100%', height: '300px' }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
