@@ -7,20 +7,9 @@ import type { SectionTitleProps } from '@/types/ui'
 import { usedClasses } from '@/utility/usedClasses'
 import styles from './style.module.scss'
 
-// SSR時はuseLayoutEffectがwarningを出すため、クライアントでのみuseLayoutEffectを使う
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 // 見出し脇の line が、画面に入ってくるのに少し遅れて追従するアニメーション。
-// mount時（ボタン遷移・直URLアクセス）と、実際のスクロール時とで挙動が異なるため、
-// 2つの line 要素（mountLine/scrollLine）を切り替えて表示する。
-// - mountLine: mount時にのみ表示。縦位置は即座に確定し、横スライドだけアニメーションする
-// - scrollLine: 実際に scroll が発生してから表示され、以降は縦位置が追従アニメーションする。
-//   下スクロールで画面内に入る時は上から下へ、上スクロールで画面内に入る時は下から上へ、
-//   スクロール方向に応じて待機位置(fromBelowの有無)を切り替えることで表現する。
-//   画面内に入った/出たの検出は IntersectionObserver で行う（rAFでのポーリングは
-//   検出タイミングがずれてアニメーションが途中で止まることがあるため使用しない）。
-//   wheel/scroll イベントは、画面外にいる間の待機位置(fromBelow)をスクロール方向に
-//   合わせて更新するためだけに使う。
 export default function BaseTitle({
   navId,
   label,
@@ -42,7 +31,6 @@ export default function BaseTitle({
     const scrollLine = scrollLineRef.current
     if (!mountLine || !scrollLine) return
 
-    // ホームページでは line を内包する section 単位で判定し、
     // section が無い場合（Product ページ等）は見出し(h2)自体を基準にする
     const boundsElement = mountLine.closest('section') ?? mountLine.closest('h2')
 
@@ -61,15 +49,6 @@ export default function BaseTitle({
       return scrollTarget instanceof Window ? window.scrollY : scrollTarget.scrollTop
     }
 
-    // mount時点の位置を mountLine に反映する（top には transition が無いため常に瞬時）
-    const initialOnScreen = computeOnScreen()
-    if (initialOnScreen !== null) {
-      mountLine.classList.toggle(styles.onScreen, initialOnScreen)
-      requestAnimationFrame(() => {
-        mountLine!.classList.add(styles.revealed)
-      })
-    }
-
     let direction: 'up' | 'down' = 'down'
     let lastScrollTop = getScrollTop()
     let lastOnScreen: boolean | null = null
@@ -81,6 +60,13 @@ export default function BaseTitle({
     // 画面内に入る瞬間だけ transition を効かせてアニメーションさせる
     function syncScrollLine(onScreen: boolean | null) {
       if (onScreen === null) return
+
+      // まだ実スクロール(hasScrolled)していない間は mountLine が表示され続けるため、
+      // ナビリンク遷移などの疑似スクロールで画面内外の状態が変わった場合も
+      // mountLine の縦位置を追従させる。top には transition が無いため常に瞬時
+      if (!hasScrolled) {
+        mountLine!.classList.toggle(styles.onScreen, onScreen)
+      }
 
       if (onScreen) {
         if (lastOnScreen !== true) {
@@ -111,8 +97,62 @@ export default function BaseTitle({
       lastDirection = direction
     }
 
-    // scrollLine は非表示のうちに現在の状態へ即座に合わせておく
-    syncScrollLine(initialOnScreen)
+    // mount直後と同じ状態（mountLine表示・縦位置は即座に確定・hasScrolledはfalse）に
+    // 揃える。初回mount時に加えて、bfcache(ブラウザバック/フォワード時にJSの状態を
+    // 丸ごと凍結・復元する仕組み)から復元された場合にも呼び直す。bfcache復元時は
+    // Reactのmount処理が再実行されず、離脱時点の状態(既に実スクロール済み等)が
+    // そのまま復元されてしまうため、明示的にリセットしないと直アクセス時と
+    // 挙動が食い違ってしまう
+    function resetToMountState() {
+      hasScrolled = false
+      direction = 'down'
+      lastScrollTop = getScrollTop()
+      lastOnScreen = null
+      lastDirection = null
+      scrollLine!.classList.remove(styles.shown)
+      mountLine!.style.display = ''
+      mountLine!.classList.remove(styles.revealed)
+
+      // mount時点の位置を mountLine に反映する（top には transition が無いため常に瞬時）
+      const onScreen = computeOnScreen()
+      if (onScreen !== null) {
+        mountLine!.classList.toggle(styles.onScreen, onScreen)
+        requestAnimationFrame(() => {
+          mountLine!.classList.add(styles.revealed)
+        })
+      }
+
+      // scrollLine は非表示のうちに現在の状態へ即座に合わせておく。
+      // syncScrollLine の onScreen 分岐は本来アニメーションさせる処理だが、
+      // ここではまだ非表示の間に位置を合わせるだけなので、一時的に transition を
+      // 無効化して瞬時に反映する。有効なままだと、非表示のうちに開始した
+      // top のtransitionが終わりきる前に hasScrolled が true になった場合
+      // （ブラウザバックのジェスチャーが実スクロールとして扱われる等）、
+      // アニメーションの途中経過がそのまま見えてしまう
+      scrollLine!.style.transition = 'none'
+      syncScrollLine(onScreen)
+      void scrollLine!.offsetHeight
+      scrollLine!.style.transition = ''
+    }
+
+    resetToMountState()
+
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted) resetToMountState()
+    }
+
+    // mountLine(横スライドのみ)から scrollLine(縦アニメーション)への切り替えは、
+    // 実際にユーザーがホイール/タッチで操作した場合にのみ行う。
+    // ナビリンククリック時の疑似スムーズスクロール(useHomeInteractions.ts)や
+    // 直URLアクセス時のハッシュジャンプも `scroll` イベントを発生させるため、
+    // `scroll` イベント自体を判定材料にすると、それらの「ボタン遷移」でも
+    // scrollLine に切り替わってしまい、意図した横スライドの見た目にならない
+    function markRealScrollStarted() {
+      if (hasScrolled) return
+      hasScrolled = true
+      scrollLine!.classList.add(styles.shown)
+      mountLine!.style.display = 'none'
+    }
 
     // wheel は passive のため実際のスクロールと並行して処理されることがあり、
     // ここでの同期が必ず画面内に入る前に間に合うとは限らない（間に合わない場合の
@@ -121,11 +161,19 @@ export default function BaseTitle({
     function handleWheel(event: WheelEvent) {
       if (event.deltaY > 0) direction = 'down'
       else if (event.deltaY < 0) direction = 'up'
+      markRealScrollStarted()
       syncScrollLine(computeOnScreen())
     }
 
-    // touch操作やキーボード操作など wheel イベントが発生しない場合のために、
-    // scroll イベントからも方向を確定させて待機位置を同期する
+    // タッチ操作(スマートフォン等)も実スクロールとして扱う
+    function handleTouchMove() {
+      markRealScrollStarted()
+    }
+
+    // scroll イベントは wheel/touch によるものだけでなく、ナビリンク遷移時の
+    // 疑似スムーズスクロールや直URLアクセスのハッシュジャンプでも発生するため、
+    // ここでは方向の確定と待機位置の同期のみ行い、mountLine/scrollLine の
+    // 切り替え(hasScrolled)は行わない
     function handleScroll() {
       const currentScrollTop = getScrollTop()
       if (currentScrollTop > lastScrollTop) direction = 'down'
@@ -133,12 +181,6 @@ export default function BaseTitle({
       lastScrollTop = currentScrollTop
 
       syncScrollLine(computeOnScreen())
-
-      if (!hasScrolled) {
-        hasScrolled = true
-        scrollLine!.classList.add(styles.shown)
-        mountLine!.style.display = 'none'
-      }
     }
 
     // 画面内に入った/出たの検出トリガーとして IntersectionObserver を使う。
@@ -155,12 +197,16 @@ export default function BaseTitle({
     if (boundsElement) observer.observe(boundsElement)
 
     scrollTarget.addEventListener('wheel', handleWheel as EventListener, { passive: true })
+    scrollTarget.addEventListener('touchmove', handleTouchMove, { passive: true })
     scrollTarget.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('pageshow', handlePageShow)
 
     return () => {
       observer.disconnect()
       scrollTarget.removeEventListener('wheel', handleWheel as EventListener)
+      scrollTarget.removeEventListener('touchmove', handleTouchMove)
       scrollTarget.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('pageshow', handlePageShow)
     }
   }, [])
 

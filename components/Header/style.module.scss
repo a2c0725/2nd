@@ -72,6 +72,7 @@
   top: 0;
   right: -100vw;
   height: 100vh;
+  height: 100dvh;
   z-index: 1001;
   transition: right 0.5s ease;
 }
@@ -139,6 +140,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
   opacity: 0;

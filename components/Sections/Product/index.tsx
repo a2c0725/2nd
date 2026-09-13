@@ -5,9 +5,9 @@ import { PRODUCT_LIST_ITEMS } from '@/constants/products/productList'
 import productStyles from '@/app/product/style.module.scss'
 import styles from './style.module.scss'
 
-export default function ProductList() {
+export default function Product() {
   return (
-    <section className={clsx('section-contents-wrapper', productStyles.section)}>
+    <section id="product" className={clsx('section-contents-wrapper', productStyles.section)}>
       <div className="section-contents-inner">
         <BaseTitle navId="product" used="product" type="white" />
         <div className="section-contents">

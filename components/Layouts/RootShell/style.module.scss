@@ -4,6 +4,7 @@
 // CSS Modules のハッシュ化を避けて :global でリテラルなクラス名のまま定義する
 :global(.container) {
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
 }
@@ -37,4 +38,9 @@
   :global(.scroll-arrow) {
     display: none;
   }
+}
+
+// 404ページ(app/not-found.tsx)では共通の Footer を表示しない
+:global(.not-found) ~ :global(footer) {
+  display: none;
 }
