@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
+import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import { COMPANY_INFO } from '@/constants/sections/company'
 import type { CompanyInfoRow } from '@/types/company'
 import styles from './style.module.scss'
@@ -49,7 +50,7 @@ export default function Company() {
       <div className="section-contents-inner">
         <BaseTitle navId="company" type="white" />
         <div className="section-contents">
-          <div className="section-inner">
+          <ScrollableSectionInner>
             <div className={styles.companyInfo}>
               <ul className={styles.companyInfoList}>
                 {COMPANY_INFO_ROWS.map((row) => (
@@ -67,7 +68,7 @@ export default function Company() {
                 alt={COMPANY_INFO.logoAlt}
               />
             </div>
-          </div>
+          </ScrollableSectionInner>
         </div>
       </div>
     </section>

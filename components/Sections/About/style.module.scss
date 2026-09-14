@@ -59,6 +59,13 @@
 }
 .aboutText {
   line-height: 1.5;
+  white-space: pre-line;
+}
+.themeSubText {
+  white-space: pre-line;
+  @include mq() {
+    white-space: normal;
+  }
 }
 .aboutList {
   @include flex(wrap, flex-start, flex-start);

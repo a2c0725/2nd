@@ -36,8 +36,14 @@ export type ButtonProps = {
 export type CardProps = {
   title: string
   description: string
-  href?: string
+  url?: string
   disabled?: boolean
   type?: 'commingsoon'
   used?: string | string[]
+}
+
+
+export type ScrollableSectionInnerProps = {
+  className?: string
+  children: ReactNode
 }

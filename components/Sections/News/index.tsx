@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
+import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import { NEWS_LIST } from '@/constants/sections/news'
 import styles from './style.module.scss'
 
@@ -9,7 +10,7 @@ export default function News() {
       <div className="section-contents-inner">
         <BaseTitle navId="news" />
         <div className="section-contents">
-          <div className="section-inner">
+          <ScrollableSectionInner>
             <ul className={styles.newsList}>
               {NEWS_LIST.map((item) => (
                 <li className={styles.newsItem} key={item.date + item.title}>
@@ -29,7 +30,7 @@ export default function News() {
                 </li>
               ))}
             </ul>
-          </div>
+          </ScrollableSectionInner>
         </div>
       </div>
     </section>

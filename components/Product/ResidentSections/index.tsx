@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
+import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import {
   RESIDENT,
   RESIDENT_PROCEDURE_BUTTONS,
@@ -15,15 +16,11 @@ export default function ResidentSections() {
       <div className="section-contents-inner">
         <BaseTitle navId="product-resident" used="product" type="white" />
         <div className="section-contents">
-          <div className={clsx('section-inner', productStyles.resident)}>
+          <ScrollableSectionInner className={productStyles.resident}>
             <div className={productStyles.sectionItem}>
               <h3 className={productStyles.heading}>{RESIDENT.guidanceHeading}</h3>
               <div className={productStyles.sectionItemContents}>
-                <p className={productStyles.desc}>
-                  {RESIDENT.guidanceTextLine1}
-                  <br />
-                  {RESIDENT.guidanceTextLine2}
-                </p>
+                <p className={productStyles.desc}>{RESIDENT.guidanceText}</p>
               </div>
             </div>
 
@@ -48,7 +45,7 @@ export default function ResidentSections() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollableSectionInner>
         </div>
       </div>
     </section>

@@ -1,7 +1,6 @@
 export const RESIDENT = {
   guidanceHeading: 'ご案内',
-  guidanceTextLine1: '入居者様専用サイトでは、賃貸物件に関する各種お手続きや賃貸住宅へのお困りごと、',
-  guidanceTextLine2: 'ご入居前・ご入居後に役立つ情報を発信しています。',
+  guidanceText: '入居者様専用サイトでは、賃貸物件に関する各種お手続きや賃貸住宅へのお困りごと、\nご入居前・ご入居後に役立つ情報を発信しています。',
   proceduresHeading: '各種お手続き',
   lifestyleHeading: '暮らしに役立つご案内',
 } as const

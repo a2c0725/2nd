@@ -1,8 +1,7 @@
 import type { CompanyOffice } from '@/types/company'
 
 // ACCESSセクションに表示する拠点一覧。
-// 本社住所はCOMPANY.address（Footer等で共通利用）と半角スペースの有無が異なるが、
-// 元サイト側の表記の違いをそのまま踏襲している
+// 本社住所はCOMPANY.address（Footer等で共通利用）
 export const ACCESS_OFFICES: CompanyOffice[] = [
   {
     title: '本社',

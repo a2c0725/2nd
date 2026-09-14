@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
+import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import { BUSINESS_BOTTOM_ITEMS, BUSINESS_TOP_ITEMS } from '@/constants/sections/business'
 import styles from './style.module.scss'
 
@@ -9,7 +10,7 @@ export default function Business() {
       <div className="section-contents-inner">
         <BaseTitle navId="business" type="white" />
         <div className="section-contents">
-          <div className="section-inner">
+          <ScrollableSectionInner>
             <div className={styles.bussinessTopContents}>
               {BUSINESS_TOP_ITEMS.map((item) => (
                 <dl className={styles.businessContent} key={item.body}>
@@ -31,7 +32,7 @@ export default function Business() {
                 </dl>
               ))}
             </div>
-          </div>
+          </ScrollableSectionInner>
         </div>
       </div>
     </section>

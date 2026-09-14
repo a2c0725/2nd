@@ -1,0 +1,17 @@
+@use '@/styles/common' as *;
+
+.scrollable {
+  @include mq() {
+    max-height: calc(100dvh - #{$headerHeightSp} - 100px - 90px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    :global(.product) & {
+      max-height: calc(100dvh - #{$headerHeightSp} - 100px);
+    }
+
+    :global(.section-contents) &:global(.section-inner) {
+      flex-wrap: nowrap;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
+import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import { CONTACT, CONTACT_BUTTONS } from '@/constants/sections/contact'
 import styles from './style.module.scss'
 
@@ -10,7 +11,7 @@ export default function Contact() {
       <div className="section-contents-inner">
         <BaseTitle navId="contact" type="white" />
         <div className="section-contents">
-          <div className="section-inner">
+          <ScrollableSectionInner>
             <ul className={styles.telList}>
               <li className={styles.telItem}>TEL {CONTACT.tel}</li>
               <li className={styles.telItem}>FAX {CONTACT.fax}</li>
@@ -20,7 +21,7 @@ export default function Contact() {
                 <BaseButton key={button.text} text={button.text} url={button.url} used="contact" />
               ))}
             </div>
-          </div>
+          </ScrollableSectionInner>
         </div>
       </div>
     </section>

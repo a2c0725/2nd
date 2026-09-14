@@ -1,52 +1,8 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
+import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import { ABOUT } from '@/constants/sections/about'
-import type { AboutItem } from '@/types/about'
 import styles from './style.module.scss'
-
-const ABOUT_ITEMS: AboutItem[] = [
-  {
-    id: 'intro',
-    title: ABOUT.introTitle,
-    text: (
-      <>
-        {ABOUT.introTextLine1}
-        <br />
-        {ABOUT.introTextLine2}
-      </>
-    ),
-  },
-  {
-    id: 'theme',
-    title: (
-      <>
-        {ABOUT.themeTitle}
-        <span className={styles.titleJp}>{ABOUT.themeTitleJp}</span>
-      </>
-    ),
-    text: (
-      <>
-        {ABOUT.themeTextLine1}
-        <br />
-        {ABOUT.themeTextLine2}
-        <br className="spnone" />
-        {ABOUT.themeTextLine3}
-        <br className="spnone" />
-        {ABOUT.themeTextLine4}
-      </>
-    ),
-  },
-  {
-    id: 'greeting',
-    title: (
-      <>
-        {ABOUT.greetingTitle}
-        <span className={styles.titleJp}>{ABOUT.greetingTitleJp}</span>
-      </>
-    ),
-    text: ABOUT.greetingText,
-  },
-]
 
 export default function About() {
   return (
@@ -54,15 +10,29 @@ export default function About() {
       <div className="section-contents-inner">
         <BaseTitle navId="about" type="white" />
         <div className="section-contents">
-          <div className="section-inner">
+          <ScrollableSectionInner>
             <div className={styles.aboutListArea}>
               <ul className={styles.aboutList}>
-                {ABOUT_ITEMS.map((item) => (
-                  <li className={styles.aboutItem} key={item.id}>
-                    <h3 className={styles.aboutTitle}>{item.title}</h3>
-                    <p className={styles.aboutText}>{item.text}</p>
-                  </li>
-                ))}
+                {ABOUT.items.map((item) => {
+                  const [titleMain, titleJp] = item.title.split('\n')
+                  return (
+                    <li className={styles.aboutItem} key={item.title}>
+                      <h3 className={styles.aboutTitle}>
+                        {titleMain}
+                        {titleJp && <span className={styles.titleJp}>{titleJp}</span>}
+                      </h3>
+                      <p className={styles.aboutText}>
+                        {item.text}
+                        {'subText' in item && (
+                          <>
+                            <br />
+                            <span className={styles.themeSubText}>{item.subText}</span>
+                          </>
+                        )}
+                      </p>
+                    </li>
+                  )
+                })}
               </ul>
               <div className={styles.representativeName}>
                 <span className={styles.post}>{ABOUT.representativeTitle}</span>
@@ -76,7 +46,7 @@ export default function About() {
                 alt={ABOUT.logoAlt}
               />
             </div>
-          </div>
+          </ScrollableSectionInner>
         </div>
       </div>
     </section>

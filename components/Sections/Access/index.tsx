@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
+import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import { ACCESS_OFFICES } from '@/constants/sections/access'
 import styles from './style.module.scss'
 
@@ -10,7 +11,7 @@ export default function Access() {
         <BaseTitle navId="access" />
         <div className="section-contents">
           {ACCESS_OFFICES.map((office) => (
-            <div className="section-inner" key={office.title}>
+            <ScrollableSectionInner key={office.title}>
               <div className={styles.accessAddress}>
                 <p className={styles.officeTitle}>{office.title}</p>
                 <p className={styles.postCode}>{office.postalCode}</p>
@@ -25,7 +26,7 @@ export default function Access() {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
-            </div>
+            </ScrollableSectionInner>
           ))}
         </div>
       </div>

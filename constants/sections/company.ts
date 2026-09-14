@@ -7,7 +7,7 @@ export const COMPANY_INFO = {
   tel: COMPANY.tel,
   fax: COMPANY.fax,
   logoAlt: COMPANY.logoAlt,
-  branchOfficeAddress: '山梨県富士吉田市下吉田7-12-1　フリムール103',
+  branchOfficeAddress: '山梨県富士吉田市下吉田7-12-1 フリムール103',
   capital: '5百万円',
   businessHours: '9:30-18:00',
   licenseNumber: '東京都知事(1)第111146号',
