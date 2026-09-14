@@ -1,10 +1,6 @@
-export const PRODUCT_LIST_ITEMS: {
-  title: string
-  description: string
-  url?: string
-  disabled?: boolean
-  type?: 'commingsoon'
-}[] = [
+import type { ProductListItem } from '@/types/product'
+
+export const PRODUCT_LIST_ITEMS: ProductListItem[] = [
   {
     title: 'ご入居者様向け製品',
     description:
