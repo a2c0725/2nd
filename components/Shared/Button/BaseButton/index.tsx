@@ -6,7 +6,15 @@ import type { ButtonProps } from '@/types/ui'
 import { usedClasses } from '@/utility/usedClasses'
 import styles from './style.module.scss'
 
-export default function BaseButton({ text, subLabel, url, className, used, disabled }: ButtonProps) {
+export default function BaseButton({
+  text,
+  subLabel,
+  url,
+  className,
+  used,
+  disabled,
+  onClick,
+}: ButtonProps) {
   const router = useRouter()
 
   const content = (
@@ -18,6 +26,10 @@ export default function BaseButton({ text, subLabel, url, className, used, disab
   const buttonClassName = clsx(styles.button, usedClasses(styles, used), className)
 
   function handleClick() {
+    if (onClick) {
+      onClick()
+      return
+    }
     if (!url) return
     const isExternal = url.startsWith('http')
     if (isExternal) {
@@ -31,7 +43,7 @@ export default function BaseButton({ text, subLabel, url, className, used, disab
     <button
       type="button"
       className={buttonClassName}
-      onClick={url ? handleClick : undefined}
+      onClick={url || onClick ? handleClick : undefined}
       disabled={disabled}
     >
       {content}

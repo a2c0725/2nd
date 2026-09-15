@@ -38,4 +38,10 @@ const PRODUCT_NAV_ITEMS: NavItem[] = [
     kana: '製品案内',
     subTitle: 'ご解約について',
   },
+  {
+    id: 'product-resident-cancellation-form',
+    label: 'Product',
+    kana: '製品案内',
+    subTitle: '各種お手続き',
+  },
 ]

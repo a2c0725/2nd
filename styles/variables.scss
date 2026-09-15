@@ -2,7 +2,7 @@
 
 $contentsWidth: 80%;
 $contentsSpWidth: 85%;
-$borderColor: #ccc;
+$borderColor: #818181;
 $headerHeight: 68px;
 $headerHeightSp: 55px;
 $hoverOpacity: 0.6;
@@ -22,6 +22,7 @@ $colors: (
   primaryRed: #fe001a,
   border: $borderColor,
   cardBackground: #1e1e1e,
+  optional: #ccc,
 );
 
 @function color($key) {

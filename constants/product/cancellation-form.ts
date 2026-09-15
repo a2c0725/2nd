@@ -1,0 +1,82 @@
+import type { FormFieldItem } from '@/types/form'
+
+// 必須 = type: 'required' / 任意 = type: 'optional'
+// 改行を入れる場合は、\n で改行
+export const CANCELLATION_FORM_FIELDS: FormFieldItem[] = [
+  {
+    name: 'name',
+    label: '名前',
+    type: 'required',
+    placeholder: '例：山田 太郎'
+  },
+  {
+    name: 'furigana',
+    label: 'フリガナ',
+    type: 'required',
+    placeholder: '例：ヤマダ タロウ'
+  },
+  {
+    name: 'email',
+    label: 'メール\nアドレス',
+    type: 'required',
+    email: true,
+    placeholder: '例：info@example.com',
+  },
+  {
+    name: 'tel',
+    label: '電話番号',
+    type: 'required',
+    placeholder: '例：090-1234-5678'
+  },
+  {
+    name: 'contactMethod',
+    label: 'ご希望の\n連絡方法',
+    type: 'required',
+    inputType: 'radio',
+    options: [
+      { label: '電話', value: 'tel' },
+      { label: 'メール', value: 'email' },
+    ],
+  },
+  {
+    name: 'postalCode',
+    label: '郵便番号',
+    type: 'required',
+    placeholder: '例：123-4567'
+  },
+  {
+    name: 'address',
+    label: '住所',
+    type: 'required',
+    placeholder: '例：東京都東村山市栄町2-22-2',
+  },
+  {
+    name: 'buildingName',
+    label: '建物名 /\n部屋番号',
+    type: 'required',
+    placeholder: '例：〇〇マンション101号室'
+  },
+  {
+    name: 'addressDetail',
+    label: '以降の住所',
+    type: 'required',
+    placeholder: '例：東京都東村山市栄町1-1-1'
+  },
+  {
+    name: 'subject',
+    label: 'ご用件',
+    type: 'required',
+    inputType: 'radio',
+    options: [
+      { label: '電話', value: 'tel' },
+      { label: 'メール', value: 'email' },
+    ],
+  },
+  {
+    name: 'content',
+    label: 'お問い合わせ内容',
+    type: 'required',
+    inputType: 'textarea',
+    placeholder: 'お問い合わせ内容をご入力ください',
+  },
+]

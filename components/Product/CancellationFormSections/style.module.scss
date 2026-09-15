@@ -1,0 +1,68 @@
+@use '@/styles/common' as *;
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+
+  @include mq() {
+    gap: 20px;
+  }
+}
+
+.formColumns {
+  @include flex(wrap, space-between, flex-start);
+  row-gap: 24px;
+  width: 100%;
+
+  @include mq() {
+    row-gap: 20px;
+  }
+}
+
+.formColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 48%;
+
+  @include mq() {
+    width: 100%;
+    gap: 20px;
+  }
+}
+
+.formRow {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  @include mq() {
+    flex-direction: column;
+  }
+}
+
+.formRowFull {
+  width: 100%;
+  flex-direction: column;
+}
+
+.confirmValue {
+  font-size: 1.5rem;
+  color: color(bright);
+  white-space: pre-line;
+  padding: 10px 0;
+}
+
+.buttonArea {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+
+  @include mq() {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

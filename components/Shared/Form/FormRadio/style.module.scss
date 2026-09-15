@@ -1,0 +1,66 @@
+@use '@/styles/common' as *;
+
+.formRadio {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  &.productForm {
+  }
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.radio {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: color(cardBackground);
+  border: 1px solid color(border);
+  cursor: pointer;
+  position: relative;
+
+  &:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: color(primaryRed);
+    opacity: 0.6;
+  }
+}
+
+.optionLabel {
+  font-size: 1.5rem;
+  color: color(bright);
+  @include mq() {
+    font-size: 1.4rem;
+  }
+}
+
+.error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 2px;
+  font-size: 1.2rem;
+  color: color(primaryRed);
+}

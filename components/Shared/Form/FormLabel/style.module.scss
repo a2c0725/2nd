@@ -1,0 +1,56 @@
+@use '@/styles/common' as *;
+
+.formLabel {
+  width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: pre-line;
+  line-height: 1.5;
+  @include mq() {
+    width: 100%;
+  }
+
+  &.productForm {
+    @include mq() {
+      white-space: nowrap;
+    }
+  }
+
+  &.contentLabel {
+    width: 210px;
+    @include mq() {
+      width: 100%;
+    }
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 2px;
+  flex-shrink: 0;
+
+  &[data-type='required'] {
+    background: color(primaryRed);
+    color: color(bright);
+  }
+
+  &[data-type='optional'] {
+    background: color(optional);
+    color: color(primaryText);
+  }
+}
+
+.text {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: color(bright);
+  @include mq() {
+    font-size: 1.4rem;
+  }
+}
