@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import clsx from 'clsx'
+import Script from 'next/script'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
 import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
@@ -12,6 +13,7 @@ import FormRadio from '@/components/Shared/Form/FormRadio'
 import type { FormFieldItem } from '@/types/form'
 import { CANCELLATION_FORM_FIELDS } from '@/constants/product/cancellation-form'
 import { VALIDATION_TEXT } from '@/constants/validationText'
+import { RECAPTCHA_SITE_KEY } from '@/constants/recaptcha'
 import productStyles from '@/app/product/style.module.scss'
 import styles from './style.module.scss'
 
@@ -38,7 +40,7 @@ function resolveConfirmValue(field: FormFieldItem, value: string) {
 }
 
 export default function CancellationFormSections() {
-  const [mode, setMode] = useState<'input' | 'confirm'>('input')
+  const [mode, setMode] = useState<'input' | 'confirm' | 'complete'>('input')
   const [values, setValues] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {}
     CANCELLATION_FORM_FIELDS.forEach((field) => {
@@ -47,6 +49,10 @@ export default function CancellationFormSections() {
     return initial
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
+  // honeypot
+  const [honeypot, setHoneypot] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const handleChange = useCallback((name: string, value: string) => {
     setValues((prev) => ({ ...prev, [name]: value }))
@@ -72,13 +78,38 @@ export default function CancellationFormSections() {
   }, [])
 
   const handleSubmit = useCallback(async () => {
-    // TODO: PHP エンドポイント完成後に fetch で POST する（values を送信）
-    // await fetch('/contact/send.php', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(values),
-    // })
-  }, [])
+    if (honeypot) return
+
+    setIsSubmitting(true)
+    setSubmitError('')
+
+    try {
+      const token = await new Promise<string>((resolve) => {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(RECAPTCHA_SITE_KEY, { action: 'cancellation_form_submit' })
+            .then(resolve)
+        })
+      })
+
+      const response = await fetch('/contact/send.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...values, recaptchaToken: token }),
+      })
+      const result = await response.json()
+
+      if (!result.success) {
+        setSubmitError(result.message || '送信に失敗しました。時間をおいて再度お試しください。')
+        return
+      }
+      setMode('complete')
+    } catch {
+      setSubmitError('送信に失敗しました。時間をおいて再度お試しください。')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }, [honeypot, values])
 
   const leftFields = CANCELLATION_FORM_FIELDS.slice(0, splitNum)
   const rightFields = CANCELLATION_FORM_FIELDS.slice(splitNum).filter(
@@ -140,6 +171,10 @@ export default function CancellationFormSections() {
 
   return (
     <section className={clsx('section-contents-wrapper', productStyles.section)}>
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
+        strategy="afterInteractive"
+      />
       <div className="section-contents-inner">
         <BaseTitle
           navId="product-resident-cancellation-form"
@@ -149,28 +184,53 @@ export default function CancellationFormSections() {
         <div className="section-contents">
           <ScrollableSectionInner>
             <div className={productStyles.sectionItem}>
-              <div className={styles.formWrapper}>
-                <div className={styles.formColumns}>
-                  <div className={styles.formColumn}>{leftFields.map(renderField)}</div>
-                  <div className={styles.formColumn}>{rightFields.map(renderField)}</div>
-                </div>
-                {fullFields.map(renderField)}
+              {mode === 'complete' ? (
+                <p className={styles.completeMessage}>
+                  お問い合わせいただきありがとうございます。
+                  <br />
+                  内容を確認の上、担当者よりご連絡いたします。
+                </p>
+              ) : (
+                <div className={styles.formWrapper}>
+                  <input
+                    className={styles.honeypot}
+                    type="text"
+                    name="website"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                  <div className={styles.formColumns}>
+                    <div className={styles.formColumn}>{leftFields.map(renderField)}</div>
+                    <div className={styles.formColumn}>{rightFields.map(renderField)}</div>
+                  </div>
+                  {fullFields.map(renderField)}
 
-                <div className={styles.buttonArea}>
-                  {mode === 'input' ? (
-                    <BaseButton text="確認する" used="cancellationForm" onClick={handleConfirm} />
-                  ) : (
-                    <>
-                      <BaseButton text="戻る" used="cancellationForm" onClick={handleBack} />
-                      <BaseButton
-                        text="送信する"
-                        used="cancellationForm"
-                        onClick={handleSubmit}
-                      />
-                    </>
-                  )}
+                  {submitError && <p className={styles.submitError}>{submitError}</p>}
+
+                  <div className={styles.buttonArea}>
+                    {mode === 'input' ? (
+                      <BaseButton text="確認する" used="cancellationForm" onClick={handleConfirm} />
+                    ) : (
+                      <>
+                        <BaseButton
+                          text="戻る"
+                          used="cancellationForm"
+                          onClick={handleBack}
+                          disabled={isSubmitting}
+                        />
+                        <BaseButton
+                          text={isSubmitting ? '送信中...' : '送信する'}
+                          used="cancellationForm"
+                          onClick={handleSubmit}
+                          disabled={isSubmitting}
+                        />
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </ScrollableSectionInner>
         </div>

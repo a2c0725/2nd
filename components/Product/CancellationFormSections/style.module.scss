@@ -1,5 +1,14 @@
 @use '@/styles/common' as *;
 
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .formWrapper {
   display: flex;
   flex-direction: column;
@@ -52,6 +61,23 @@
   color: color(bright);
   white-space: pre-line;
   padding: 10px 0;
+}
+
+.completeMessage {
+  font-size: 1.6rem;
+  color: color(bright);
+  line-height: 1.8;
+  text-align: center;
+  @include mq() {
+    font-size: 1.4rem;
+  }
+}
+
+.submitError {
+  width: 100%;
+  font-size: 1.3rem;
+  color: color(primaryRed);
+  text-align: center;
 }
 
 .buttonArea {
