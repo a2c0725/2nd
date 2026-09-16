@@ -1,7 +1,7 @@
 @use '@/styles/common' as *;
 
 .section {
-  background-image: url('/img/bg/business_bg.webp');
+  background-image: url('#{$base-path}/img/bg/business_bg.webp');
   background-attachment: fixed;
   color: color(bright);
   position: relative;

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { NAV_ITEMS } from '@/constants/common/nav'
 import { COMPANY } from '@/constants/common/company'
+import { BASE_PATH } from '@/constants/common/basePath'
 import styles from './style.module.scss'
 
 export default function Footer() {
@@ -9,8 +10,8 @@ export default function Footer() {
       <div className="section-contents-inner">
         <div className={styles.footerLogoArea}>
           <div className={styles.footerLogo}>
-            <img className={styles.logoImg} src="/img/logo/logo_notext_w.svg" alt={COMPANY.logoAlt} />
-            <img className={styles.logoImg} src="/img/logo/2nd.svg" alt={COMPANY.logoAlt} />
+            <img className={styles.logoImg} src={`${BASE_PATH}/img/logo/logo_notext_w.svg`} alt={COMPANY.logoAlt} />
+            <img className={styles.logoImg} src={`${BASE_PATH}/img/logo/2nd.svg`} alt={COMPANY.logoAlt} />
           </div>
           <ul className={styles.companyInfo}>
             <li className={styles.companyName}>{COMPANY.name}</li>
@@ -23,7 +24,7 @@ export default function Footer() {
           <ul className={styles.gnav}>
             {NAV_ITEMS.map((item) => (
               <li className={styles.gnavItem} key={item.id}>
-                <a className={clsx('gnav-link', styles.gnavLink)} href={`/#${item.id}`}>
+                <a className={clsx('gnav-link', styles.gnavLink)} href={`${BASE_PATH}/#${item.id}`}>
                   {item.label}
                 </a>
               </li>

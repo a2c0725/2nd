@@ -1,7 +1,7 @@
 @use '@/styles/common' as *;
 
 .business {
-  background-image: url('/img/bg/business.webp');
+  background-image: url('#{$base-path}/img/bg/business.webp');
 
   color: color(bright);
 

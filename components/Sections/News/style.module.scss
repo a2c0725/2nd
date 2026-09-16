@@ -1,7 +1,7 @@
 @use '@/styles/common' as *;
 
 .news {
-  background-image: url('/img/bg/news.webp');
+  background-image: url('#{$base-path}/img/bg/news.webp');
   background-size: 200%;
   background-position: 82% 0;
   @include mq() {

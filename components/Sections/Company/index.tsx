@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import { COMPANY_INFO } from '@/constants/sections/company'
+import { BASE_PATH } from '@/constants/common/basePath'
 import type { CompanyInfoRow } from '@/types/company'
 import styles from './style.module.scss'
 
@@ -64,7 +65,7 @@ export default function Company() {
             <div className={styles.companyInfoLogo}>
               <img
                 className={styles.companyLogo}
-                src="/img/logo/company-info-logo-r.svg"
+                src={`${BASE_PATH}/img/logo/company-info-logo-r.svg`}
                 alt={COMPANY_INFO.logoAlt}
               />
             </div>

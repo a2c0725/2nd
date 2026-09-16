@@ -1,7 +1,7 @@
 @use '@/styles/common' as *;
 
 .access {
-  background-image: url('/img/bg/access.webp');
+  background-image: url('#{$base-path}/img/bg/access.webp');
   background-size: 200%;
   background-position: 82% 0;
   @include mq() {

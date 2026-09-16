@@ -13,7 +13,8 @@ import FormRadio from '@/components/Shared/Form/FormRadio'
 import type { FormFieldItem } from '@/types/form'
 import { CANCELLATION_FORM_FIELDS } from '@/constants/product/cancellation-form'
 import { VALIDATION_TEXT } from '@/constants/validationText'
-import { RECAPTCHA_SITE_KEY } from '@/constants/recaptcha'
+import { RECAPTCHA_SITE_KEY, RECAPTCHA_DISCLOSURE_TEXT } from '@/constants/recaptcha'
+import { BASE_PATH } from '@/constants/common/basePath'
 import productStyles from '@/app/product/style.module.scss'
 import styles from './style.module.scss'
 
@@ -92,7 +93,7 @@ export default function CancellationFormSections() {
         })
       })
 
-      const response = await fetch('/contact/send.php', {
+      const response = await fetch(`${BASE_PATH}/contact/send.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...values, recaptchaToken: token }),
@@ -229,6 +230,7 @@ export default function CancellationFormSections() {
                       </>
                     )}
                   </div>
+                  <p className={styles.recaptchaDisclosure}>{RECAPTCHA_DISCLOSURE_TEXT}</p>
                 </div>
               )}
             </div>

@@ -116,3 +116,8 @@ body {
     display: block;
   }
 }
+
+// reCAPTCHA v3バッジは非表示にし、代わりにフォーム内へ明示文言を表示している
+.grecaptcha-badge {
+  visibility: hidden;
+}

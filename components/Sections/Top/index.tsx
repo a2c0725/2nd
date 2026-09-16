@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { HERO } from '@/constants/sections/hero'
+import { BASE_PATH } from '@/constants/common/basePath'
 import styles from './style.module.scss'
 
 export default function Top() {
@@ -12,7 +13,7 @@ export default function Top() {
             <div className={styles.logoWrapper}>
               <img
                 className={styles.companyLogo}
-                src="/img/logo/logo_white.svg"
+                src={`${BASE_PATH}/img/logo/logo_white.svg`}
                 alt={HERO.logoAlt}
               />
             </div>
@@ -22,7 +23,7 @@ export default function Top() {
             <p className={clsx(styles.catchEn, 'sans')}>{HERO.catchEn}</p>
             <div className={styles.catchFn}>
               {HERO.catchPrefix}
-              <img className={styles.catchImg} src="/img/logo/2nd.svg" alt={HERO.logoAlt} />
+              <img className={styles.catchImg} src={`${BASE_PATH}/img/logo/2nd.svg`} alt={HERO.logoAlt} />
               {HERO.catchSuffix}
             </div>
           </div>

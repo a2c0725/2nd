@@ -1,5 +1,8 @@
 @use 'sass:map';
 
+// test2016/ 配下での検証用(本番デプロイ前に必ず空文字に戻すこと)
+$base-path: '/test2016';
+
 $contentsWidth: 80%;
 $contentsSpWidth: 85%;
 $borderColor: #818181;

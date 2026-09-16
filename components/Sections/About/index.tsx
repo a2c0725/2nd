@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
 import { ABOUT } from '@/constants/sections/about'
+import { BASE_PATH } from '@/constants/common/basePath'
 import styles from './style.module.scss'
 
 export default function About() {
@@ -42,7 +43,7 @@ export default function About() {
             <div className={styles.logoAbout}>
               <img
                 className={styles.companyLogo}
-                src="/img/logo/logo_notext_w.svg"
+                src={`${BASE_PATH}/img/logo/logo_notext_w.svg`}
                 alt={ABOUT.logoAlt}
               />
             </div>

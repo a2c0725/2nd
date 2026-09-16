@@ -1,7 +1,7 @@
 @use '@/styles/common' as *;
 
 .top {
-  background-image: url('/img/bg/top.webp');
+  background-image: url('#{$base-path}/img/bg/top.webp');
   background-size: 200%;
   background-position: 50% 50%;
   @include mq() {

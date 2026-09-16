@@ -1,7 +1,7 @@
 @use '@/styles/common' as *;
 
 .contact {
-  background-image: url('/img/bg/contact.webp');
+  background-image: url('#{$base-path}/img/bg/contact.webp');
   background-position: 80%;
 
   color: color(bright);

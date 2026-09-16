@@ -20,6 +20,13 @@
   }
 }
 
+.recaptchaDisclosure {
+  width: 100%;
+  font-size: 1.1rem;
+  color: color(optional);
+  text-align: center;
+}
+
 .formColumns {
   @include flex(wrap, space-between, flex-start);
   row-gap: 24px;
