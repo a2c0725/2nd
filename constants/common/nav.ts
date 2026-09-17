@@ -44,4 +44,10 @@ const PRODUCT_NAV_ITEMS: NavItem[] = [
     kana: '製品案内',
     subTitle: '各種お手続き',
   },
+  {
+    id: 'agreement',
+    label: 'Agreement',
+    kana: '規約',
+    subTitle: '個人情報の取り扱いについて',
+  },
 ]

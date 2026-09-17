@@ -26,6 +26,7 @@ $colors: (
   border: $borderColor,
   cardBackground: #1e1e1e,
   optional: #ccc,
+  disabled: #656565,
 );
 
 @function color($key) {

@@ -11,8 +11,8 @@ export const RESIDENT_PROCEDURE_BUTTONS = [
 ]
 
 export const RESIDENT_LIFESTYLE_BUTTONS = [
-  { text: '車庫証明の発行依頼', url: '#' },
-  { text: '駐輪シールの発行依頼', url: '#' },
-  { text: '共用電灯切れの連絡', url: '#' },
-  { text: 'その他設備の不備', url: '#' },
+  { text: '車庫証明の発行依頼', url: '/product/resident/form?subject=parking' },
+  { text: '駐輪シールの発行依頼', url: '/product/resident/form?subject=sticker' },
+  { text: '共用電灯切れの連絡', url: '/product/resident/form?subject=electric-light' },
+  { text: 'その他設備の不備', url: '/product/resident/form?subject=other' },
 ]

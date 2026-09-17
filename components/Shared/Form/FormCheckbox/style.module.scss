@@ -1,0 +1,52 @@
+@use '@/styles/common' as *;
+
+.formCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  cursor: pointer;
+
+  .link {
+    color: color(bright);
+    text-decoration: underline;
+
+    &:hover {
+      opacity: $hoverOpacity;
+    }
+  }
+}
+
+.checkbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: color(cardBackground);
+  border: 1px solid color(border);
+  cursor: pointer;
+  position: relative;
+
+  &:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    width: 4px;
+    height: 8px;
+    border: solid color(primaryRed);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.label {
+  font-size: 1.4rem;
+  color: color(bright);
+}

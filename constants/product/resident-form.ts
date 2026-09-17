@@ -2,7 +2,7 @@ import type { FormFieldItem } from '@/types/form'
 
 // 必須 = type: 'required' / 任意 = type: 'optional'
 // 改行を入れる場合は、\n で改行
-export const CANCELLATION_FORM_FIELDS: FormFieldItem[] = [
+export const RESIDENT_FORM_FIELDS: FormFieldItem[] = [
   {
     name: 'name',
     label: '名前',

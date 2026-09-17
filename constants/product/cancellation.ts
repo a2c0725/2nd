@@ -69,5 +69,5 @@ export const CANCELLATION = {
 
 export const CANCELLATION_STEP4_BUTTONS = [
   { text: `賃室解約通知書\nダウンロードはこちら`, url: '/product/resident' },
-  { text: `退去受付フォーム\nwebでのご解約手続きはこちら`, url: '/product/resident' },
+  { text: `退去受付フォーム\nwebでのご解約手続きはこちら`, url: '/product/resident/cancellation/form' },
 ]

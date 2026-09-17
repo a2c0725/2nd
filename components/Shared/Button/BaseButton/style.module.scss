@@ -36,6 +36,12 @@
     }
   }
 
+  &:disabled {
+    opacity: 0.6;
+    background: color(disabled);
+    cursor: not-allowed;
+  }
+
   &.contact {
     font-size: 2rem;
   }
