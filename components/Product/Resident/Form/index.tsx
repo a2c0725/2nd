@@ -42,7 +42,7 @@ function resolveConfirmValue(field: FormFieldItem, value: string) {
 }
 
 export default function FormSections() {
-  const [mode, setMode] = useState<'input' | 'confirm' | 'complete'>('complete') // DEBUG: 完了画面確認用、確認後に'input'へ戻す
+  const [mode, setMode] = useState<'input' | 'confirm' | 'complete'>('input')
   const [values, setValues] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {}
     RESIDENT_FORM_FIELDS.forEach((field) => {
