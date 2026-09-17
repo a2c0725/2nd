@@ -12,7 +12,7 @@ import FormTextarea from '@/components/Shared/Form/FormTextarea'
 import FormRadio from '@/components/Shared/Form/FormRadio'
 import FormCheckbox from '@/components/Shared/Form/FormCheckbox'
 import type { FormFieldItem } from '@/types/form'
-import { RESIDENT_FORM_FIELDS } from '@/constants/product/resident-form'
+import { RESIDENT_FORM_FIELDS, RESIDENT_FORM_COMPLETE } from '@/constants/product/resident/form'
 import { VALIDATION_TEXT } from '@/constants/validationText'
 import { RECAPTCHA_SITE_KEY, RECAPTCHA_DISCLOSURE_TEXT } from '@/constants/recaptcha'
 import { BASE_PATH } from '@/constants/common/basePath'
@@ -42,7 +42,7 @@ function resolveConfirmValue(field: FormFieldItem, value: string) {
 }
 
 export default function FormSections() {
-  const [mode, setMode] = useState<'input' | 'confirm' | 'complete'>('input')
+  const [mode, setMode] = useState<'input' | 'confirm' | 'complete'>('complete') // DEBUG: 完了画面確認用、確認後に'input'へ戻す
   const [values, setValues] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {}
     RESIDENT_FORM_FIELDS.forEach((field) => {
@@ -198,11 +198,18 @@ export default function FormSections() {
           <ScrollableSectionInner>
             <div className={productStyles.sectionItem}>
               {mode === 'complete' ? (
-                <p className={styles.completeMessage}>
-                  お問い合わせいただきありがとうございます。
-                  <br />
-                  内容を確認の上、担当者よりご連絡いたします。
-                </p>
+                <>
+                  <p className={styles.completeMessage}>
+                    <span className={styles.completeMessageTitle}>{RESIDENT_FORM_COMPLETE.title}</span>
+                    <br />
+                    <span className={styles.completeMessageBody}>{RESIDENT_FORM_COMPLETE.body}</span>
+                  </p>
+                  <BaseButton
+                    text={RESIDENT_FORM_COMPLETE.buttonText}
+                    used="cancellationForm"
+                    url="/product/resident"
+                  />
+                </>
               ) : (
                 <div className={styles.formWrapper}>
                   <input

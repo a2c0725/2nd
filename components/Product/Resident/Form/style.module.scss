@@ -75,13 +75,24 @@
 }
 
 .completeMessage {
+  padding-bottom: 40px;
   font-size: 1.6rem;
   color: color(bright);
   line-height: 1.8;
-  text-align: center;
   @include mq() {
     font-size: 1.4rem;
   }
+}
+
+.completeMessageTitle {
+  display: inline-block;
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.completeMessageBody {
+  display: inline-block;
+  white-space: pre-line;
 }
 
 .submitError {

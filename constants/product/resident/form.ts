@@ -82,3 +82,9 @@ export const RESIDENT_FORM_FIELDS: FormFieldItem[] = [
     placeholder: 'お問い合わせ内容をご入力ください',
   },
 ]
+
+export const RESIDENT_FORM_COMPLETE = {
+  title: 'お手続きの申請を受付いたしました。',
+  body: '後日、担当より確認のお電話またはメールをさせていただきますので、\nしばらくお待ちください。\n\nまた、自動返信にて受付内容をお送りしておりますので、\n受付内容に相違がないかご確認お願いいたします。',
+  buttonText: '入居者様専用サイトに戻る',
+}
