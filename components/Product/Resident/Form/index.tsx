@@ -133,7 +133,11 @@ export default function FormSections() {
   function renderField(field: FormFieldItem) {
     return (
       <div
-        className={clsx(styles.formRow, field.inputType === 'textarea' && styles.formRowFull)}
+        className={clsx(
+          styles.formRow,
+          field.inputType === 'textarea' && styles.formRowFull,
+          mode === 'confirm' && styles.formRowConfirm,
+        )}
         key={field.name}
       >
         <FormLabel
