@@ -9,7 +9,7 @@ import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectio
 import FormLabel from '@/components/Shared/Form/FormLabel'
 import FormInput from '@/components/Shared/Form/FormInput'
 import FormTextarea from '@/components/Shared/Form/FormTextarea'
-import FormCheckbox from '@/components/Shared/Form/FormCheckbox'
+import FormCheckbox, { FormCheckboxAgreementLink } from '@/components/Shared/Form/FormCheckbox'
 import type { FormFieldItem } from '@/types/form'
 import { CONTACT } from '@/constants/sections/contact'
 import { CONTACT_FORM_FIELDS, CONTACT_FORM_COMPLETE } from '@/constants/sections/contact/form'
@@ -202,7 +202,19 @@ export default function Contact() {
 
                 {submitError && <p className={styles.submitError}>{submitError}</p>}
 
-                {mode === 'input' && <FormCheckbox checked={agreed} onChange={setAgreed} />}
+                {mode === 'input' && (
+                  <FormCheckbox
+                    checked={agreed}
+                    onChange={setAgreed}
+                    label={
+                      <>
+                        個人情報取り扱いの
+                        <FormCheckboxAgreementLink>利用規約</FormCheckboxAgreementLink>
+                        に同意する
+                      </>
+                    }
+                  />
+                )}
 
                 <div className={styles.buttonArea}>
                   {mode === 'input' ? (

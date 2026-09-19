@@ -1,0 +1,77 @@
+@use '@/styles/common' as *;
+
+.formSelect {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  &.productForm {
+  }
+}
+
+.selectWrapper {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid color(bright);
+    border-bottom: 2px solid color(bright);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+  }
+}
+
+.select {
+  width: 100%;
+  padding: 14px 40px 14px 20px;
+  font-size: 1.5rem;
+  color: color(bright);
+  background: color(cardBackground);
+  opacity: 0.8;
+  border: 1px solid color(border);
+  border-radius: 4px;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  @include mq() {
+    font-size: 1.6rem;
+  }
+
+  &:focus {
+    border-color: color(bright);
+  }
+
+  &:disabled {
+    background: #333;
+    cursor: not-allowed;
+  }
+
+  option {
+    color: color(primaryText);
+    background: color(bright);
+  }
+}
+
+.placeholder {
+  color: #a8a8a8;
+}
+
+.hasError {
+  border-color: color(primaryRed);
+}
+
+.error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 2px;
+  font-size: 1.2rem;
+  color: color(primaryRed);
+}

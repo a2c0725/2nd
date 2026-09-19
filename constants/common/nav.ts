@@ -38,11 +38,11 @@ const PRODUCT_NAV_ITEMS: NavItem[] = [
     kana: '製品案内',
     subTitle: 'ご解約について',
   },
+  // kana/subTitle はStepごとに BaseTitle 側で個別指定するため、ここでは既定値のみ
   {
     id: 'product-resident-cancellation-form',
     label: 'Product',
-    kana: '製品案内',
-    subTitle: '各種お手続き',
+    kana: '退去受付フォーム',
   },
   {
     id: 'agreement',

@@ -10,7 +10,7 @@ import FormLabel from '@/components/Shared/Form/FormLabel'
 import FormInput from '@/components/Shared/Form/FormInput'
 import FormTextarea from '@/components/Shared/Form/FormTextarea'
 import FormRadio from '@/components/Shared/Form/FormRadio'
-import FormCheckbox from '@/components/Shared/Form/FormCheckbox'
+import FormCheckbox, { FormCheckboxAgreementLink } from '@/components/Shared/Form/FormCheckbox'
 import type { FormFieldItem } from '@/types/form'
 import { RESIDENT_FORM_FIELDS, RESIDENT_FORM_COMPLETE } from '@/constants/product/resident/form'
 import { VALIDATION_TEXT } from '@/constants/validationText'
@@ -234,7 +234,17 @@ export default function FormSections() {
                   {submitError && <p className={styles.submitError}>{submitError}</p>}
 
                   {mode === 'input' && (
-                    <FormCheckbox checked={agreed} onChange={setAgreed} />
+                    <FormCheckbox
+                      checked={agreed}
+                      onChange={setAgreed}
+                      label={
+                        <>
+                          個人情報取り扱いの
+                          <FormCheckboxAgreementLink>利用規約</FormCheckboxAgreementLink>
+                          に同意する
+                        </>
+                      }
+                    />
                   )}
 
                   <div className={styles.buttonArea}>

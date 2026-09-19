@@ -9,24 +9,6 @@
   pointer-events: none;
 }
 
-.formWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 100%;
-
-  @include mq() {
-    gap: 20px;
-  }
-}
-
-.recaptchaDisclosure {
-  width: 100%;
-  font-size: 1.1rem;
-  color: color(optional);
-  text-align: center;
-}
-
 .formColumns {
   @include flex(wrap, space-between, flex-start);
   row-gap: 24px;
@@ -60,11 +42,42 @@
   }
 }
 
+.formRowConfirm {
+  border-bottom: 1px solid #fff;
+}
+
 .formRowFull {
   width: 100%;
   flex-direction: column;
   gap: 16px;
   align-items: flex-start;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  width: 100%;
+}
+
+.checkboxGroup {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.checkboxGroupError {
+  width: 100%;
+  font-size: 1.2rem;
+  color: color(primaryRed);
+}
+
+.fieldNote {
+  font-size: 1.2rem;
+  color: color(optional);
+  white-space: pre-line;
 }
 
 .confirmValue {
@@ -74,14 +87,73 @@
   padding: 10px 0;
 }
 
+.confirmWrapper {
+  gap: 40px;
+}
+
+.confirmFieldList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.scrollableAlways {
+  max-height: calc(100dvh - #{$headerHeight} - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @include mq() {
+    max-height: calc(100dvh - #{$headerHeightSp} - 100px - 90px);
+  }
+}
+
+.ruleBox {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid color(bright);
+  @include mq() {
+    margin-top: 24px;
+    padding-top: 24px;
+  }
+}
+
+.ruleTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: color(bright);
+}
+
+.ruleText {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: color(bright);
+  white-space: pre-line;
+}
+
 .completeMessage {
+  padding-bottom: 40px;
   font-size: 1.6rem;
   color: color(bright);
   line-height: 1.8;
-  text-align: center;
   @include mq() {
     font-size: 1.4rem;
   }
+}
+
+.completeMessageTitle {
+  display: inline-block;
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.completeMessageBody {
+  display: inline-block;
+  white-space: pre-line;
 }
 
 .submitError {
@@ -102,4 +174,11 @@
     flex-direction: column;
     gap: 12px;
   }
+}
+
+.recaptchaDisclosure {
+  width: 100%;
+  font-size: 1.1rem;
+  color: color(optional);
+  text-align: center;
 }
