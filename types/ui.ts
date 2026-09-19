@@ -31,6 +31,7 @@ export type ButtonProps = {
   className?: string
   used?: string | string[]
   disabled?: boolean
+  download?: boolean
   onClick?: () => void
 }
 

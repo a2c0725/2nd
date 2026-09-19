@@ -28,7 +28,13 @@ export default function Step4() {
               </div>
               <div className={productStyles.downloadButtons}>
                 {CANCELLATION_STEP4_BUTTONS.map((button) => (
-                  <BaseButton key={button.text} text={button.text} url={button.url} used="resident" />
+                  <BaseButton
+                    key={button.text}
+                    text={button.text}
+                    url={button.url}
+                    download={'download' in button ? button.download : undefined}
+                    used="resident"
+                  />
                 ))}
               </div>
             </div>

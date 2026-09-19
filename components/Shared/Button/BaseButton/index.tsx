@@ -13,6 +13,7 @@ export default function BaseButton({
   className,
   used,
   disabled,
+  download,
   onClick,
 }: ButtonProps) {
   const router = useRouter()
@@ -24,6 +25,14 @@ export default function BaseButton({
     </>
   )
   const buttonClassName = clsx(styles.button, usedClasses(styles, used), className)
+
+  if (download && url) {
+    return (
+      <a className={buttonClassName} href={url} download>
+        {content}
+      </a>
+    )
+  }
 
   function handleClick() {
     if (onClick) {
