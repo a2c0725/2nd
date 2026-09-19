@@ -93,7 +93,7 @@ export default function CancellationFormSections() {
         })
       })
 
-      const response = await fetch(`${BASE_PATH}/contact/send.php`, {
+      const response = await fetch(`${BASE_PATH}/contact/send-cancellation.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...values, recaptchaToken: token }),

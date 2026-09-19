@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import clsx from 'clsx'
 import Script from 'next/script'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
@@ -9,20 +9,18 @@ import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectio
 import FormLabel from '@/components/Shared/Form/FormLabel'
 import FormInput from '@/components/Shared/Form/FormInput'
 import FormTextarea from '@/components/Shared/Form/FormTextarea'
-import FormRadio from '@/components/Shared/Form/FormRadio'
 import FormCheckbox from '@/components/Shared/Form/FormCheckbox'
 import type { FormFieldItem } from '@/types/form'
-import { RESIDENT_FORM_FIELDS, RESIDENT_FORM_COMPLETE } from '@/constants/product/resident/form'
+import { CONTACT_FORM_FIELDS, CONTACT_FORM_COMPLETE } from '@/constants/sections/contact/form'
 import { VALIDATION_TEXT } from '@/constants/validationText'
 import { RECAPTCHA_SITE_KEY, RECAPTCHA_DISCLOSURE_TEXT } from '@/constants/recaptcha'
 import { BASE_PATH } from '@/constants/common/basePath'
-import productStyles from '@/app/product/style.module.scss'
 import styles from './style.module.scss'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 // PCでは何番目までを左列にするか（残りのうちtextareaは常に全幅側に出す）
-const splitNum = 5
+const splitNum = 3
 
 function validateField(value: string, field: FormFieldItem): string {
   if (field.type === 'required' && !value.trim()) {
@@ -34,18 +32,11 @@ function validateField(value: string, field: FormFieldItem): string {
   return ''
 }
 
-function resolveConfirmValue(field: FormFieldItem, value: string) {
-  if (field.inputType === 'radio') {
-    return field.options?.find((option) => option.value === value)?.label ?? value
-  }
-  return value
-}
-
-export default function FormSections() {
+export default function ContactFormSections() {
   const [mode, setMode] = useState<'input' | 'confirm' | 'complete'>('input')
   const [values, setValues] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {}
-    RESIDENT_FORM_FIELDS.forEach((field) => {
+    CONTACT_FORM_FIELDS.forEach((field) => {
       initial[field.name] = ''
     })
     return initial
@@ -53,16 +44,6 @@ export default function FormSections() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   // honeypot
   const [honeypot, setHoneypot] = useState('')
-
-  // ボタンごとのリンク(?subject=xxx)から遷移してきた場合、該当するご用件を初期選択状態にする
-  useEffect(() => {
-    const subject = new URLSearchParams(window.location.search).get('subject')
-    if (!subject) return
-    const subjectField = RESIDENT_FORM_FIELDS.find((field) => field.name === 'subject')
-    if (subjectField?.options?.some((option) => option.value === subject)) {
-      setValues((prev) => ({ ...prev, subject }))
-    }
-  }, [])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const [agreed, setAgreed] = useState(false)
@@ -75,7 +56,7 @@ export default function FormSections() {
   const handleConfirm = useCallback(() => {
     const newErrors: Record<string, string> = {}
     let hasError = false
-    RESIDENT_FORM_FIELDS.forEach((field) => {
+    CONTACT_FORM_FIELDS.forEach((field) => {
       const error = validateField(values[field.name], field)
       if (error) {
         newErrors[field.name] = error
@@ -100,12 +81,12 @@ export default function FormSections() {
       const token = await new Promise<string>((resolve) => {
         window.grecaptcha.ready(() => {
           window.grecaptcha
-            .execute(RECAPTCHA_SITE_KEY, { action: 'resident_form_submit' })
+            .execute(RECAPTCHA_SITE_KEY, { action: 'contact_form_submit' })
             .then(resolve)
         })
       })
 
-      const response = await fetch(`${BASE_PATH}/contact/send-resident.php`, {
+      const response = await fetch(`${BASE_PATH}/contact/send-contact.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...values, recaptchaToken: token }),
@@ -124,11 +105,11 @@ export default function FormSections() {
     }
   }, [honeypot, values])
 
-  const leftFields = RESIDENT_FORM_FIELDS.slice(0, splitNum)
-  const rightFields = RESIDENT_FORM_FIELDS.slice(splitNum).filter(
+  const leftFields = CONTACT_FORM_FIELDS.slice(0, splitNum)
+  const rightFields = CONTACT_FORM_FIELDS.slice(splitNum).filter(
     (field) => field.inputType !== 'textarea',
   )
-  const fullFields = RESIDENT_FORM_FIELDS.filter((field) => field.inputType === 'textarea')
+  const fullFields = CONTACT_FORM_FIELDS.filter((field) => field.inputType === 'textarea')
 
   function renderField(field: FormFieldItem) {
     return (
@@ -157,16 +138,6 @@ export default function FormSections() {
               used="productForm"
               error={errors[field.name]}
             />
-          ) : field.inputType === 'radio' ? (
-            <FormRadio
-              name={field.name}
-              value={values[field.name]}
-              onChange={(v) => handleChange(field.name, v)}
-              options={field.options ?? []}
-              type={field.type}
-              used="productForm"
-              error={errors[field.name]}
-            />
           ) : (
             <FormInput
               name={field.name}
@@ -180,38 +151,34 @@ export default function FormSections() {
             />
           )
         ) : (
-          <span className={styles.confirmValue}>{resolveConfirmValue(field, values[field.name])}</span>
+          <span className={styles.confirmValue}>{values[field.name]}</span>
         )}
       </div>
     )
   }
 
   return (
-    <section className={clsx('section-contents-wrapper', productStyles.section)}>
+    <section className={clsx('section-contents-wrapper', styles.section)}>
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
       />
       <div className="section-contents-inner">
-        <BaseTitle
-          navId="product-resident-cancellation-form"
-          used="product"
-          type="white"
-        />
+        <BaseTitle navId="contact-form" used="product" type="white" />
         <div className="section-contents">
           <ScrollableSectionInner>
-            <div className={productStyles.sectionItem}>
+            <div className={styles.sectionItem}>
               {mode === 'complete' ? (
                 <>
                   <p className={styles.completeMessage}>
-                    <span className={styles.completeMessageTitle}>{RESIDENT_FORM_COMPLETE.title}</span>
+                    <span className={styles.completeMessageTitle}>{CONTACT_FORM_COMPLETE.title}</span>
                     <br />
-                    <span className={styles.completeMessageBody}>{RESIDENT_FORM_COMPLETE.body}</span>
+                    <span className={styles.completeMessageBody}>{CONTACT_FORM_COMPLETE.body}</span>
                   </p>
                   <BaseButton
-                    text={RESIDENT_FORM_COMPLETE.buttonText}
+                    text={CONTACT_FORM_COMPLETE.buttonText}
                     used="cancellationForm"
-                    url="/product/resident"
+                    url="/"
                   />
                 </>
               ) : (
@@ -233,9 +200,7 @@ export default function FormSections() {
 
                   {submitError && <p className={styles.submitError}>{submitError}</p>}
 
-                  {mode === 'input' && (
-                    <FormCheckbox checked={agreed} onChange={setAgreed} />
-                  )}
+                  {mode === 'input' && <FormCheckbox checked={agreed} onChange={setAgreed} />}
 
                   <div className={styles.buttonArea}>
                     {mode === 'input' ? (

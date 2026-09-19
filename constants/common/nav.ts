@@ -50,4 +50,10 @@ const PRODUCT_NAV_ITEMS: NavItem[] = [
     kana: '規約',
     subTitle: '個人情報の取り扱いについて',
   },
+  {
+    id: 'contact-form',
+    label: 'CONTACT',
+    kana: 'お問い合わせ',
+    subTitle: 'お問い合わせフォーム',
+  },
 ]
