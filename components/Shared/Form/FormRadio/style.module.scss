@@ -48,6 +48,11 @@
   }
 }
 
+.hasError {
+  border-color: color(primaryRed);
+  background: rgba(color(primaryRed), 0.08);
+}
+
 .optionLabel {
   font-size: 1.5rem;
   color: color(bright);
@@ -57,9 +62,6 @@
 }
 
 .error {
-  position: absolute;
-  top: 100%;
-  left: 0;
   margin-top: 2px;
   font-size: 1.2rem;
   color: color(primaryRed);

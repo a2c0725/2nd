@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import { CANCELLATION, CANCELLATION_STEP4_BUTTONS } from '@/constants/product/resident/cancellation'
 import productStyles from '@/app/product/style.module.scss'
 

@@ -5,6 +5,8 @@ export type FormLabelProps = {
   type: FormFieldType
   htmlFor?: string
   used?: string | string[]
+  fullWidth?: boolean
+  widthAuto?: boolean
 }
 
 export type FormInputProps = {
@@ -82,4 +84,10 @@ export type FormFieldItem = {
   checkboxLabel?: string
   // 入力欄の下に表示する補足説明
   note?: string
+  // .form-row に追加で付与するクラス名
+  rowClassName?: string
+  // FormLabel を全幅表示にするかどうか
+  labelFullWidth?: boolean
+  // FormLabel の幅を auto にするかどうか
+  labelWidthAuto?: boolean
 }

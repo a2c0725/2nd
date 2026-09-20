@@ -1,13 +1,12 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import FormFieldRow, { splitFieldColumns } from './FormFieldRow'
 import {
   CANCELLATION_FORM_CONTRACTOR_FIELDS,
   CANCELLATION_FORM_SECTIONS,
 } from '@/constants/product/resident/cancellation/form'
 import productStyles from '@/app/product/style.module.scss'
-import styles from './style.module.scss'
 
 type Step3Props = {
   sectionRef: (el: HTMLElement | null) => void
@@ -20,7 +19,15 @@ export default function Step3({ sectionRef, values, errors, onChange }: Step3Pro
   const { leftFields, rightFields, fullFields } = splitFieldColumns(CANCELLATION_FORM_CONTRACTOR_FIELDS)
 
   return (
-    <section className={clsx('section-contents-wrapper', productStyles.section)} ref={sectionRef}>
+    <section
+      className={clsx(
+        'section-contents-wrapper',
+        'cancellation-form',
+        'cancellation-form-step3',
+        productStyles.section,
+      )}
+      ref={sectionRef}
+    >
       <div className="section-contents-inner">
         <BaseTitle
           navId="product-resident-cancellation-form"
@@ -31,8 +38,8 @@ export default function Step3({ sectionRef, values, errors, onChange }: Step3Pro
         <div className="section-contents">
           <ScrollableSectionInner>
             <div className={productStyles.sectionItem}>
-              <div className={styles.formColumns}>
-                <div className={styles.formColumn}>
+              <div className="form-columns">
+                <div className="form-column">
                   {leftFields.map((field) => (
                     <FormFieldRow
                       key={field.name}
@@ -43,7 +50,7 @@ export default function Step3({ sectionRef, values, errors, onChange }: Step3Pro
                     />
                   ))}
                 </div>
-                <div className={styles.formColumn}>
+                <div className="form-column">
                   {rightFields.map((field) => (
                     <FormFieldRow
                       key={field.name}

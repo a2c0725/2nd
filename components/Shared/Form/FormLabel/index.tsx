@@ -3,10 +3,15 @@ import type { FormLabelProps } from '@/types/form'
 import { usedClasses } from '@/utility/usedClasses'
 import styles from './style.module.scss'
 
-export default function FormLabel({ label, type, htmlFor, used }: FormLabelProps) {
+export default function FormLabel({ label, type, htmlFor, used, fullWidth, widthAuto }: FormLabelProps) {
   return (
     <label
-      className={clsx(styles.formLabel, ...usedClasses(styles, used))}
+      className={clsx(
+        styles.formLabel,
+        fullWidth && styles.width100,
+        widthAuto && styles.widthAuto,
+        ...usedClasses(styles, used),
+      )}
       htmlFor={htmlFor}
     >
       <span className={styles.badge} data-type={type}>

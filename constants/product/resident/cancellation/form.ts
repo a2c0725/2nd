@@ -29,6 +29,7 @@ export const CANCELLATION_FORM_CANCELLATION_FIELDS: FormFieldItem[] = [
       { label: '駐車場', value: 'parking' },
       { label: 'その他', value: 'other' },
     ],
+    labelFullWidth: true,
   },
   {
     name: 'cancellationDate',
@@ -44,6 +45,7 @@ export const CANCELLATION_FORM_CANCELLATION_FIELDS: FormFieldItem[] = [
     inputType: 'checkbox',
     checkboxLabel: '解約希望日までの賃料発生に同意する',
     note: '本項目に同意しない場合、解約を受理できません。',
+    labelFullWidth: true,
   },
   {
     name: 'cancellationReason',
@@ -75,9 +77,16 @@ export const CANCELLATION_FORM_CANCELLATION_FIELDS: FormFieldItem[] = [
     type: 'required',
     inputType: 'select',
     options: WITNESS_TIME_OPTIONS,
+    rowClassName: 'changeHeight',
   },
   { name: 'witnessPerson', label: '立会人', type: 'required', placeholder: '例：本人' },
-  { name: 'witnessContact', label: '立会人ご連絡先', type: 'required', placeholder: '例：09012345678' },
+  {
+    name: 'witnessContact',
+    label: '立会人ご連絡先',
+    type: 'required',
+    placeholder: '例：09012345678',
+    rowClassName: 'changeHeight2',
+  },
 ]
 
 // 3.ご契約者様情報
@@ -100,7 +109,7 @@ export const CANCELLATION_FORM_CONTRACTOR_FIELDS: FormFieldItem[] = [
 export const CANCELLATION_FORM_RELOCATION_FIELDS: FormFieldItem[] = [
   {
     name: 'relocationStatus',
-    label: '転居先の\n決定状況',
+    label: '転居先の決定状況',
     type: 'required',
     inputType: 'radio',
     options: [
@@ -108,10 +117,17 @@ export const CANCELLATION_FORM_RELOCATION_FIELDS: FormFieldItem[] = [
       { label: '決定済', value: 'decided' },
     ],
     note: '未定の場合、立会時にご住所を記載していただきます。',
+    labelWidthAuto: true,
   },
   { name: 'relocationPostalCode', label: '郵便番号', type: 'optional', placeholder: '例：171-0022' },
   { name: 'relocationAddress', label: '住所', type: 'optional', placeholder: '例：東京都豊島区南池袋' },
-  { name: 'relocationAddressDetail', label: '以降の住所', type: 'optional', placeholder: '例：1-7-20' },
+  {
+    name: 'relocationAddressDetail',
+    label: '以降の住所',
+    type: 'optional',
+    placeholder: '例：1-7-20',
+    rowClassName: 'changeHeight',
+  },
   { name: 'relocationTel', label: '電話番号', type: 'optional', placeholder: '例：090-1234-5678' },
 ]
 
@@ -130,9 +146,10 @@ export const CANCELLATION_FORM_ACCOUNT_FIELDS: FormFieldItem[] = [
       { label: '普通', value: 'ordinary' },
       { label: '当座', value: 'checking' },
     ],
+    rowClassName: 'changeHeight',
   },
   { name: 'accountNumber', label: '口座番号', type: 'required', placeholder: '例：1234567' },
-  { name: 'accountHolderName', label: '名義人', type: 'required', placeholder: '例：ヤマダ タロウ' },
+  { name: 'accountHolderName', label: '名義人', type: 'required', placeholder: '例：山田 太郎' },
   { name: 'accountHolderFurigana', label: 'フリガナ', type: 'required', placeholder: '例：ヤマダ タロウ' },
 ]
 

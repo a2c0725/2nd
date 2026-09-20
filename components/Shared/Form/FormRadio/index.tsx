@@ -19,7 +19,7 @@ export default function FormRadio({
         {options.map((option) => (
           <label className={styles.option} key={option.value}>
             <input
-              className={styles.radio}
+              className={clsx(styles.radio, error && styles.hasError)}
               type="radio"
               name={name}
               value={option.value}

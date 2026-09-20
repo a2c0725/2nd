@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import { BUSINESS_BOTTOM_ITEMS, BUSINESS_TOP_ITEMS } from '@/constants/sections/business'
 import styles from './style.module.scss'
 

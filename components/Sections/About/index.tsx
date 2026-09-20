@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import { ABOUT } from '@/constants/sections/about'
 import { BASE_PATH } from '@/constants/common/basePath'
 import styles from './style.module.scss'

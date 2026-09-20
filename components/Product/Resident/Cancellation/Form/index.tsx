@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'react'
 import clsx from 'clsx'
 import Script from 'next/script'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import type { FormFieldItem } from '@/types/form'
 import {
   CANCELLATION_FORM_SECTIONS,
@@ -22,7 +22,6 @@ import Step5 from './Step5'
 import Confirm from './Confirm'
 import { resolveConfirmValue } from './resolveConfirmValue'
 import productStyles from '@/app/product/style.module.scss'
-import styles from './style.module.scss'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const SELECT_TYPE_INPUT_TYPES = ['radio', 'select', 'checkboxGroup', 'checkbox']
@@ -127,7 +126,7 @@ export default function CancellationFormSections() {
 
   if (mode === 'complete') {
     return (
-      <section className={clsx('section-contents-wrapper', productStyles.section)}>
+      <section className={clsx('section-contents-wrapper', 'cancellation-form', productStyles.section)}>
         <div className="section-contents-inner">
           <BaseTitle
             navId="product-resident-cancellation-form"
@@ -138,10 +137,10 @@ export default function CancellationFormSections() {
           <div className="section-contents">
             <ScrollableSectionInner>
               <div className={productStyles.sectionItem}>
-                <p className={styles.completeMessage}>
-                  <span className={styles.completeMessageTitle}>{CANCELLATION_FORM_COMPLETE.title}</span>
+                <p className="complete-message">
+                  <span className="complete-message-title">{CANCELLATION_FORM_COMPLETE.title}</span>
                   <br />
-                  <span className={styles.completeMessageBody}>{CANCELLATION_FORM_COMPLETE.body}</span>
+                  <span className="complete-message-body">{CANCELLATION_FORM_COMPLETE.body}</span>
                 </p>
               </div>
             </ScrollableSectionInner>
@@ -170,7 +169,7 @@ export default function CancellationFormSections() {
         strategy="afterInteractive"
       />
       <input
-        className={styles.honeypot}
+        className="honeypot"
         type="text"
         name="website"
         value={honeypot}

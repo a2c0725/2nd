@@ -6,7 +6,6 @@ import FormSelect from '@/components/Shared/Form/FormSelect'
 import FormDatePicker from '@/components/Shared/Form/FormDatePicker'
 import FormCheckbox from '@/components/Shared/Form/FormCheckbox'
 import type { FormFieldItem } from '@/types/form'
-import styles from './style.module.scss'
 
 const FULL_WIDTH_INPUT_TYPES = ['textarea', 'checkboxGroup', 'checkbox']
 
@@ -43,75 +42,86 @@ type FormFieldRowProps = {
 
 export default function FormFieldRow({ field, value, onChange, error }: FormFieldRowProps) {
   return (
-    <div className={clsx(styles.formRow, isFullWidthField(field) && styles.formRowFull)}>
-      <FormLabel label={field.label} type={field.type} htmlFor={field.name} used="productForm" />
-      <div className={styles.formControl}>
-        {field.inputType === 'select' ? (
-          <FormSelect
-            name={field.name}
-            value={value}
-            onChange={(v) => onChange(field.name, v)}
-            options={field.options ?? []}
-            placeholder={field.placeholder}
-            type={field.type}
-            used="productForm"
-            error={error}
-          />
-        ) : field.inputType === 'date' ? (
-          <FormDatePicker
-            name={field.name}
-            value={value}
-            onChange={(v) => onChange(field.name, v)}
-            placeholder={field.placeholder}
-            type={field.type}
-            used="productForm"
-            error={error}
-          />
-        ) : field.inputType === 'radio' ? (
-          <FormRadio
-            name={field.name}
-            value={value}
-            onChange={(v) => onChange(field.name, v)}
-            options={field.options ?? []}
-            type={field.type}
-            used="productForm"
-            error={error}
-          />
-        ) : field.inputType === 'checkboxGroup' ? (
-          <div className={styles.checkboxGroup}>
-            {field.options?.map((option) => (
-              <FormCheckbox
-                key={option.value}
-                checked={value.split(',').includes(option.value)}
-                onChange={() => onChange(field.name, toggleGroupValue(value, option.value))}
-                label={option.label}
-              />
-            ))}
-            {error && <span className={styles.checkboxGroupError}>{error}</span>}
-          </div>
-        ) : field.inputType === 'checkbox' ? (
-          <div className={styles.checkboxGroup}>
-            <FormCheckbox
-              checked={value === 'true'}
-              onChange={(checked) => onChange(field.name, checked ? 'true' : '')}
-              label={field.checkboxLabel ?? field.label}
+    <div className="form-field">
+      <div className={clsx('form-row', isFullWidthField(field) && 'form-row-full', field.rowClassName)}>
+        <FormLabel
+          label={field.label}
+          type={field.type}
+          htmlFor={field.name}
+          used="productForm"
+          fullWidth={field.labelFullWidth}
+          widthAuto={field.labelWidthAuto}
+        />
+        <div className="form-control">
+          {field.inputType === 'select' ? (
+            <FormSelect
+              name={field.name}
+              value={value}
+              onChange={(v) => onChange(field.name, v)}
+              options={field.options ?? []}
+              placeholder={field.placeholder}
+              type={field.type}
+              used="productForm"
+              error={error}
             />
-            {error && <span className={styles.checkboxGroupError}>{error}</span>}
-          </div>
-        ) : (
-          <FormInput
-            name={field.name}
-            value={value}
-            onChange={(v) => onChange(field.name, v)}
-            placeholder={field.placeholder}
-            email={field.email}
-            type={field.type}
-            used="productForm"
-            error={error}
-          />
-        )}
-        {field.note && <p className={styles.fieldNote}>{field.note}</p>}
+          ) : field.inputType === 'date' ? (
+            <FormDatePicker
+              name={field.name}
+              value={value}
+              onChange={(v) => onChange(field.name, v)}
+              placeholder={field.placeholder}
+              type={field.type}
+              used="productForm"
+              error={error}
+            />
+          ) : field.inputType === 'radio' ? (
+            <FormRadio
+              name={field.name}
+              value={value}
+              onChange={(v) => onChange(field.name, v)}
+              options={field.options ?? []}
+              type={field.type}
+              used="productForm"
+              error={error}
+            />
+          ) : field.inputType === 'checkboxGroup' ? (
+            <div className="checkbox-group">
+              {field.options?.map((option) => (
+                <FormCheckbox
+                  key={option.value}
+                  checked={value.split(',').includes(option.value)}
+                  onChange={() => onChange(field.name, toggleGroupValue(value, option.value))}
+                  label={option.label}
+                  error={error}
+                />
+              ))}
+              {error && <span className="checkbox-group-error">{error}</span>}
+            </div>
+          ) : field.inputType === 'checkbox' ? (
+            <div className="checkbox-group">
+              <FormCheckbox
+                checked={value === 'true'}
+                onChange={(checked) => onChange(field.name, checked ? 'true' : '')}
+                label={field.checkboxLabel ?? field.label}
+                error={error}
+              />
+              {error && <span className="checkbox-group-error">{error}</span>}
+            </div>
+          ) : (
+            <FormInput
+              name={field.name}
+              value={value}
+              onChange={(v) => onChange(field.name, v)}
+              placeholder={field.placeholder}
+              email={field.email}
+              type={field.type}
+              used="productForm"
+              error={error}
+            />
+          )}
+        </div>
       </div>
+      {field.note && <p className="field-note">{field.note}</p>}
     </div>
   )
 }

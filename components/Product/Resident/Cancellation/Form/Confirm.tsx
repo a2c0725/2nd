@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import FormLabel from '@/components/Shared/Form/FormLabel'
 import {
   CANCELLATION_FORM_SECTIONS,
@@ -10,7 +10,6 @@ import {
 import { RECAPTCHA_DISCLOSURE_TEXT } from '@/constants/recaptcha'
 import { resolveConfirmValue } from './resolveConfirmValue'
 import productStyles from '@/app/product/style.module.scss'
-import styles from './style.module.scss'
 
 type ConfirmProps = {
   values: Record<string, string>
@@ -22,7 +21,7 @@ type ConfirmProps = {
 
 export default function Confirm({ values, submitError, isSubmitting, onBack, onSubmit }: ConfirmProps) {
   return (
-    <section className={clsx('section-contents-wrapper', productStyles.section)}>
+    <section className={clsx('section-contents-wrapper', 'cancellation-form', productStyles.section)}>
       <div className="section-contents-inner">
         <BaseTitle
           navId="product-resident-cancellation-form"
@@ -31,19 +30,19 @@ export default function Confirm({ values, submitError, isSubmitting, onBack, onS
           subTitle={CANCELLATION_FORM_CONFIRM_SUBTITLE}
         />
         <div className="section-contents">
-          <ScrollableSectionInner className={styles.scrollableAlways}>
-            <div className={clsx(productStyles.sectionItem, styles.confirmWrapper)}>
+          <ScrollableSectionInner className="scrollable-always">
+            <div className={clsx(productStyles.sectionItem, 'confirm-wrapper')}>
               {CANCELLATION_FORM_SECTIONS.map((section) => {
                 const visibleFields = section.fields.filter((field) => values[field.name]?.trim())
                 if (visibleFields.length === 0) return null
                 return (
                   <div className={productStyles.sectionItemContents} key={section.key}>
                     <h3 className={productStyles.sectionSubTitle}>{section.heading}</h3>
-                    <div className={styles.confirmFieldList}>
+                    <div className="confirm-field-list">
                       {visibleFields.map((field) => (
-                        <div className={clsx(styles.formRow, styles.formRowConfirm)} key={field.name}>
+                        <div className={clsx('form-row', 'form-row-confirm')} key={field.name}>
                           <FormLabel label={field.label} type={field.type} used="productForm" />
-                          <span className={styles.confirmValue}>
+                          <span className="confirm-value">
                             {resolveConfirmValue(field, values[field.name])}
                           </span>
                         </div>
@@ -53,9 +52,9 @@ export default function Confirm({ values, submitError, isSubmitting, onBack, onS
                 )
               })}
 
-              {submitError && <p className={styles.submitError}>{submitError}</p>}
+              {submitError && <p className="submit-error">{submitError}</p>}
 
-              <div className={styles.buttonArea}>
+              <div className="button-area">
                 <BaseButton text="戻る" used="cancellationForm" onClick={onBack} disabled={isSubmitting} />
                 <BaseButton
                   text={isSubmitting ? '送信中...' : '送信する'}
@@ -64,7 +63,7 @@ export default function Confirm({ values, submitError, isSubmitting, onBack, onS
                   disabled={isSubmitting}
                 />
               </div>
-              <p className={styles.recaptchaDisclosure}>{RECAPTCHA_DISCLOSURE_TEXT}</p>
+              <p className="recaptcha-disclosure">{RECAPTCHA_DISCLOSURE_TEXT}</p>
             </div>
           </ScrollableSectionInner>
         </div>

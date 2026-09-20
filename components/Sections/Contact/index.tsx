@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import Script from 'next/script'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import FormLabel from '@/components/Shared/Form/FormLabel'
 import FormInput from '@/components/Shared/Form/FormInput'
 import FormTextarea from '@/components/Shared/Form/FormTextarea'
@@ -16,7 +16,6 @@ import { CONTACT_FORM_FIELDS, CONTACT_FORM_COMPLETE } from '@/constants/sections
 import { VALIDATION_TEXT } from '@/constants/validationText'
 import { RECAPTCHA_SITE_KEY, RECAPTCHA_DISCLOSURE_TEXT } from '@/constants/recaptcha'
 import { BASE_PATH } from '@/constants/common/basePath'
-import styles from './style.module.scss'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -121,9 +120,9 @@ export default function Contact() {
     return (
       <div
         className={clsx(
-          styles.formRow,
-          field.inputType === 'textarea' && styles.formRowFull,
-          mode === 'confirm' && styles.formRowConfirm,
+          'form-row',
+          field.inputType === 'textarea' && 'form-row-full',
+          mode === 'confirm' && 'form-row-confirm',
         )}
         key={field.name}
       >
@@ -157,14 +156,14 @@ export default function Contact() {
             />
           )
         ) : (
-          <span className={styles.confirmValue}>{values[field.name]}</span>
+          <span className="confirm-value">{values[field.name]}</span>
         )}
       </div>
     )
   }
 
   return (
-    <section id="contact" className={clsx('section-contents-wrapper', styles.contact)}>
+    <section id="contact" className={clsx('section-contents-wrapper', 'contact-form')}>
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
@@ -173,20 +172,21 @@ export default function Contact() {
         <BaseTitle navId="contact" type="white" />
         <div className="section-contents">
           <ScrollableSectionInner>
-            <ul className={styles.telList}>
-              <li className={styles.telItem}>TEL {CONTACT.tel}</li>
-              <li className={styles.telItem}>FAX {CONTACT.fax}</li>
-            </ul>
+            {mode !== 'complete' && (
+              <p className="tel-list">
+                TEL {CONTACT.tel} / FAX {CONTACT.fax}
+              </p>
+            )}
             {mode === 'complete' ? (
-              <p className={styles.completeMessage}>
-                <span className={styles.completeMessageTitle}>{CONTACT_FORM_COMPLETE.title}</span>
+              <p className="complete-message">
+                <span className="complete-message-title">{CONTACT_FORM_COMPLETE.title}</span>
                 <br />
-                <span className={styles.completeMessageBody}>{CONTACT_FORM_COMPLETE.body}</span>
+                <span className="complete-message-body">{CONTACT_FORM_COMPLETE.body}</span>
               </p>
             ) : (
-              <div className={styles.formWrapper}>
+              <div className="form-wrapper">
                 <input
-                  className={styles.honeypot}
+                  className="honeypot"
                   type="text"
                   name="website"
                   value={honeypot}
@@ -194,13 +194,13 @@ export default function Contact() {
                   tabIndex={-1}
                   autoComplete="off"
                 />
-                <div className={styles.formColumns}>
-                  <div className={styles.formColumn}>{visibleLeftFields.map(renderField)}</div>
-                  <div className={styles.formColumn}>{visibleRightFields.map(renderField)}</div>
+                <div className="form-columns">
+                  <div className="form-column">{visibleLeftFields.map(renderField)}</div>
+                  <div className="form-column">{visibleRightFields.map(renderField)}</div>
                 </div>
                 {visibleFullFields.map(renderField)}
 
-                {submitError && <p className={styles.submitError}>{submitError}</p>}
+                {submitError && <p className="submit-error">{submitError}</p>}
 
                 {mode === 'input' && (
                   <FormCheckbox
@@ -216,7 +216,7 @@ export default function Contact() {
                   />
                 )}
 
-                <div className={styles.buttonArea}>
+                <div className="button-area">
                   {mode === 'input' ? (
                     <BaseButton
                       text="確認する"
@@ -241,7 +241,7 @@ export default function Contact() {
                     </>
                   )}
                 </div>
-                <p className={styles.recaptchaDisclosure}>{RECAPTCHA_DISCLOSURE_TEXT}</p>
+                <p className="recaptcha-disclosure">{RECAPTCHA_DISCLOSURE_TEXT}</p>
               </div>
             )}
           </ScrollableSectionInner>

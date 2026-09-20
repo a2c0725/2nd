@@ -1,0 +1,283 @@
+@use './common' as *;
+
+// 3フォーム（お問い合わせ / 退去受付 / 入居者様各種お手続き）共通のレイアウトクラス
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-columns {
+  @include flex(wrap, space-between, flex-start);
+  row-gap: 24px;
+  width: 100%;
+
+  @include mq() {
+    row-gap: 20px;
+  }
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 48%;
+
+  @include mq() {
+    width: 100%;
+    gap: 20px;
+  }
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  @include mq() {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.form-row-full {
+  width: 100%;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.confirm-value {
+  font-size: 1.5rem;
+  color: color(bright);
+  white-space: pre-line;
+  padding: 10px 0;
+}
+
+.complete-message {
+  padding-bottom: 40px;
+  font-size: 1.6rem;
+  color: color(bright);
+  line-height: 1.8;
+  @include mq() {
+    font-size: 1.4rem;
+  }
+}
+
+.complete-message-title {
+  display: inline-block;
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.complete-message-body {
+  display: inline-block;
+  white-space: pre-line;
+}
+
+.submit-error {
+  width: 100%;
+  font-size: 1.3rem;
+  color: color(primaryRed);
+  text-align: center;
+}
+
+.button-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+
+  @include mq() {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.recaptcha-disclosure {
+  width: 100%;
+  font-size: 1.1rem;
+  color: color(optional);
+  text-align: center;
+}
+
+// お問い合わせフォーム固有
+.contact-form {
+  background-image: url('#{$base-path}/img/bg/contact.webp');
+  background-position: 80%;
+  color: color(bright);
+
+  .tel-list {
+    width: 100%;
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    margin-top: 60px;
+
+    @include mq() {
+      margin-top: 40px;
+      gap: 20px;
+    }
+  }
+
+  .form-row-confirm {
+    border-bottom: 1px solid #fff;
+  }
+
+  .complete-message {
+    margin-top: 60px;
+    @include mq() {
+      margin-top: 40px;
+    }
+  }
+}
+
+// 退去受付フォーム固有
+.cancellation-form {
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .form-control {
+    flex: 1;
+    width: 100%;
+  }
+
+  .checkbox-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+
+  .checkbox-group-error {
+    width: 100%;
+    font-size: 1.2rem;
+    color: color(primaryRed);
+  }
+
+  .field-note {
+    font-size: 1.2rem;
+    color: color(optional);
+    white-space: pre-line;
+  }
+
+  .confirm-wrapper {
+    gap: 40px;
+  }
+
+  .confirm-field-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .scrollable-always {
+    max-height: calc(100dvh - #{$headerHeight} - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @include mq() {
+      max-height: calc(100dvh - #{$headerHeightSp} - 100px - 90px);
+    }
+  }
+
+  .rule-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid color(bright);
+    @include mq() {
+      margin-top: 12px;
+      padding-top: 12px;
+    }
+  }
+
+  .ruleContentsWrapper {
+    @include flex(wrap, flex-start, flex-start);
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid color(primaryRed)
+  }
+
+  .rule-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: color(bright);
+  }
+
+  .rule-text {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: color(bright);
+    white-space: pre-line;
+  }
+
+  &.cancellation-form-step1 {
+    .changeHeight {
+    }
+  }
+
+  &.cancellation-form-step2 {
+    .changeHeight {
+      min-height: 82.8px;
+      align-items: flex-start;
+    }
+
+    .changeHeight2 {
+      min-height: 65.5px;
+    }
+  }
+
+  &.cancellation-form-step3 {
+    .changeHeight {
+    }
+  }
+
+  &.cancellation-form-step4 {
+    .changeHeight {
+    }
+  }
+
+  &.cancellation-form-step5 {
+    .changeHeight {
+      min-height: 47.2px;
+    }
+  }
+}
+
+// 入居者様各種お手続きフォーム固有
+.resident-form {
+  .form-row-confirm {
+    border-bottom: 1px solid #fff;
+  }
+
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+
+    @include mq() {
+      gap: 20px;
+    }
+  }
+}

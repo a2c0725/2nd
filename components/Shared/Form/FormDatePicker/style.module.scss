@@ -43,6 +43,7 @@
 
 .hasError {
   border-color: color(primaryRed);
+  background: rgba(color(primaryRed), 0.08);
 }
 
 .calendar {

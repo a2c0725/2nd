@@ -46,6 +46,11 @@
   }
 }
 
+.hasError {
+  border-color: color(primaryRed);
+  background: rgba(color(primaryRed), 0.08);
+}
+
 .label {
   font-size: 1.4rem;
   color: color(bright);

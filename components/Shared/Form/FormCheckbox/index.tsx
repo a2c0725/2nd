@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
 import styles from './style.module.scss'
 
 type FormCheckboxProps = {
@@ -7,13 +8,14 @@ type FormCheckboxProps = {
   onChange: (checked: boolean) => void
   label: ReactNode
   disabled?: boolean
+  error?: string
 }
 
-export default function FormCheckbox({ checked, onChange, label, disabled }: FormCheckboxProps) {
+export default function FormCheckbox({ checked, onChange, label, disabled, error }: FormCheckboxProps) {
   return (
     <label className={styles.formCheckbox}>
       <input
-        className={styles.checkbox}
+        className={clsx(styles.checkbox, error && styles.hasError)}
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import FormCheckbox, { FormCheckboxAgreementLink } from '@/components/Shared/Form/FormCheckbox'
 import FormFieldRow, { splitFieldColumns } from './FormFieldRow'
 import {
@@ -11,7 +11,6 @@ import {
 } from '@/constants/product/resident/cancellation/form'
 import { RECAPTCHA_DISCLOSURE_TEXT } from '@/constants/recaptcha'
 import productStyles from '@/app/product/style.module.scss'
-import styles from './style.module.scss'
 
 type Step5Props = {
   sectionRef: (el: HTMLElement | null) => void
@@ -35,7 +34,15 @@ export default function Step5({
   const { leftFields, rightFields, fullFields } = splitFieldColumns(CANCELLATION_FORM_ACCOUNT_FIELDS)
 
   return (
-    <section className={clsx('section-contents-wrapper', productStyles.section)} ref={sectionRef}>
+    <section
+      className={clsx(
+        'section-contents-wrapper',
+        'cancellation-form',
+        'cancellation-form-step5',
+        productStyles.section,
+      )}
+      ref={sectionRef}
+    >
       <div className="section-contents-inner">
         <BaseTitle
           navId="product-resident-cancellation-form"
@@ -46,8 +53,8 @@ export default function Step5({
         <div className="section-contents">
           <ScrollableSectionInner>
             <div className={productStyles.sectionItem}>
-              <div className={styles.formColumns}>
-                <div className={styles.formColumn}>
+              <div className="form-columns">
+                <div className="form-column">
                   {leftFields.map((field) => (
                     <FormFieldRow
                       key={field.name}
@@ -58,7 +65,7 @@ export default function Step5({
                     />
                   ))}
                 </div>
-                <div className={styles.formColumn}>
+                <div className="form-column">
                   {rightFields.map((field) => (
                     <FormFieldRow
                       key={field.name}
@@ -80,9 +87,11 @@ export default function Step5({
                 />
               ))}
 
-              <div className={styles.ruleBox}>
-                <h4 className={styles.ruleTitle}>{CANCELLATION_FORM_RULE.title}</h4>
-                <p className={styles.ruleText}>{CANCELLATION_FORM_RULE.text}</p>
+              <div className="rule-box">
+                <div className="ruleContentsWrapper">
+                  <h4 className="rule-title">{CANCELLATION_FORM_RULE.title}</h4>
+                  <p className="rule-text">{CANCELLATION_FORM_RULE.text}</p>
+                </div>
                 <FormCheckbox
                   checked={agreed}
                   onChange={onAgreedChange}
@@ -94,10 +103,10 @@ export default function Step5({
                     </>
                   }
                 />
-                <div className={styles.buttonArea}>
+                <div className="button-area">
                   <BaseButton text="確認する" used="cancellationForm" onClick={onConfirm} disabled={!agreed} />
                 </div>
-                <p className={styles.recaptchaDisclosure}>{RECAPTCHA_DISCLOSURE_TEXT}</p>
+                <p className="recaptcha-disclosure">{RECAPTCHA_DISCLOSURE_TEXT}</p>
               </div>
             </div>
           </ScrollableSectionInner>

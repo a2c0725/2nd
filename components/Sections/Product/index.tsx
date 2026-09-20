@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import Card from '@/components/Shared/Card'
-import ScrollableSectionInner from '@/components/Shared/Section/ScrollableSectionInner'
+import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import { PRODUCT_LIST_ITEMS } from '@/constants/sections/product'
 import productStyles from '@/app/product/style.module.scss'
 import styles from './style.module.scss'

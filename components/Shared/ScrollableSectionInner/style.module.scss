@@ -2,6 +2,7 @@
 
 .scrollable {
   max-height: calc(100dvh - #{$headerHeight} - 100px - 90px);
+  padding-bottom: 40px;
   overflow-y: auto;
   overflow-x: hidden;
 
