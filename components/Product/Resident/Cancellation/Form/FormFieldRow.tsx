@@ -1,10 +1,11 @@
 import clsx from 'clsx'
-import FormLabel from '@/components/Shared/Form/FormLabel'
-import FormInput from '@/components/Shared/Form/FormInput'
-import FormRadio from '@/components/Shared/Form/FormRadio'
-import FormSelect from '@/components/Shared/Form/FormSelect'
-import FormDatePicker from '@/components/Shared/Form/FormDatePicker'
-import FormCheckbox from '@/components/Shared/Form/FormCheckbox'
+import FormLabel from '@/components/Shared/FormLabel'
+import FormInput from '@/components/Shared/FormInput'
+import FormRadio from '@/components/Shared/FormRadio'
+import FormSelect from '@/components/Shared/FormSelect'
+import FormDatePicker from '@/components/Shared/DatePicker'
+import FormBirthdayDatePicker from '@/components/Shared/DatePicker/BirthdayDatePicker'
+import FormCheckbox from '@/components/Shared/FormCheckbox'
 import type { FormFieldItem } from '@/types/form'
 
 const FULL_WIDTH_INPUT_TYPES = ['textarea', 'checkboxGroup', 'checkbox']
@@ -59,6 +60,16 @@ export default function FormFieldRow({ field, value, onChange, error }: FormFiel
               value={value}
               onChange={(v) => onChange(field.name, v)}
               options={field.options ?? []}
+              placeholder={field.placeholder}
+              type={field.type}
+              used="productForm"
+              error={error}
+            />
+          ) : field.inputType === 'birthday' ? (
+            <FormBirthdayDatePicker
+              name={field.name}
+              value={value}
+              onChange={(v) => onChange(field.name, v)}
               placeholder={field.placeholder}
               type={field.type}
               used="productForm"

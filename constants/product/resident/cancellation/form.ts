@@ -9,12 +9,33 @@ export const CANCELLATION_FORM_LEASE_FIELDS: FormFieldItem[] = [
   { name: 'roomNumber', label: '部屋号室', type: 'required', placeholder: '例：101' },
   { name: 'postalCode', label: '郵便番号', type: 'required', placeholder: '例：171-0022' },
   { name: 'address', label: '住所', type: 'required', placeholder: '例：東京都豊島区南池袋' },
-  { name: 'addressDetail', label: '以降の住所\n(番地まで)', type: 'required', placeholder: '例：1-7-20' },
+  {
+    name: 'addressDetail',
+    label: '以降の住所\n(番地まで)',
+    type: 'required',
+    placeholder: '例：1-7-20',
+  },
 ]
 
 const WITNESS_TIME_OPTIONS = [
-  '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00',
-  '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30',
+  '09:00',
+  '09:30',
+  '10:00',
+  '10:30',
+  '11:00',
+  '11:30',
+  '12:00',
+  '12:30',
+  '13:00',
+  '13:30',
+  '14:00',
+  '14:30',
+  '15:00',
+  '15:30',
+  '16:00',
+  '16:30',
+  '17:00',
+  '17:30',
 ].map((time) => ({ label: time, value: time }))
 
 // 2.ご解約情報
@@ -92,17 +113,63 @@ export const CANCELLATION_FORM_CANCELLATION_FIELDS: FormFieldItem[] = [
 // 3.ご契約者様情報
 export const CANCELLATION_FORM_CONTRACTOR_FIELDS: FormFieldItem[] = [
   { name: 'contractorName', label: 'ご契約者氏名', type: 'required', placeholder: '例：山田 太郎' },
-  { name: 'contractorFurigana', label: 'フリガナ', type: 'required', placeholder: '例：ヤマダ タロウ' },
-  { name: 'contractorBirthday', label: '生年月日', type: 'required', inputType: 'date' },
-  { name: 'contractorPostalCode', label: '郵便番号', type: 'required', placeholder: '例：171-0022' },
-  { name: 'contractorAddress', label: '契約者住所', type: 'required', placeholder: '例：東京都豊島区南池袋' },
-  { name: 'contractorAddressDetail', label: '以降の住所', type: 'required', placeholder: '例：1-7-20' },
-  { name: 'contractorTel', label: '契約者電話番号', type: 'required', placeholder: '例：090-1234-5678' },
-  { name: 'email', label: 'メールアドレス', type: 'required', email: true, placeholder: '例：info@example.com' },
+  {
+    name: 'contractorFurigana',
+    label: 'フリガナ',
+    type: 'required',
+    placeholder: '例：ヤマダ タロウ',
+  },
+  { name: 'contractorBirthday', label: '生年月日', type: 'required', inputType: 'birthday' },
+  {
+    name: 'contractorPostalCode',
+    label: '郵便番号',
+    type: 'required',
+    placeholder: '例：171-0022',
+  },
+  {
+    name: 'contractorAddress',
+    label: '契約者住所',
+    type: 'required',
+    placeholder: '例：東京都豊島区南池袋',
+  },
+  {
+    name: 'contractorAddressDetail',
+    label: '以降の住所',
+    type: 'required',
+    placeholder: '例：1-7-20',
+  },
+  {
+    name: 'contractorTel',
+    label: '契約者電話番号',
+    type: 'required',
+    placeholder: '例：090-1234-5678',
+  },
+  {
+    name: 'email',
+    label: 'メールアドレス',
+    type: 'required',
+    email: true,
+    placeholder: '例：info@example.com',
+  },
   { name: 'workplaceName', label: '勤務先名', type: 'required', placeholder: '例：株式会社〇〇' },
-  { name: 'workplaceTel', label: '勤務先電話番号', type: 'required', placeholder: '例：03-1234-5678' },
-  { name: 'residentName', label: '入居者名\n(法人の場合)', type: 'optional', placeholder: '例：山田 太郎' },
-  { name: 'residentTel', label: '入居者電話番号', type: 'optional', placeholder: '例：090-1234-5678' },
+  {
+    name: 'workplaceTel',
+    label: '勤務先電話番号',
+    type: 'required',
+    placeholder: '例：03-1234-5678',
+  },
+  {
+    name: 'residentName',
+    label: '入居者名\n(法人の場合)',
+    type: 'optional',
+    placeholder: '例：山田 太郎',
+  },
+  {
+    name: 'residentTel',
+    label: '入居者電話番号',
+    type: 'optional',
+    placeholder: '例：090-1234-5678',
+  },
 ]
 
 // 4.転居先情報
@@ -119,8 +186,18 @@ export const CANCELLATION_FORM_RELOCATION_FIELDS: FormFieldItem[] = [
     note: '未定の場合、立会時にご住所を記載していただきます。',
     labelWidthAuto: true,
   },
-  { name: 'relocationPostalCode', label: '郵便番号', type: 'optional', placeholder: '例：171-0022' },
-  { name: 'relocationAddress', label: '住所', type: 'optional', placeholder: '例：東京都豊島区南池袋' },
+  {
+    name: 'relocationPostalCode',
+    label: '郵便番号',
+    type: 'optional',
+    placeholder: '例：171-0022',
+  },
+  {
+    name: 'relocationAddress',
+    label: '住所',
+    type: 'optional',
+    placeholder: '例：東京都豊島区南池袋',
+  },
   {
     name: 'relocationAddressDetail',
     label: '以降の住所',
@@ -150,7 +227,12 @@ export const CANCELLATION_FORM_ACCOUNT_FIELDS: FormFieldItem[] = [
   },
   { name: 'accountNumber', label: '口座番号', type: 'required', placeholder: '例：1234567' },
   { name: 'accountHolderName', label: '名義人', type: 'required', placeholder: '例：山田 太郎' },
-  { name: 'accountHolderFurigana', label: 'フリガナ', type: 'required', placeholder: '例：ヤマダ タロウ' },
+  {
+    name: 'accountHolderFurigana',
+    label: 'フリガナ',
+    type: 'required',
+    placeholder: '例：ヤマダ タロウ',
+  },
 ]
 
 export type CancellationFormSection = {

@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
 import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
-import FormLabel from '@/components/Shared/Form/FormLabel'
+import FormLabel from '@/components/Shared/FormLabel'
 import {
   CANCELLATION_FORM_SECTIONS,
   CANCELLATION_FORM_CONFIRM_SUBTITLE,

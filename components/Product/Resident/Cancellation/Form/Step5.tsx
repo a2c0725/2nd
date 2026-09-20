@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import BaseButton from '@/components/Shared/Button/BaseButton'
 import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
-import FormCheckbox, { FormCheckboxAgreementLink } from '@/components/Shared/Form/FormCheckbox'
+import FormCheckbox, { FormCheckboxAgreementLink } from '@/components/Shared/FormCheckbox'
 import FormFieldRow, { splitFieldColumns } from './FormFieldRow'
 import {
   CANCELLATION_FORM_ACCOUNT_FIELDS,

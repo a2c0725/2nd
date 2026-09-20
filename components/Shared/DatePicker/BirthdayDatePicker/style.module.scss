@@ -1,0 +1,209 @@
+@use '@/styles/common' as *;
+
+.formDatePicker {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  &.productForm {
+  }
+}
+
+.trigger {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 1.5rem;
+  text-align: left;
+  color: color(bright);
+  background: color(cardBackground);
+  opacity: 0.8;
+  border: 1px solid color(border);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  @include mq() {
+    font-size: 1.6rem;
+  }
+
+  &:focus {
+    border-color: color(bright);
+  }
+
+  &:disabled {
+    background: #333;
+    cursor: not-allowed;
+  }
+}
+
+.placeholder {
+  color: #a8a8a8;
+}
+
+.hasError {
+  border-color: color(primaryRed);
+  background: rgba(color(primaryRed), 0.08);
+}
+
+.calendar {
+  position: fixed;
+  z-index: 2000;
+  width: 280px;
+  max-width: calc(100vw - 40px);
+  padding: 16px;
+  background: #1a1a1a;
+  border: 1px solid color(border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.calendarTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: color(bright);
+}
+
+.navButton {
+  width: 28px;
+  height: 28px;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: color(bright);
+  background: transparent;
+  border: 1px solid color(border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background: color(primaryRed);
+    border-color: color(primaryRed);
+  }
+}
+
+.navButtonSpacer {
+  width: 28px;
+  height: 28px;
+}
+
+.yearList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.yearTag {
+  padding: 6px 14px;
+  font-size: 1.6rem;
+  color: color(bright);
+  background: transparent;
+  border: 1px solid color(border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    border-color: color(primaryRed);
+  }
+}
+
+.yearTagSelected {
+  background: color(primaryRed);
+  border-color: color(primaryRed);
+}
+
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.monthCell {
+  padding: 12px 0;
+  font-size: 1.3rem;
+  color: color(bright);
+  background: transparent;
+  border: 1px solid color(border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    border-color: color(primaryRed);
+  }
+}
+
+.monthCellSelected {
+  background: color(primaryRed);
+  border-color: color(primaryRed);
+}
+
+.weekRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 4px;
+}
+
+.weekday {
+  font-size: 1.1rem;
+  text-align: center;
+  color: color(optional);
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.emptyDay {
+  display: block;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: color(bright);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.daySelected {
+  background: color(primaryRed);
+  font-weight: 700;
+
+  &:hover {
+    background: color(primaryRed);
+    opacity: 0.85;
+  }
+}
+
+.error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 2px;
+  font-size: 1.2rem;
+  color: color(primaryRed);
+}
