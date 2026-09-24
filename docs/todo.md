@@ -2,24 +2,26 @@
 
 問い合わせフォーム(`product/resident/cancellation/form/`)は、現在すべて仮の値・仮環境で実装されています。本番公開前に以下を必ず対応してください。
 
-## 1. reCAPTCHA v3 キーの差し替え
+## 1. reCAPTCHA v3 キーの差し替え ✅ 対応済み
 
-現在のキーは `localhost` 限定で発行した仮キーです。本番ドメイン(`2nd-inc.com`)用のキーを新規取得し、以下2箇所を差し替える。
+本番ドメイン(`2nd-inc.com`)用のキーを取得し、以下2箇所に反映済み。
 
 - `constants/recaptcha.ts` の `RECAPTCHA_SITE_KEY`(サイトキー)
 - `public/contact/config.php` の `RECAPTCHA_SECRET_KEY`(シークレットキー)
 
-取得先: https://www.google.com/recaptcha/admin (ドメインに本番ドメインを登録)
-
 ## 2. 通知先メールアドレスの差し替え
 
-`public/contact/config.php` の `NOTIFY_TO` が仮アドレス(`daisuke.9240.harley@gmail.com`)になっている。会社側の正式な受信アドレスに差し替える。
+`public/contact/config.php` の通知先はフォームごとに以下の定数で個別管理している。
 
-## 3. 送信元メールアドレスの確認
+- `NOTIFY_TO_CONTACT`(お問い合わせフォーム): `info@2nd-inc.com` に設定済み
+- `NOTIFY_TO_RESIDENT`(入居者お手続きフォーム): 仮アドレス(`a2c0725@gmail.com`)のまま。会社側の正式な受信アドレスに差し替える
+- `NOTIFY_TO_CANCELLATION`(退去受付フォーム): 仮アドレス(`a2c0725@gmail.com`)のまま。会社側の正式な受信アドレスに差し替える
 
-`public/contact/config.php` の `NOTIFY_FROM`(`no-reply@2nd-inc.com`)が実在する・送信可能なアドレスかロリポップ側の設定を確認する(存在しない/未設定だと迷惑メール判定や送信エラーの原因になる)。
+## 3. 送信元メールアドレスの確認 ✅ 対応済み
 
-## 4. 実際のメール送信確認
+`public/contact/config.php` の `NOTIFY_FROM`(`no-reply@2nd-inc.com`)を使い、ロリポップから実際にメール送信して自動返信メールが受信ボックスに正常に届くことを確認済み(4番参照)。ドメインからの送信が問題なく機能している。
+
+## 4. 実際のメール送信確認 ✅ 対応済み
 
 ローカル環境にはメール送信環境が無いため、スターサーバー(`https://hanaparis.com/test2016/`)に一時的にデプロイして検証した(2026-09-16)。
 
@@ -27,17 +29,13 @@
 - 問い合わせ者宛の自動返信メール → 届いた
 - reCAPTCHA v3も、サイトキーのドメイン(`hanaparis.com`)登録後に正常動作を確認
 
-⚠️ ただし本番ホスティングは**ロリポップ**であり、スターサーバーとはサーバー環境(PHP/mail設定、SPF/DKIM等)が異なる。上記はあくまでコード側のロジック(reCAPTCHA検証・メール組み立て・honeypot)が正しく動くことの確認であり、**ロリポップへの実デプロイ後に改めて以下を確認すること**:
+その後、本番ホスティングの**ロリポップ**(`/test`ディレクトリ)へのデプロイでも確認し、問い合わせ者宛の自動返信メールが正常に受信ボックスへ届くことを確認済み。
 
-- 会社宛の通知メールが届くか
-- 問い合わせ者宛の自動返信メールが届くか
-- 双方とも迷惑メール判定されないか(送信元ドメインのSPF/DKIM設定含む)
+## 5. デプロイ確認 ✅ 対応済み
 
-## 5. デプロイ確認
+`public/contact/send.php` と `config.php` が `yarn build` → `out/contact/` に正しくコピーされ、ロリポップへのFTPアップロード後に実際に動作することを確認済み。
 
-`public/contact/send.php` と `config.php` が `yarn build` → `out/contact/` に正しくコピーされ、FTPアップロード後に実際に動作するか確認する。
-
-## 6. 総合動作確認
+## 6. 総合動作確認 ✅ 対応済み
 
 - 本番reCAPTCHAキーでの送信テスト(スコアによる拒否が発生しないか)
 - honeypotが誤って正規ユーザーをブロックしていないか

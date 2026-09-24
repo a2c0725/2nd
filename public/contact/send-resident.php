@@ -17,7 +17,6 @@ const FIELD_LABELS = [
     'postalCode' => '郵便番号',
     'address' => '住所',
     'buildingName' => '建物名 / 部屋番号',
-    'addressDetail' => '以降の住所',
     'subject' => 'ご用件',
     'content' => 'お問い合わせ内容',
 ];
@@ -80,7 +79,7 @@ $body = buildBody($data);
 
 // 会社宛 通知メール
 mail(
-    NOTIFY_TO,
+    NOTIFY_TO_RESIDENT,
     '各種お手続きフォームより送信がありました',
     $body,
     'From: ' . NOTIFY_FROM

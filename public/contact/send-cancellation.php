@@ -127,7 +127,7 @@ $body = buildBody($data);
 
 // 会社宛 通知メール
 mail(
-    NOTIFY_TO,
+    NOTIFY_TO_CANCELLATION,
     '退去受付フォームより送信がありました',
     $body,
     'From: ' . NOTIFY_FROM

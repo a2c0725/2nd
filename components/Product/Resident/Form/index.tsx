@@ -193,7 +193,7 @@ export default function FormSections() {
       />
       <div className="section-contents-inner">
         <BaseTitle
-          navId="product-resident-cancellation-form"
+          navId="product-resident-form"
           used="product"
           type="white"
         />

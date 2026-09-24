@@ -6,7 +6,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'news', label: 'NEWS', kana: 'ニュース' },
   { id: 'about', label: 'ABOUT', kana: '2ndについて', sectionTitleKana: 'アバウト' },
   { id: 'business', label: 'BUSINESS', kana: '事業内容' },
-  { id: 'product', label: 'PRODUCT', kana: '製品案内' },
+  { id: 'product', label: 'SUPPORT', kana: 'サービス案内' },
   { id: 'company', label: 'COMPANY', kana: '会社概要' },
   { id: 'access', label: 'ACCESS', kana: 'アクセス' },
   { id: 'contact', label: 'CONTACT', kana: 'お問い合わせ' },
@@ -25,24 +25,29 @@ export function getNavItem(id: string): NavItem {
 // Product 系ページの SectionTitle 表示内容。home の NAV_ITEMS と同じ考え方で、
 // ページ(URL)ごとに固定の navId を割り当て、label/kana/subTitle をここに集約する
 const PRODUCT_NAV_ITEMS: NavItem[] = [
-  { id: 'product-resident', label: 'Product', kana: '製品案内', subTitle: 'ご入居者様専用サイト' },
+  { id: 'product-resident', label: 'Support', kana: 'サービス案内', subTitle: 'ご入居者様専用ページ' },
   {
     id: 'product-resident-renewal',
-    label: 'Product',
-    kana: '製品案内',
+    label: 'Support',
+    kana: 'サービス案内',
     subTitle: '契約の更新ついて',
   },
   {
     id: 'product-resident-cancellation',
-    label: 'Product',
-    kana: '製品案内',
+    label: 'Support',
+    kana: 'サービス案内',
     subTitle: 'ご解約について',
   },
   // kana/subTitle はStepごとに BaseTitle 側で個別指定するため、ここでは既定値のみ
   {
     id: 'product-resident-cancellation-form',
-    label: 'Product',
+    label: 'Support',
     kana: '退去受付フォーム',
+  },
+  {
+    id: 'product-resident-form',
+    label: 'Support',
+    kana: '暮らしに役立つお問い合わせ',
   },
   {
     id: 'agreement',

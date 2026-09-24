@@ -57,12 +57,6 @@ export const RESIDENT_FORM_FIELDS: FormFieldItem[] = [
     placeholder: '例：〇〇マンション101号室'
   },
   {
-    name: 'addressDetail',
-    label: '以降の住所',
-    type: 'required',
-    placeholder: '例：東京都東村山市栄町1-1-1'
-  },
-  {
     name: 'subject',
     label: 'ご用件',
     type: 'required',

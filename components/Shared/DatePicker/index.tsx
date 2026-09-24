@@ -59,7 +59,14 @@ export default function FormDatePicker({
     function updatePosition() {
       const rect = triggerRef.current?.getBoundingClientRect()
       if (!rect) return
-      setCalendarPosition({ top: rect.bottom + 8, left: rect.left })
+      const calendarHeight = calendarRef.current?.getBoundingClientRect().height ?? 0
+      const spaceBelow = window.innerHeight - rect.bottom
+      const spaceAbove = rect.top
+      const showAbove = spaceBelow < calendarHeight + 8 && spaceAbove > spaceBelow
+      setCalendarPosition({
+        top: showAbove ? rect.top - calendarHeight - 8 : rect.bottom + 8,
+        left: rect.left,
+      })
     }
     updatePosition()
     window.addEventListener('scroll', updatePosition, true)
@@ -68,7 +75,7 @@ export default function FormDatePicker({
       window.removeEventListener('scroll', updatePosition, true)
       window.removeEventListener('resize', updatePosition)
     }
-  }, [open])
+  }, [open, viewYear, viewMonth])
 
   function handlePrevMonth() {
     if (viewMonth === 0) {

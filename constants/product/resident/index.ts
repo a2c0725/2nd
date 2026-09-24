@@ -2,7 +2,7 @@ export const RESIDENT = {
   guidanceHeading: 'ご案内',
   guidanceText: '入居者様専用サイトでは、賃貸物件に関する各種お手続きや賃貸住宅へのお困りごと、\nご入居前・ご入居後に役立つ情報を発信しています。',
   proceduresHeading: '各種お手続き',
-  lifestyleHeading: '暮らしに役立つご案内',
+  lifestyleHeading: '暮らしに役立つお問い合わせ',
 } as const
 
 export const RESIDENT_PROCEDURE_BUTTONS = [
