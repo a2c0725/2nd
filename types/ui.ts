@@ -49,3 +49,8 @@ export type ScrollableSectionInnerProps = {
   className?: string
   children: ReactNode
 }
+
+export type StepIndicatorProps = {
+  currentStep: number
+  totalSteps: number
+}

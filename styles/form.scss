@@ -196,6 +196,37 @@
     }
   }
 
+  // SP時、画面下部に固定表示するStepIndicatorとフォーム内容(見出し込み)が
+  // スクロール前から重ならないよう、コンテンツ全体をその高さ分だけ手前で収める。
+  // 見出しの行数はStepごとに異なるため、固定値で本文側の高さを決め打ちせず、
+  // flexboxで「見出しの実高さを引いた残り全部」を本文側に自動で割り当てる
+  .section-contents-inner {
+    @include mq() {
+      height: calc(100dvh - 155px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .section-contents {
+    @include mq() {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+    }
+  }
+
+  // ScrollableSectionInner側(.scrollable)の max-height と詳細度が同点で
+  // ビルド順次第で上書きが効かないことがあるため、3クラス連結で詳細度を上げる
+  .section-contents .section-inner {
+    @include mq() {
+      flex: 1;
+      min-height: 0;
+      max-height: none;
+    }
+  }
+
   .rule-box {
     display: flex;
     flex-direction: column;

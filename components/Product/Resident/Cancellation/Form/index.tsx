@@ -1,10 +1,11 @@
 'use client'
 
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import Script from 'next/script'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
+import StepIndicator from '@/components/Shared/StepIndicator'
 import type { FormFieldItem } from '@/types/form'
 import {
   CANCELLATION_FORM_SECTIONS,
@@ -53,7 +54,30 @@ export default function CancellationFormSections() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const [agreed, setAgreed] = useState(false)
+  const [currentStep, setCurrentStep] = useState(1)
   const sectionRefs = useRef<(HTMLElement | null)[]>([])
+
+  useEffect(() => {
+    if (mode !== 'input') return
+    const elements = sectionRefs.current.filter((el): el is HTMLElement => el !== null)
+    if (elements.length === 0) return
+
+    const scrollTarget = document.querySelector<HTMLElement>('.container')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting)
+        if (visible.length === 0) return
+        const topEntry = visible.reduce((prev, curr) =>
+          curr.intersectionRatio > prev.intersectionRatio ? curr : prev,
+        )
+        const index = elements.indexOf(topEntry.target as HTMLElement)
+        if (index !== -1) setCurrentStep(index + 1)
+      },
+      { root: scrollTarget, threshold: 0.5 },
+    )
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [mode])
 
   const handleChange = useCallback((name: string, value: string) => {
     setValues((prev) => ({ ...prev, [name]: value }))
@@ -177,6 +201,7 @@ export default function CancellationFormSections() {
         tabIndex={-1}
         autoComplete="off"
       />
+      <StepIndicator currentStep={currentStep} totalSteps={5} />
       <Step1
         sectionRef={(el) => {
           sectionRefs.current[0] = el
