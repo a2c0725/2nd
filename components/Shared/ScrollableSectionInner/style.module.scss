@@ -6,7 +6,7 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  :global(.product) & {
+  :global(.support) & {
     max-height: calc(100dvh - #{$headerHeight} - 100px);
   }
 
@@ -17,7 +17,7 @@
   @include mq() {
     max-height: calc(100dvh - #{$headerHeightSp} - 100px - 90px);
 
-    :global(.product) & {
+    :global(.support) & {
       max-height: calc(100dvh - #{$headerHeightSp} - 100px);
     }
   }

@@ -130,7 +130,7 @@ export default function Contact() {
           label={field.label}
           type={field.type}
           htmlFor={field.name}
-          used={field.name === 'content' ? 'contentLabel' : 'productForm'}
+          used={field.name === 'content' ? 'contentLabel' : 'supportForm'}
         />
         {mode === 'input' ? (
           field.inputType === 'textarea' ? (
@@ -140,7 +140,7 @@ export default function Contact() {
               onChange={(v) => handleChange(field.name, v)}
               placeholder={field.placeholder}
               type={field.type}
-              used="productForm"
+              used="supportForm"
               error={errors[field.name]}
             />
           ) : (
@@ -151,7 +151,7 @@ export default function Contact() {
               placeholder={field.placeholder}
               email={field.email}
               type={field.type}
-              used="productForm"
+              used="supportForm"
               error={errors[field.name]}
             />
           )

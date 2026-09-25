@@ -37,7 +37,7 @@
     cursor: not-allowed;
   }
 
-  .productForm & {
+  .supportForm & {
     min-height: 250px;
     @include mq() {
       min-height: auto;

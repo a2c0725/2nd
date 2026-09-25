@@ -31,7 +31,7 @@ export default function BaseTitle({
     const scrollLine = scrollLineRef.current
     if (!mountLine || !scrollLine) return
 
-    // section が無い場合（Product ページ等）は見出し(h2)自体を基準にする
+    // section が無い場合（Support ページ等）は見出し(h2)自体を基準にする
     const boundsElement = mountLine.closest('section') ?? mountLine.closest('h2')
 
     function computeOnScreen() {

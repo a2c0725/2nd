@@ -1,2 +1,2 @@
-product background
+support background
 #00000091

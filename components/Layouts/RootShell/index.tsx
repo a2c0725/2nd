@@ -11,7 +11,7 @@ import './style.module.scss'
 
 export default function RootShell({ children }: RootShellProps) {
   const pathname = usePathname()
-  const isProduct = pathname.startsWith('/product')
+  const isSupport = pathname.startsWith('/support')
   const isHome = pathname === '/'
 
   useGlobalInteractions()
@@ -35,7 +35,7 @@ export default function RootShell({ children }: RootShellProps) {
   }, [pathname])
 
   return (
-    <div className={clsx(isProduct && 'product')}>
+    <div className={clsx(isSupport && 'support')}>
       <Header />
       <main className="container">
         {children}

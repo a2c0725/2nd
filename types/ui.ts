@@ -11,7 +11,7 @@ export type RootShellProps = {
 export type SectionTitleProps = {
   // constants/nav.ts の NAV_ITEMS に対応する id。指定するとここから label/kana を解決する
   navId?: string
-  // navId が NAV_ITEMS に無い見出し（Product ページ等）で直接指定する場合
+  // navId が NAV_ITEMS に無い見出し（Support ページ等）で直接指定する場合
   label?: string
   kana?: string
   // CONTACT セクションなど、見出し文言の先頭に付与したい要素がある場合に指定

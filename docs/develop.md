@@ -18,13 +18,13 @@ app/                  # Next.js App Router のページ実体（ルーティン�
   layout.tsx           # ルートレイアウト（<html>/<head>、共通metadata）
   page.tsx              # トップページ（ホームの全セクションを並べるだけ）
   not-found.tsx          # 404ページ（独立ページの実装例として参考になる）
-  product/resident/...    # Product詳細ページ群（後述）
+  support/resident/...    # Support詳細ページ群（後述）
 
 components/
   Layouts/RootShell/       # 全ページ共通の外枠（Header/Footer/スクロール制御）
   Header/, Footer/          # 共通ヘッダー・フッター
   Sections/                  # ホームページの各セクション（1コンポーネント = 1セクション）
-  Product/                    # Product詳細ページ群の中身
+  Support/                    # Support詳細ページ群の中身
   Shared/                      # 使い回す部品（Button/Title/Card/Section など）
 
 constants/              # 表示テキスト・データを集約する置き場（後述、最重要）
@@ -46,17 +46,17 @@ public/                 # 静的ファイル置き場。静的書き出し時に
 
 ```tsx
 // app/page.tsx
-<Top /><News /><About /><Business /><Product /><Company /><Access /><Contact />
+<Top /><News /><About /><Business /><Support /><Company /><Access /><Contact />
 ```
 
-### パターンB: 独立ページ（Product詳細ページ、404ページなど）
+### パターンB: 独立ページ（Support詳細ページ、404ページなど）
 
-`app/product/resident/page.tsx` のように、App Router の通常のルーティングで独立したURLを持つページ。中身のコンポーネントは `components/Product/` 配下に置く。
+`app/support/resident/page.tsx` のように、App Router の通常のルーティングで独立したURLを持つページ。中身のコンポーネントは `components/ Support/                    ` 配下に置く。
 
 ```tsx
-// app/product/resident/page.tsx
+// app/support/resident/page.tsx
 'use client'
-import ResidentSections from '@/components/Product/ResidentSections'
+import ResidentSections from '@/components/ Support/                    ResidentSections'
 export default function ResidentPage() {
   return <ResidentSections />
 }
@@ -94,10 +94,10 @@ export default function ResidentPage() {
 <BaseTitle navId="contact" type="white" />
 ```
 
-- `navId`: `constants/common/nav.ts` の `NAV_ITEMS`（ホーム用）または `PRODUCT_NAV_ITEMS`（Product系ページ用、同ファイル内）の `id` に対応。指定すると `label`/`kana`/`subTitle` を自動解決する
+- `navId`: `constants/common/nav.ts` の `NAV_ITEMS`（ホーム用）または `SUPPORT_NAV_ITEMS`（Support系ページ用、同ファイル内）の `id` に対応。指定すると `label`/`kana`/`subTitle` を自動解決する
 - `navId` を使わずページ固有の見出しにしたい場合は `label`/`kana` を直接渡すことも可能
 - `type="white"`: 背景が暗い画像の上に乗る場合に指定（lineの色が変わる）
-- 新しいページ(例: contact)の見出しなら、`constants/common/nav.ts` の `NAV_ITEMS` に既に `contact` の項目があるので `navId="contact"` を使えばよい。全く新規のnavIdが必要なら `NAV_ITEMS` または `PRODUCT_NAV_ITEMS` に追加する
+- 新しいページ(例: contact)の見出しなら、`constants/common/nav.ts` の `NAV_ITEMS` に既に `contact` の項目があるので `navId="contact"` を使えばよい。全く新規のnavIdが必要なら `NAV_ITEMS` または `SUPPORT_NAV_ITEMS` に追加する
 
 ### BaseButton（`components/Shared/Button/BaseButton`）
 
@@ -109,15 +109,15 @@ export default function ResidentPage() {
 
 - `text`: ボタン文言（`\n`で改行可、CSS側`white-space: pre-line`対応済み）
 - `url`: 遷移先。**`href`という名前は使わない**（このプロジェクトのルール。フィールド名は必ず`url`）
-- `used`: 見た目のバリエーション切り替え（`style.module.scss`内の`.contact`や`.product`などのクラス名文字列。後述の「usedパターン」参照）
-- ボタンの見た目を追加したい場合、既存の`.contact`/`.product`/`.resident`のような専用クラスを`BaseButton`の`style.module.scss`にわ増やす。**他ページに影響する共通(`.button`)クラス自体は絶対に直接変更しない**
+- `used`: 見た目のバリエーション切り替え（`style.module.scss`内の`.contact`や`.support`などのクラス名文字列。後述の「usedパターン」参照）
+- ボタンの見た目を追加したい場合、既存の`.contact`/`.support`/`.resident`のような専用クラスを`BaseButton`の`style.module.scss`にわ増やす。**他ページに影響する共通(`.button`)クラス自体は絶対に直接変更しない**
 
 ### Card（`components/Shared/Card`）
 
-タイトル+説明文+詳細ボタンのカード。Product一覧セクションで使用中。
+タイトル+説明文+詳細ボタンのカード。Support一覧セクションで使用中。
 
 ```tsx
-<Card title="..." description="..." url="/product/resident" used="product" />
+<Card title="..." description="..." url="/support/resident" used="support" />
 ```
 
 ### ScrollableSectionInner（`components/Shared/Section/ScrollableSectionInner`）
@@ -158,10 +158,10 @@ export function usedClasses(styles: Record<string, string>, used?: string | stri
 ```
 constants/common/     # サイト全体で共通利用するもの（company.ts, nav.ts）
 constants/sections/   # ホームの各セクション専用（hero.ts, about.ts, contact.ts...）
-constants/product/     # Product詳細ページ群専用（resident.ts, cancellation.ts, renewal.ts）
+constants/support/     # Support詳細ページ群専用（resident.ts, cancellation.ts, renewal.ts）
 ```
 
-- **common**: 本当に複数の無関係なページ・コンポーネントから使われるものだけ（会社名・電話番号などの会社情報、グローバルナビ）。判断に迷ったら sections/product 側に置き、実際に複数箇所で必要になってから common に昇格させる
+- **common**: 本当に複数の無関係なページ・コンポーネントから使われるものだけ（会社名・電話番号などの会社情報、グローバルナビ）。判断に迷ったら sections/support 側に置き、実際に複数箇所で必要になってから common に昇格させる
 - **sections**: そのセクション1つでしか使わないデータ。ファイル名はセクション名に合わせる（例: `constants/sections/contact.ts` → `components/Sections/Contact`）
 - 新しく問い合わせフォームを作るなら `constants/sections/contact.ts`（既存ファイル）にフォーム項目のラベルなどを追記していく想定
 
@@ -169,7 +169,7 @@ constants/product/     # Product詳細ページ群専用（resident.ts, cancella
 
 - **同じ形の要素が並ぶだけのもの（カード一覧、ボタン一覧、フォームのinput項目一覧など）は必ず配列にする**。コンポーネント側は`.map()`で回す。個別に`item1`/`item2`...のようなキーを増やして都度JSXを複製しない
 - 単発の値（見出し文言、説明文など）はオブジェクトのプロパティで定義する
-- 例（`constants/product/cancellation.ts`）:
+- 例（`constants/support/cancellation.ts`）:
   ```ts
   export const CANCELLATION = {
     step1: {
@@ -203,20 +203,20 @@ constants/product/     # Product詳細ページ群専用（resident.ts, cancella
 
 - **型は全て`types/`配下の`.ts`ファイルに定義し、`import type`で読み込む。`.tsx`ファイル内で`type`/`interface`を直接書かない**
 - `constants/*.ts`側でも、インラインのオブジェクト型注釈（`const X: { foo: string }[] = [...]`のような書き方）は禁止。`types/`に named type を切り出して import する
-- ファイル名はドメインに合わせる（例: `types/product.ts`, `types/business.ts`, `types/ui.ts`(共通コンポーネントのProps集約)）
+- ファイル名はドメインに合わせる（例: `types/support.ts`, `types/business.ts`, `types/ui.ts`(共通コンポーネントのProps集約)）
 
 ```ts
-// types/product.ts
-export type ProductListItem = {
+// types/support.ts
+export type SupportListItem = {
   title: string
   description: string
   url?: string
 }
 ```
 ```ts
-// constants/sections/product.ts
-import type { ProductListItem } from '@/types/product'
-export const PRODUCT_LIST_ITEMS: ProductListItem[] = [...]
+// constants/sections/support.ts
+import type { SupportListItem } from '@/types/support'
+export const SUPPORT_LIST_ITEMS: SupportListItem[] = [...]
 ```
 
 ## 8. スタイリングのルール

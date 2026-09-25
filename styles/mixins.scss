@@ -63,7 +63,7 @@
 }
 
 // NEWS/ABOUT/BUSINESS/COMPANY/ACCESS/CONTACT 各セクション表示中、および
-// Product ページ表示中に、ヘッダーの見た目を「白背景セクション用」に切り替えるためのフラグ判定
+// Support ページ表示中に、ヘッダーの見た目を「白背景セクション用」に切り替えるためのフラグ判定
 @mixin onContentSection {
   :global(.section-news) &,
   :global(.section-about) &,
@@ -71,7 +71,7 @@
   :global(.section-company) &,
   :global(.section-access) &,
   :global(.section-contact) &,
-  :global(.product) & {
+  :global(.support) & {
     @content;
   }
 }

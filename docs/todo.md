@@ -1,6 +1,6 @@
 # 本番切り替え時のTODO(解約申請フォーム)
 
-問い合わせフォーム(`product/resident/cancellation/form/`)は、現在すべて仮の値・仮環境で実装されています。本番公開前に以下を必ず対応してください。
+問い合わせフォーム(`support/resident/cancellation/form/`)は、現在すべて仮の値・仮環境で実装されています。本番公開前に以下を必ず対応してください。
 
 ## 1. reCAPTCHA v3 キーの差し替え ✅ 対応済み
 

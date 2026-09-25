@@ -2,21 +2,21 @@ import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
 import { AGREEMENT } from '@/constants/agreement'
-import productStyles from '@/app/product/style.module.scss'
+import supportStyles from '@/app/support/style.module.scss'
 import styles from './style.module.scss'
 
 export default function AgreementSections() {
   return (
-    <section className={clsx('section-contents-wrapper', productStyles.section)}>
+    <section className={clsx('section-contents-wrapper', supportStyles.section)}>
       <div className="section-contents-inner">
-        <BaseTitle navId="agreement" used="product" type="white" />
+        <BaseTitle navId="agreement" used="support" type="white" />
         <div className="section-contents">
           <ScrollableSectionInner className={styles.scrollableAlways}>
-            <div className={clsx(productStyles.sectionItem, styles.agreement)}>
-              <p className={productStyles.desc}>{AGREEMENT.desc}</p>
+            <div className={clsx(supportStyles.sectionItem, styles.agreement)}>
+              <p className={supportStyles.desc}>{AGREEMENT.desc}</p>
               {AGREEMENT.rules.map((rule) => (
-                <div className={productStyles.sectionItemContents} key={rule.title}>
-                  <h3 className={productStyles.sectionSubTitle}>{rule.title}</h3>
+                <div className={supportStyles.sectionItemContents} key={rule.title}>
+                  <h3 className={supportStyles.sectionSubTitle}>{rule.title}</h3>
                   {rule.textList.map((block, index) =>
                     Array.isArray(block) ? (
                       <ul className={styles.annotationList} key={index}>
@@ -27,16 +27,16 @@ export default function AgreementSections() {
                         ))}
                       </ul>
                     ) : (
-                      <p className={productStyles.desc} key={index}>
+                      <p className={supportStyles.desc} key={index}>
                         {block}
                       </p>
                     ),
                   )}
                 </div>
               ))}
-              <div className={clsx(productStyles.sectionItemContents, styles.companyInfo)}>
+              <div className={clsx(supportStyles.sectionItemContents, styles.companyInfo)}>
                 {AGREEMENT.companyInfo.map((info) => (
-                  <p className={productStyles.desc} key={info.title}>
+                  <p className={supportStyles.desc} key={info.title}>
                     {info.title}：{info.text}
                   </p>
                 ))}

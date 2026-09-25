@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 
 /**
- * Home・Product問わず全ページ共通で必要な操作。
+ * Home・Support問わず全ページ共通で必要な操作。
  * ハンバーガーメニューの開閉と、画面高さに応じた small-device 判定を配線する。
  */
 export function useGlobalInteractions() {
