@@ -87,6 +87,16 @@
     background: color(primaryRed);
     border-color: color(primaryRed);
   }
+
+  &:disabled {
+    color: color(disabled);
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+      border-color: color(border);
+    }
+  }
 }
 
 .weekRow {
@@ -136,6 +146,15 @@
   &:hover {
     background: color(primaryRed);
     opacity: 0.85;
+  }
+}
+
+.dayDisabled {
+  color: color(disabled);
+  cursor: not-allowed;
+
+  &:hover {
+    background: transparent;
   }
 }
 

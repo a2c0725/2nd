@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import BaseTitle from '@/components/Shared/Title/BaseTitle'
 import ScrollableSectionInner from '@/components/Shared/ScrollableSectionInner'
-import FormFieldRow, { splitFieldColumns } from './FormFieldRow'
+import FormFieldRow from './FormFieldRow'
 import {
   CANCELLATION_FORM_LEASE_FIELDS,
   CANCELLATION_FORM_SECTIONS,
@@ -16,8 +16,6 @@ type Step1Props = {
 }
 
 export default function Step1({ sectionRef, values, errors, onChange }: Step1Props) {
-  const { leftFields, rightFields, fullFields } = splitFieldColumns(CANCELLATION_FORM_LEASE_FIELDS)
-
   return (
     <section
       className={clsx(
@@ -38,31 +36,7 @@ export default function Step1({ sectionRef, values, errors, onChange }: Step1Pro
         <div className="section-contents">
           <ScrollableSectionInner>
             <div className={supportStyles.sectionItem}>
-              <div className="form-columns">
-                <div className="form-column">
-                  {leftFields.map((field) => (
-                    <FormFieldRow
-                      key={field.name}
-                      field={field}
-                      value={values[field.name]}
-                      onChange={onChange}
-                      error={errors[field.name]}
-                    />
-                  ))}
-                </div>
-                <div className="form-column">
-                  {rightFields.map((field) => (
-                    <FormFieldRow
-                      key={field.name}
-                      field={field}
-                      value={values[field.name]}
-                      onChange={onChange}
-                      error={errors[field.name]}
-                    />
-                  ))}
-                </div>
-              </div>
-              {fullFields.map((field) => (
+              {CANCELLATION_FORM_LEASE_FIELDS.map((field) => (
                 <FormFieldRow
                   key={field.name}
                   field={field}

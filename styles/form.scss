@@ -175,6 +175,10 @@
     white-space: pre-line;
   }
 
+  .field-note-error {
+    color: color(primaryRed);
+  }
+
   .confirm-wrapper {
     gap: 40px;
   }

@@ -52,9 +52,15 @@ export const RESIDENT_FORM_FIELDS: FormFieldItem[] = [
   },
   {
     name: 'buildingName',
-    label: '建物名 /\n部屋番号',
+    label: '建物名',
     type: 'required',
-    placeholder: '例：〇〇マンション101号室'
+    placeholder: '例：〇〇マンション'
+  },
+  {
+    name: 'roomNumber',
+    label: '部屋番号',
+    type: 'required',
+    placeholder: '例：101'
   },
   {
     name: 'subject',

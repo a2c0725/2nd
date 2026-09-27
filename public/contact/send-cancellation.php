@@ -10,11 +10,10 @@ const RECAPTCHA_SCORE_THRESHOLD = 0.5;
 // 各フィールドの label（メール本文用）
 const FIELD_LABELS = [
     // 1.賃貸借契約情報
-    'buildingName' => '建物名',
-    'roomNumber' => '部屋号室',
     'postalCode' => '郵便番号',
     'address' => '住所',
-    'addressDetail' => '以降の住所（番地まで）',
+    'buildingName' => '建物名',
+    'roomNumber' => '部屋号室',
     // 2.ご解約情報
     'cancellationTarget' => '解約をご希望の契約',
     'cancellationDate' => '解約希望日',
@@ -30,7 +29,6 @@ const FIELD_LABELS = [
     'contractorBirthday' => '生年月日',
     'contractorPostalCode' => '郵便番号（契約者）',
     'contractorAddress' => '契約者住所',
-    'contractorAddressDetail' => '以降の住所（契約者）',
     'contractorTel' => '契約者電話番号',
     'email' => 'メールアドレス',
     'workplaceName' => '勤務先名',
@@ -41,7 +39,6 @@ const FIELD_LABELS = [
     'relocationStatus' => '転居先の決定状況',
     'relocationPostalCode' => '郵便番号（転居先）',
     'relocationAddress' => '住所（転居先）',
-    'relocationAddressDetail' => '以降の住所（転居先）',
     'relocationTel' => '電話番号（転居先）',
     // 5.精算金振込先口座
     'bankCode' => '金融機関コード',
@@ -56,11 +53,11 @@ const FIELD_LABELS = [
 
 // 必須項目（フロント側のバリデーションと二重で行う。入居者名・入居者電話番号・転居先情報の詳細は任意項目）
 const REQUIRED_FIELDS = [
-    'buildingName', 'roomNumber', 'postalCode', 'address', 'addressDetail',
+    'postalCode', 'address', 'buildingName', 'roomNumber',
     'cancellationTarget', 'cancellationDate', 'rentAgreement', 'cancellationReason',
     'witnessDate', 'witnessTime', 'witnessPerson', 'witnessContact',
     'contractorName', 'contractorFurigana', 'contractorBirthday', 'contractorPostalCode',
-    'contractorAddress', 'contractorAddressDetail', 'contractorTel', 'email',
+    'contractorAddress', 'contractorTel', 'email',
     'workplaceName', 'workplaceTel',
     'relocationStatus',
     'bankCode', 'bankName', 'branchCode', 'branchName', 'accountType', 'accountNumber',
@@ -123,6 +120,50 @@ function buildBody(array $data): string
     return implode("\n", $lines);
 }
 
+function buildAutoReplyBody(array $data): string
+{
+    $name = $data['contractorName'] ?? '';
+    $confirmDetails = buildBody($data);
+
+    return <<<MAIL
+{$name} 様
+
+株式会社2ndへご連絡いただき、誠にありがとうございます。
+以下の内容でご解約のお問い合わせを受け付けました。
+
+内容を確認のうえ、担当者よりご連絡いたします。
+今しばらくお待ちくださいませ。
+
+――――――――――――――――
+■ ご入力内容の確認
+
+{$confirmDetails}
+――――――――――――――――
+
+入力内容に誤りがあった場合は、お手数ですがお電話にてお知らせください。
+
+売買、賃貸、管理、リフォームまで、お客様の「理想の暮らし」を実現するために心を込めてお手伝いいたします。
+
+【このメールへのご返信について】
+本メールは送信専用アドレスより自動送信しております。
+本メールへご返信いただいても対応いたしかねますので、ご了承ください。
+ご用件がございましたら、お電話にてご連絡ください。
+
+【ご注意】
+・数日経っても連絡がない場合は、迷惑メールフォルダをご確認のうえ、お電話でお問い合わせください。
+・本メールにお心当たりがない場合は、お手数ですが破棄してください。
+
+━━━━━━━━━━━━━━━━━━━━
+二番目でも輝ける世界を。
+株式会社2nd
+〒189-0013 東京都東村山市栄町2-22-2 Jビル2F
+TEL：042-306-4742
+営業時間：9:30〜18:00
+https://2nd-inc.com/
+━━━━━━━━━━━━━━━━━━━━
+MAIL;
+}
+
 $body = buildBody($data);
 
 // 会社宛 通知メール
@@ -136,8 +177,8 @@ mail(
 // 問い合わせ者宛 自動返信メール
 mail(
     $data['email'],
-    '【株式会社2nd】退去受付フォームの送信ありがとうございます',
-    "この度はご連絡いただき誠にありがとうございます。\n以下の内容で受け付けいたしました。\n\n" . $body,
+    '【株式会社2nd】ご解約のお問い合わせを受け付けました',
+    buildAutoReplyBody($data),
     'From: ' . NOTIFY_FROM
 );
 

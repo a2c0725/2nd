@@ -5,16 +5,15 @@ import type { FormFieldItem } from '@/types/form'
 
 // 1.賃貸借契約情報
 export const CANCELLATION_FORM_LEASE_FIELDS: FormFieldItem[] = [
+  { name: 'postalCode', label: '郵便番号', type: 'required', placeholder: '例：171-0022' },
+  {
+    name: 'address',
+    label: '住所',
+    type: 'required',
+    placeholder: '例：東京都豊島区南池袋1-7-20',
+  },
   { name: 'buildingName', label: '建物名', type: 'required', placeholder: '例：〇〇マンション' },
   { name: 'roomNumber', label: '部屋号室', type: 'required', placeholder: '例：101' },
-  { name: 'postalCode', label: '郵便番号', type: 'required', placeholder: '例：171-0022' },
-  { name: 'address', label: '住所', type: 'required', placeholder: '例：東京都豊島区南池袋' },
-  {
-    name: 'addressDetail',
-    label: '以降の住所\n(番地まで)',
-    type: 'required',
-    placeholder: '例：1-7-20',
-  },
 ]
 
 const WITNESS_TIME_OPTIONS = [
@@ -57,6 +56,7 @@ export const CANCELLATION_FORM_CANCELLATION_FIELDS: FormFieldItem[] = [
     label: '解約希望日',
     type: 'required',
     inputType: 'date',
+    minDaysFromToday: 30,
     note: '解約の申出は賃貸借契約書の条文に規定した期間前までにお願い致します。また、契約形態によっては、解約に当たり別途違約金等が発生する場合もございますので契約条項をご確認ください。',
   },
   {
@@ -130,13 +130,7 @@ export const CANCELLATION_FORM_CONTRACTOR_FIELDS: FormFieldItem[] = [
     name: 'contractorAddress',
     label: '契約者住所',
     type: 'required',
-    placeholder: '例：東京都豊島区南池袋',
-  },
-  {
-    name: 'contractorAddressDetail',
-    label: '以降の住所',
-    type: 'required',
-    placeholder: '例：1-7-20',
+    placeholder: '例：東京都豊島区南池袋1-7-20',
   },
   {
     name: 'contractorTel',
@@ -196,14 +190,7 @@ export const CANCELLATION_FORM_RELOCATION_FIELDS: FormFieldItem[] = [
     name: 'relocationAddress',
     label: '住所',
     type: 'optional',
-    placeholder: '例：東京都豊島区南池袋',
-  },
-  {
-    name: 'relocationAddressDetail',
-    label: '以降の住所',
-    type: 'optional',
-    placeholder: '例：1-7-20',
-    rowClassName: 'changeHeight',
+    placeholder: '例：東京都豊島区南池袋1-7-20',
   },
   { name: 'relocationTel', label: '電話番号', type: 'optional', placeholder: '例：090-1234-5678' },
 ]

@@ -39,6 +39,14 @@ function validateField(value: string, field: FormFieldItem): string {
   return ''
 }
 
+// 立会希望日は解約希望日より前である必要がある
+function validateWitnessDate(witnessDate: string, cancellationDate: string): string {
+  if (witnessDate && cancellationDate && witnessDate >= cancellationDate) {
+    return '立会日は解約日より前に設定してください。'
+  }
+  return ''
+}
+
 export default function CancellationFormSections() {
   const [mode, setMode] = useState<'input' | 'confirm' | 'complete'>('input')
   const [values, setValues] = useState<Record<string, string>>(() => {
@@ -80,8 +88,17 @@ export default function CancellationFormSections() {
   }, [mode])
 
   const handleChange = useCallback((name: string, value: string) => {
-    setValues((prev) => ({ ...prev, [name]: value }))
-    setErrors((prev) => ({ ...prev, [name]: '' }))
+    setValues((prev) => {
+      const next = { ...prev, [name]: value }
+      setErrors((prevErrors) => {
+        const nextErrors = { ...prevErrors, [name]: '' }
+        if (name === 'witnessDate' || name === 'cancellationDate') {
+          nextErrors.witnessDate = validateWitnessDate(next.witnessDate, next.cancellationDate)
+        }
+        return nextErrors
+      })
+      return next
+    })
   }, [])
 
   const handleConfirm = useCallback(() => {
@@ -89,7 +106,10 @@ export default function CancellationFormSections() {
     let firstErrorSectionIndex: number | null = null
     CANCELLATION_FORM_SECTIONS.forEach((section, index) => {
       section.fields.forEach((field) => {
-        const error = validateField(values[field.name], field)
+        let error = validateField(values[field.name], field)
+        if (!error && field.name === 'witnessDate') {
+          error = validateWitnessDate(values.witnessDate, values.cancellationDate)
+        }
         if (error) {
           newErrors[field.name] = error
           if (firstErrorSectionIndex === null) firstErrorSectionIndex = index

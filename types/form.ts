@@ -70,6 +70,10 @@ export type FormDatePickerProps = {
   used?: string | string[]
   error?: string
   disabled?: boolean
+  // この日付(YYYY-MM-DD)より前の日付は選択不可にする
+  minDate?: string
+  // エラー枠線は表示したまま、下のエラーテキストだけ非表示にする(他で同じ文言を表示している場合の重複防止用)
+  hideErrorText?: boolean
 }
 
 export type FormBirthdayDatePickerProps = {
@@ -109,4 +113,6 @@ export type FormFieldItem = {
   labelFullWidth?: boolean
   // FormLabel の幅を auto にするかどうか
   labelWidthAuto?: boolean
+  // inputType: 'date' の場合、本日からこの日数だけ先の日付以降のみ選択可能にする
+  minDaysFromToday?: number
 }

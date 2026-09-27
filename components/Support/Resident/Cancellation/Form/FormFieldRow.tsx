@@ -26,6 +26,16 @@ export function splitFieldColumns(fields: FormFieldItem[]) {
   }
 }
 
+function resolveMinDate(minDaysFromToday: number | undefined): string | undefined {
+  if (minDaysFromToday === undefined) return undefined
+  const date = new Date()
+  date.setDate(date.getDate() + minDaysFromToday)
+  const yyyy = date.getFullYear()
+  const mm = String(date.getMonth() + 1).padStart(2, '0')
+  const dd = String(date.getDate()).padStart(2, '0')
+  return `${yyyy}-${mm}-${dd}`
+}
+
 function toggleGroupValue(current: string, optionValue: string) {
   const selected = current ? current.split(',') : []
   const next = selected.includes(optionValue)
@@ -42,6 +52,9 @@ type FormFieldRowProps = {
 }
 
 export default function FormFieldRow({ field, value, onChange, error }: FormFieldRowProps) {
+  // note と同一文言のエラーは note 側を赤くして表示するため、DatePicker側の重複テキストのみ非表示にする
+  const isNoteError = Boolean(field.note && error === field.note)
+
   return (
     <div className="form-field">
       <div className={clsx('form-row', isFullWidthField(field) && 'form-row-full', field.rowClassName)}>
@@ -84,6 +97,8 @@ export default function FormFieldRow({ field, value, onChange, error }: FormFiel
               type={field.type}
               used="supportForm"
               error={error}
+              minDate={resolveMinDate(field.minDaysFromToday)}
+              hideErrorText={isNoteError}
             />
           ) : field.inputType === 'radio' ? (
             <FormRadio
@@ -132,7 +147,9 @@ export default function FormFieldRow({ field, value, onChange, error }: FormFiel
           )}
         </div>
       </div>
-      {field.note && <p className="field-note">{field.note}</p>}
+      {field.note && (
+        <p className={clsx('field-note', isNoteError && 'field-note-error')}>{field.note}</p>
+      )}
     </div>
   )
 }

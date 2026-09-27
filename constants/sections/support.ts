@@ -17,7 +17,6 @@ export const SUPPORT_LIST_ITEMS: SupportListItem[] = [
     title: 'オーナー様向け',
     description:
       '多くのオーナー様の悩みのタネである、入居者様からの苦情対応、滞納処理など、賃貸経営に纏わる管理業務のサポートをご提供します。',
-    disabled: true,
-    type: 'commingsoon',
+    url: 'https://ucl.life/owners/login',
   },
 ]

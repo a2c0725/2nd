@@ -32,9 +32,11 @@ export default function FormDatePicker({
   used,
   error,
   disabled,
+  minDate,
+  hideErrorText,
 }: FormDatePickerProps) {
   const [open, setOpen] = useState(false)
-  const initialDate = value ? new Date(value) : new Date()
+  const initialDate = value ? new Date(value) : minDate ? new Date(minDate) : new Date()
   const [viewYear, setViewYear] = useState(initialDate.getFullYear())
   const [viewMonth, setViewMonth] = useState(initialDate.getMonth())
   const [calendarPosition, setCalendarPosition] = useState({ top: 0, left: 0 })
@@ -95,16 +97,29 @@ export default function FormDatePicker({
     }
   }
 
-  function handleSelect(day: number) {
+  function buildDateString(day: number) {
     const mm = String(viewMonth + 1).padStart(2, '0')
     const dd = String(day).padStart(2, '0')
-    onChange(`${viewYear}-${mm}-${dd}`)
+    return `${viewYear}-${mm}-${dd}`
+  }
+
+  function isDayDisabled(day: number) {
+    if (!minDate) return false
+    return buildDateString(day) < minDate
+  }
+
+  function handleSelect(day: number) {
+    if (isDayDisabled(day)) return
+    onChange(buildDateString(day))
     setOpen(false)
   }
 
   const cells = buildCalendarCells(viewYear, viewMonth)
   const [selectedYear, selectedMonth, selectedDay] = value ? value.split('-').map(Number) : []
   const isSelectedMonth = selectedYear === viewYear && selectedMonth === viewMonth + 1
+  const [minYear, minMonth] = minDate ? minDate.split('-').map(Number) : []
+  const isPrevMonthDisabled =
+    minDate !== undefined && (viewYear < minYear || (viewYear === minYear && viewMonth + 1 <= minMonth))
 
   return (
     <div className={clsx(styles.formDatePicker, ...usedClasses(styles, used))} ref={wrapperRef}>
@@ -130,6 +145,7 @@ export default function FormDatePicker({
                 className={styles.navButton}
                 onClick={handlePrevMonth}
                 aria-label="前の月"
+                disabled={isPrevMonthDisabled}
               >
                 ‹
               </button>
@@ -162,8 +178,10 @@ export default function FormDatePicker({
                     className={clsx(
                       styles.day,
                       isSelectedMonth && day === selectedDay && styles.daySelected,
+                      isDayDisabled(day) && styles.dayDisabled,
                     )}
                     onClick={() => handleSelect(day)}
+                    disabled={isDayDisabled(day)}
                     key={day}
                   >
                     {day}
@@ -175,7 +193,7 @@ export default function FormDatePicker({
           document.body,
         )}
       <input type="hidden" name={name} value={value} required={type === 'required'} />
-      {error && <span className={styles.error}>{error}</span>}
+      {error && !hideErrorText && <span className={styles.error}>{error}</span>}
     </div>
   )
 }
