@@ -47,6 +47,7 @@ export default function Step2({ sectionRef, values, errors, onChange }: Step2Pro
                       value={values[field.name]}
                       onChange={onChange}
                       error={errors[field.name]}
+                      values={values}
                     />
                   ))}
                   <FormFieldRow
@@ -54,6 +55,7 @@ export default function Step2({ sectionRef, values, errors, onChange }: Step2Pro
                     value={values[fullFields[1].name]}
                     onChange={onChange}
                     error={errors[fullFields[1].name]}
+                    values={values}
                   />
                 </div>
                 <div className="form-column">
@@ -64,6 +66,7 @@ export default function Step2({ sectionRef, values, errors, onChange }: Step2Pro
                       value={values[field.name]}
                       onChange={onChange}
                       error={errors[field.name]}
+                      values={values}
                     />
                   ))}
                   <FormFieldRow
@@ -71,6 +74,7 @@ export default function Step2({ sectionRef, values, errors, onChange }: Step2Pro
                     value={values[fullFields[0].name]}
                     onChange={onChange}
                     error={errors[fullFields[0].name]}
+                    values={values}
                   />
                 </div>
               </div>

@@ -49,9 +49,11 @@ type FormFieldRowProps = {
   value: string
   onChange: (name: string, value: string) => void
   error?: string
+  // maxDateField で他フィールドの値を上限日として参照する際に使う
+  values?: Record<string, string>
 }
 
-export default function FormFieldRow({ field, value, onChange, error }: FormFieldRowProps) {
+export default function FormFieldRow({ field, value, onChange, error, values }: FormFieldRowProps) {
   // note と同一文言のエラーは note 側を赤くして表示するため、DatePicker側の重複テキストのみ非表示にする
   const isNoteError = Boolean(field.note && error === field.note)
 
@@ -98,6 +100,7 @@ export default function FormFieldRow({ field, value, onChange, error }: FormFiel
               used="supportForm"
               error={error}
               minDate={resolveMinDate(field.minDaysFromToday)}
+              maxDate={field.maxDateField ? values?.[field.maxDateField] : undefined}
               hideErrorText={isNoteError}
             />
           ) : field.inputType === 'radio' ? (

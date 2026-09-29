@@ -33,6 +33,7 @@ export default function FormDatePicker({
   error,
   disabled,
   minDate,
+  maxDate,
   hideErrorText,
 }: FormDatePickerProps) {
   const [open, setOpen] = useState(false)
@@ -104,8 +105,10 @@ export default function FormDatePicker({
   }
 
   function isDayDisabled(day: number) {
-    if (!minDate) return false
-    return buildDateString(day) < minDate
+    const dateString = buildDateString(day)
+    if (minDate && dateString < minDate) return true
+    if (maxDate && dateString >= maxDate) return true
+    return false
   }
 
   function handleSelect(day: number) {
@@ -120,6 +123,9 @@ export default function FormDatePicker({
   const [minYear, minMonth] = minDate ? minDate.split('-').map(Number) : []
   const isPrevMonthDisabled =
     minDate !== undefined && (viewYear < minYear || (viewYear === minYear && viewMonth + 1 <= minMonth))
+  const [maxYear, maxMonth] = maxDate ? maxDate.split('-').map(Number) : []
+  const isNextMonthDisabled =
+    maxDate !== undefined && (viewYear > maxYear || (viewYear === maxYear && viewMonth + 1 >= maxMonth))
 
   return (
     <div className={clsx(styles.formDatePicker, ...usedClasses(styles, used))} ref={wrapperRef}>
@@ -157,6 +163,7 @@ export default function FormDatePicker({
                 className={styles.navButton}
                 onClick={handleNextMonth}
                 aria-label="次の月"
+                disabled={isNextMonthDisabled}
               >
                 ›
               </button>

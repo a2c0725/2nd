@@ -72,6 +72,8 @@ export type FormDatePickerProps = {
   disabled?: boolean
   // この日付(YYYY-MM-DD)より前の日付は選択不可にする
   minDate?: string
+  // この日付(YYYY-MM-DD)以降の日付は選択不可にする
+  maxDate?: string
   // エラー枠線は表示したまま、下のエラーテキストだけ非表示にする(他で同じ文言を表示している場合の重複防止用)
   hideErrorText?: boolean
 }
@@ -115,4 +117,6 @@ export type FormFieldItem = {
   labelWidthAuto?: boolean
   // inputType: 'date' の場合、本日からこの日数だけ先の日付以降のみ選択可能にする
   minDaysFromToday?: number
+  // inputType: 'date' の場合、この名前のフィールドの値(YYYY-MM-DD)を上限日(その日は含まない)として使う
+  maxDateField?: string
 }

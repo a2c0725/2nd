@@ -57,7 +57,7 @@ export const CANCELLATION_FORM_CANCELLATION_FIELDS: FormFieldItem[] = [
     type: 'required',
     inputType: 'date',
     minDaysFromToday: 30,
-    note: '解約の申出は賃貸借契約書の条文に規定した期間前までにお願い致します。また、契約形態によっては、解約に当たり別途違約金等が発生する場合もございますので契約条項をご確認ください。',
+    note: '解約の申出は賃貸借契約書の条文に規定した期間前までにお願い致します。また、契約形態によっては、解約に当たり別途違約金等が発生する場合もございますので契約条項をご確認ください。\n解約日は30日後以降に設定してください。',
   },
   {
     name: 'rentAgreement',
@@ -90,6 +90,7 @@ export const CANCELLATION_FORM_CANCELLATION_FIELDS: FormFieldItem[] = [
     label: '立会希望日',
     type: 'required',
     inputType: 'date',
+    maxDateField: 'cancellationDate',
     note: '立会日は解約日より前に設定してください。',
   },
   {
