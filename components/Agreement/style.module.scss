@@ -1,0 +1,46 @@
+@use '@/styles/common' as *;
+
+.agreement {
+  padding-bottom: 32px;
+  gap: 32px;
+  @include mq() {
+    padding-bottom: 0;
+    gap: 24px;
+  }
+}
+
+.scrollableAlways {
+  max-height: calc(100dvh - #{$headerHeight} - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @include mq() {
+    max-height: calc(100dvh - #{$headerHeightSp} - 100px - 90px);
+  }
+}
+
+.annotationList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.annotationItem {
+  font-size: 1.6rem;
+  white-space: pre-line;
+  @include mq() {
+    font-size: 1.4rem;
+  }
+}
+
+.companyInfo {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid color(bright);
+  @include mq() {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+}

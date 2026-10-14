@@ -1,0 +1,74 @@
+@use '@/styles/common' as *;
+
+.footer {
+  background: color(primaryRed);
+  color: color(bright);
+
+  :global(.section-contents-inner) {
+    @include flex(nowrap, space-between, stretch);
+  }
+}
+
+.footerLogoArea {
+  @include flex(wrap, flex-start, flex-start);
+  flex-direction: column;
+  row-gap: 48px;
+}
+
+.footerLogo {
+  max-width: 200px;
+  @include mq() {
+    width: 90px;
+  }
+}
+
+.companyInfo {
+  @include flex(wrap, flex-start, flex-start);
+  flex-direction: column;
+  row-gap: 5px;
+  max-width: 300px;
+  flex: 1;
+  font-size: 1.6rem;
+  font-weight: bold;
+  @include mq() {
+    margin-top: 80px;
+  }
+}
+
+.companyName {
+  font-size: 2rem;
+}
+
+.gnavArea {
+  width: 200px;
+  @include mq() {
+    display: none;
+  }
+}
+
+.gnav {
+  @include flex(wrap, flex-start, flex-start);
+  flex-direction: column;
+  row-gap: 48px;
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+.gnavItem {
+  position: relative;
+}
+.gnavLink {
+  @include hoverAnimation(color(bright), color(bright));
+  color: color(bright);
+  &:hover {
+    opacity: $hoverOpacity;
+  }
+}
+
+.copyright {
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 50px;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: center;
+}

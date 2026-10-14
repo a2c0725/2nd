@@ -1,0 +1,58 @@
+@use '@/styles/common' as *;
+
+.indicator {
+  position: fixed;
+  top: 50%;
+  right: 30px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transform: translateY(-50%);
+
+  @include mq() {
+    top: auto;
+    right: auto;
+    bottom: 16px;
+    left: 50%;
+    flex-direction: row;
+    transform: translateX(-50%);
+  }
+}
+
+.dots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @include mq() {
+    display: none;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dotActive {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: color(primaryRed);
+  box-shadow: 0 0 0 3px rgba(254, 0, 26, 0.3);
+}
+
+.count {
+  font-family: $sans;
+  font-size: 14px;
+  color: color(bright);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+}

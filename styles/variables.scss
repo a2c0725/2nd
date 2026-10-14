@@ -1,0 +1,42 @@
+@use 'sass:map';
+
+$base-path: '';
+
+$contentsWidth: 80%;
+$contentsSpWidth: 85%;
+$borderColor: #818181;
+$headerHeight: 68px;
+$headerHeightSp: 55px;
+$hoverOpacity: 0.6;
+$serif: 'Noto Serif JP', serif;
+$sans: 'Inter', sans-serif;
+$helvetica: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+$spMenuPositionTop: 20px;
+$spMenuPositionLeft: 30px;
+$spMenuSize: 100px;
+
+// color
+$colors: (
+  bright: #fff,
+  lightGreen: #8edbb1,
+  darkGreen: #076251,
+  primaryText: #333,
+  primaryRed: #fe001a,
+  border: $borderColor,
+  cardBackground: #1e1e1e,
+  optional: #ccc,
+  disabled: #656565,
+);
+
+@function color($key) {
+  @return map.get($colors, $key);
+}
+
+$breakpoints: (
+  'xs': 'screen and (max-width: 360px)',
+  's': 'screen and (max-width: 400px)',
+  'm': 'screen and (max-width: 768px)',
+  'ms': 'screen and (max-width: 800px)',
+  'l': 'screen and (max-width: 1000px)',
+  'xl': 'screen and (max-width: 1200px)',
+);
