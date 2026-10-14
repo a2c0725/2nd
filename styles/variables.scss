@@ -1,7 +1,6 @@
 @use 'sass:map';
 
-// /test 配下での検証用(本番デプロイ前に必ず空文字に戻すこと)
-$base-path: '/test';
+$base-path: '';
 
 $contentsWidth: 80%;
 $contentsSpWidth: 85%;
